@@ -10,7 +10,7 @@ HOMEPAGE="http://www.gnu.org/software/guile/"
 SRC_URI="mirror://gnu/guile/${P}.tar.gz"
 
 LICENSE="LGPL-3"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~*"
 IUSE="debug debug-malloc +deprecated +networking nls +regex +threads"
 
 RDEPEND="

@@ -9,7 +9,7 @@ SRC_URI="https://github.com/gentoo/hwids/archive/${P}.tar.gz"
 
 LICENSE="|| ( GPL-2 BSD ) public-domain"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~x86-fbsd ~x64-freebsd ~amd64-linux ~arm-linux ~x86-linux"
+KEYWORDS="~*"
 IUSE="+udev"
 
 DEPEND="udev? (

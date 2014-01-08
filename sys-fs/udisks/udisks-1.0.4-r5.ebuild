@@ -11,7 +11,7 @@ SRC_URI="http://hal.freedesktop.org/releases/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="alpha amd64 arm ia64 ~mips ppc ppc64 sh sparc x86"
+KEYWORDS="*"
 IUSE="debug nls remote-access selinux"
 
 COMMON_DEPEND=">=dev-libs/dbus-glib-0.100
