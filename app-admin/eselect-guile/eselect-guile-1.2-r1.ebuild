@@ -8,7 +8,7 @@ HOMEPAGE="http://www.gentoo.org/proj/en/lisp/scheme/"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~*"
+KEYWORDS="*"
 IUSE=""
 
 # Versions prior to guile-1.8.8-r2 aren't properly slotted
