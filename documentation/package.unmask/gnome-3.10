@@ -3,6 +3,7 @@
 =x11-libs/gdk-pixbuf-2.30.1
 =dev-libs/totem-pl-parser-3.10.0
 =app-crypt/libsecret-0.16
+=sys-fs/lvm2-2.02.103
 
 # Gilles Dartiguelongue <eva@gentoo.org> (23 Dec 2013)
 # Gnome 3.10 mask

@@ -1,2 +1,3 @@
 media-plugins/grilo-plugins upnp-av
 media-sound/gnome-music python_single_target_python3_3
+sys-fs/lvm2 -static -static-libs
