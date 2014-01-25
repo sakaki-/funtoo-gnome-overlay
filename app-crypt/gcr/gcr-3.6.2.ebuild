@@ -4,7 +4,7 @@ EAPI="5"
 GCONF_DEBUG="no"
 GNOME2_LA_PUNT="yes"
 
-inherit gnome2 virtualx
+inherit eutils gnome2 virtualx
 
 DESCRIPTION="Libraries for cryptographic UIs and accessing PKCS#11 modules"
 HOMEPAGE="http://www.gnome.org/"
@@ -47,6 +47,8 @@ src_prepare() {
 		--disable-update-icon-cache
 		--disable-update-mime"
 
+	epatch "${FILESDIR}/${P}-gobject.patch"
+	
 	# Disable stupid flag changes
 	sed -e 's/CFLAGS="$CFLAGS -g"//' \
 		-e 's/CFLAGS="$CFLAGS -O0"//' \
