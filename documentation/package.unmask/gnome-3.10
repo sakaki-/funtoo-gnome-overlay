@@ -5,6 +5,7 @@
 =app-crypt/libsecret-0.16
 =sys-fs/lvm2-2.02.103
 =sys-apps/hwids-20140103
+=virtual/udev-206-r3
 
 # Gilles Dartiguelongue <eva@gentoo.org> (23 Dec 2013)
 # Gnome 3.10 mask
