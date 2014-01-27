@@ -16,7 +16,7 @@ SLOT="2"
 IUSE="debug fam kernel_linux selinux static-libs systemtap test utils xattr"
 KEYWORDS="~*"
 
-
+# FIXME: want libselinux[${MULTILIB_USEDEP}] - bug #480960
 RDEPEND="
 	virtual/libiconv[${MULTILIB_USEDEP}]
 	virtual/libffi[${MULTILIB_USEDEP}]
@@ -58,6 +58,8 @@ PDEPEND="x11-misc/shared-mime-info
 	!<gnome-base/gvfs-1.6.4-r990"
 # shared-mime-info needed for gio/xdgmime, bug #409481
 # Earlier versions of gvfs do not work with glib
+
+DOCS="AUTHORS ChangeLog* NEWS* README"
 
 pkg_setup() {
 	if use kernel_linux ; then
@@ -163,15 +165,11 @@ multilib_src_configure() {
 	# Only used by the gresource bin
 	multilib_is_native_abi || myconf="${myconf} --disable-libelf"
 
-	if use test; then
-		myconf="${myconf} --enable-modular-tests"
+	# FIXME: change to "$(use_enable selinux)" when libselinux is multilibbed, bug #480960
+	if multilib_is_native_abi; then
+		myconf="${myconf} $(use_enable selinux)"
 	else
-		if [[ ${PV} = 9999 ]] && use doc; then
-			# need to build tests if USE=doc for bug #387385
-			myconf="${myconf} --enable-modular-tests"
-		else
-			myconf="${myconf} --disable-modular-tests"
-		fi
+		myconf="${myconf} --disable-selinux"
 	fi
 
 	# Always use internal libpcre, bug #254659
@@ -182,14 +180,14 @@ multilib_src_configure() {
 		$(use_enable static-libs static) \
 		$(use_enable systemtap dtrace) \
 		$(use_enable systemtap systemtap) \
+		$(use_enable test modular-tests) \
 		--enable-man \
 		--with-pcre=internal \
-		--with-threads=posix \
 		--with-xml-catalog="${EPREFIX}/etc/xml/catalog"
 }
 
-multilib_src_install() {
-	default
+multilib_src_install_all() {
+	einstalldocs
 
 	if use utils ; then
 		python_replicate_script "${ED}"/usr/bin/gtester-report
@@ -203,8 +201,6 @@ multilib_src_install() {
 
 	# Don't install gdb python macros, bug 291328
 	rm -rf "${ED}/usr/share/gdb/" "${ED}/usr/share/glib-2.0/gdb/"
-
-	dodoc AUTHORS ChangeLog* NEWS* README
 
 	# Completely useless with or without USE static-libs, people need to use
 	# pkg-config
@@ -228,7 +224,7 @@ multilib_src_test() {
 
 	# Hardened: gdb needs this, bug #338891
 	if host-is-pax ; then
-		pax-mark -mr "${S}"/tests/.libs/assert-msg-test \
+		pax-mark -mr "${BUILD_DIR}"/tests/.libs/assert-msg-test \
 			|| die "Hardened adjustment failed"
 	fi
 
