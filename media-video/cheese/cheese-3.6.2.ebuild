@@ -4,7 +4,7 @@ EAPI="5"
 GCONF_DEBUG="no"
 GNOME2_LA_PUNT="yes"
 
-inherit eutils gnome2 multilib virtualx
+inherit eutils flag-o-matic gnome2 multilib virtualx
 
 DESCRIPTION="A cheesy program to take pictures and videos from your webcam"
 HOMEPAGE="http://www.gnome.org/projects/cheese/"
@@ -58,6 +58,9 @@ DEPEND="${COMMON_DEPEND}
 	test? ( dev-libs/glib:2[utils] )"
 
 src_configure() {
+	# Fix missing link to lgthread
+	append-ldflags "-lgthread-2.0"
+
 	G2CONF="${G2CONF}
 		GST_INSPECT=$(type -P true)
 		VALAC=$(type -P valac-0.18)
