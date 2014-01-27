@@ -175,7 +175,7 @@ multilib_src_configure() {
 	fi
 
 	# Always use internal libpcre, bug #254659
-	ECONF_SOURCE=${S}" econf ${myconf} \
+	ECONF_SOURCE="${S}" econf ${myconf} \
 		$(use_enable xattr) \
 		$(use_enable fam) \
 		$(use_enable selinux) \
