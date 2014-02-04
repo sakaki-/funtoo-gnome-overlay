@@ -19,6 +19,7 @@ COMMON_DEPEND="
 	>=dev-libs/glib-2.10:2
 	>=x11-libs/gtk+-3.4:3
 	>=app-crypt/libsecret-0.5
+	<app-crypt/libsecret-0.16
 	net-libs/libsoup:2.4
 	x11-misc/shared-mime-info
 
