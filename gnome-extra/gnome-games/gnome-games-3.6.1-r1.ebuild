@@ -16,7 +16,7 @@ HOMEPAGE="http://live.gnome.org/GnomeGames/"
 LICENSE="GPL-2 GPL-3 FDL-1.1"
 SLOT="0"
 # TODO: file KEYWORDREQ bug once it's determined that seed is usable
-KEYWORDS="~*"
+KEYWORDS="*"
 
 # FIXME: we should decide whether to have USE flag for games or features
 # IUSE="artworkextra clutter opengl python test"

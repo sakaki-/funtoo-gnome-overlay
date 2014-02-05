@@ -1,6 +1,4 @@
-# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/gnome-base/gnome-panel/gnome-panel-3.6.2-r1.ebuild,v 1.3 2013/09/08 17:53:29 eva Exp $
 
 EAPI="5"
 GCONF_DEBUG="no"
@@ -15,7 +13,7 @@ LICENSE="GPL-2+ FDL-1.1+ LGPL-2+"
 SLOT="0"
 IUSE="eds +introspection networkmanager"
 # Odd behaviour w.r.t. panels: https://bugzilla.gnome.org/show_bug.cgi?id=631553
-KEYWORDS="~alpha ~amd64 ~arm ~ia64 ~ppc ~ppc64 ~sh ~sparc ~x86 ~x86-fbsd ~x86-interix ~amd64-linux ~x86-linux ~x86-solaris"
+KEYWORDS="*"
 
 RDEPEND="
 	>=dev-libs/glib-2.31.14:2

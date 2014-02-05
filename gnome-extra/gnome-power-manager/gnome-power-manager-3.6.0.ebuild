@@ -11,7 +11,7 @@ HOMEPAGE="http://www.gnome.org/projects/gnome-power-manager/"
 LICENSE="GPL-2"
 SLOT="0"
 IUSE="test"
-KEYWORDS="~*"
+KEYWORDS="*"
 
 COMMON_DEPEND="
 	>=dev-libs/glib-2.31.10

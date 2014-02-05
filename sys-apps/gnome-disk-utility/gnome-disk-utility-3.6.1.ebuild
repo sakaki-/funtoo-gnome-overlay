@@ -12,7 +12,7 @@ HOMEPAGE="http://git.gnome.org/browse/gnome-disk-utility"
 LICENSE="GPL-2+"
 SLOT="0"
 IUSE="fat"
-KEYWORDS="~*"
+KEYWORDS="*"
 
 COMMON_DEPEND="
 	>=dev-libs/glib-2.31:2

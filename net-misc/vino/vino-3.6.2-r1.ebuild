@@ -11,7 +11,7 @@ HOMEPAGE="http://live.gnome.org/Vino"
 
 LICENSE="GPL-2+"
 SLOT="0"
-KEYWORDS="~*"
+KEYWORDS="*"
 IUSE="avahi crypt gnome-keyring ipv6 jpeg libnotify networkmanager ssl +telepathy +zlib"
 
 # cairo used in vino-fb

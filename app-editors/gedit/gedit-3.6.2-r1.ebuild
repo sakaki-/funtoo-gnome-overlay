@@ -13,7 +13,7 @@ HOMEPAGE="http://live.gnome.org/Gedit"
 LICENSE="GPL-2+ CC-BY-SA-3.0"
 SLOT="0"
 IUSE="+introspection +python spell zeitgeist"
-KEYWORDS="~*"
+KEYWORDS="*"
 
 # X libs are not needed for OSX (aqua)
 COMMON_DEPEND="

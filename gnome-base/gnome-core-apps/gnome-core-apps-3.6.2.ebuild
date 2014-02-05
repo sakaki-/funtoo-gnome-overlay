@@ -10,7 +10,7 @@ IUSE="+bluetooth +cdr cups +networkmanager"
 
 # when unmasking for an arch
 # double check none of the deps are still masked !
-KEYWORDS="~*"
+KEYWORDS="*"
 
 # Note to developers:
 # This is a wrapper for the core apps tightly integrated with GNOME 3

@@ -13,7 +13,7 @@ HOMEPAGE="http://live.gnome.org/"
 
 LICENSE="GPL-2+"
 SLOT="0"
-KEYWORDS="~*"
+KEYWORDS="*"
 IUSE=""
 
 COMMON_DEPEND="

@@ -11,7 +11,7 @@ HOMEPAGE="https://live.gnome.org/GnomeOnlineAccounts"
 LICENSE="LGPL-2+"
 SLOT="0"
 IUSE="gnome +introspection kerberos"
-KEYWORDS="~*"
+KEYWORDS="*"
 
 # pango used in goaeditablelabel
 # libsoup used in goaoauthprovider

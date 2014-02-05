@@ -13,7 +13,7 @@ HOMEPAGE="http://live.gnome.org/GnomeTweakTool"
 LICENSE="GPL-2+"
 SLOT="0"
 IUSE=""
-KEYWORDS="~*"
+KEYWORDS="*"
 
 COMMON_DEPEND="
 	>=gnome-base/gsettings-desktop-schemas-3.4

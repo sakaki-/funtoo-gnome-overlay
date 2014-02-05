@@ -12,7 +12,7 @@ HOMEPAGE="http://live.gnome.org/GnomeBluetooth"
 LICENSE="GPL-2+ LGPL-2.1+ FDL-1.1+"
 SLOT="2/11" # subslot = libgnome-bluetooth soname version
 IUSE="+introspection sendto"
-KEYWORDS="~*"
+KEYWORDS="*"
 
 COMMON_DEPEND=">=dev-libs/glib-2.29.90:2
 	>=x11-libs/gtk+-2.91.3:3[introspection?]

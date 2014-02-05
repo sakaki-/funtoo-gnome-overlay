@@ -12,7 +12,7 @@ HOMEPAGE="http://live.gnome.org/GnomeKeyring"
 LICENSE="GPL-2+ LGPL-2+"
 SLOT="0"
 IUSE="+caps debug pam selinux"
-KEYWORDS="~*"
+KEYWORDS="*"
 
 RDEPEND="
 	>=app-crypt/gcr-3.5.3:=

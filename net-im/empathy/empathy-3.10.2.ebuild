@@ -16,7 +16,7 @@ SLOT="0"
 # sendto: support from building nautilus sendto plugins from it was dropped in 3.7
 IUSE="debug +geoloc gnome gnome-online-accounts +map spell test +v4l"
 
-KEYWORDS="~*"
+KEYWORDS="*"
 
 # False positives caused by nested configure scripts
 QA_CONFIGURE_OPTIONS=".*"

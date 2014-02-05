@@ -10,7 +10,7 @@ HOMEPAGE="https://projects.gnome.org/tracker/"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~*"
+KEYWORDS="*"
 IUSE=""
 
 COMMON_DEPEND="

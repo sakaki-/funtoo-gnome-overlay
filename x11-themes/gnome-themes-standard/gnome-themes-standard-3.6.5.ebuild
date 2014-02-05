@@ -12,7 +12,7 @@ HOMEPAGE="http://www.gnome.org/"
 LICENSE="LGPL-2.1+"
 SLOT="0"
 IUSE="+gtk"
-KEYWORDS="~*"
+KEYWORDS="*"
 
 COMMON_DEPEND="
 	gnome-base/librsvg:2

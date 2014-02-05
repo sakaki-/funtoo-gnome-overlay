@@ -12,7 +12,7 @@ HOMEPAGE="http://live.gnome.org/libgdata"
 LICENSE="LGPL-2.1+"
 SLOT="0/13" # subslot = libgdata soname version
 IUSE="gnome +introspection static-libs"
-KEYWORDS="~*"
+KEYWORDS="*"
 
 # gtk+ is needed for gdk
 # configure checks for gtk:3, but only uses it for demos which are not installed

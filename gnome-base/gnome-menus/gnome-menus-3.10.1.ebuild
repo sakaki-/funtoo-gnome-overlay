@@ -10,7 +10,7 @@ HOMEPAGE="https://git.gnome.org/browse/gnome-menus"
 
 LICENSE="GPL-2+ LGPL-2+"
 SLOT="3"
-KEYWORDS="~*"
+KEYWORDS="*"
 
 IUSE="debug +introspection test"
 

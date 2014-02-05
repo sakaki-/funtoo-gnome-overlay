@@ -12,7 +12,7 @@ HOMEPAGE="http://projects.gnome.org/epiphany/"
 LICENSE="GPL-2"
 SLOT="0"
 IUSE="+introspection +jit +nss test"
-KEYWORDS="~*"
+KEYWORDS="*"
 
 RDEPEND="
 	>=app-crypt/gcr-3.5.5

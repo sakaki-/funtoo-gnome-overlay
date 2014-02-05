@@ -10,7 +10,7 @@ IUSE="+shotwell +tracker"
 
 # when unmasking for an arch
 # double check none of the deps are still masked !
-KEYWORDS="~*"
+KEYWORDS="*"
 
 # Note to developers:
 # This is a wrapper for the extra apps integrated with GNOME 3

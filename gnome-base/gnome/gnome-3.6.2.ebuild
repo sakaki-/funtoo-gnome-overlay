@@ -10,7 +10,7 @@ SLOT="2.0" # Cannot be installed at the same time as gnome-2
 
 # when unmasking for an arch
 # double check none of the deps are still masked !
-KEYWORDS="~*"
+KEYWORDS="*"
 
 IUSE="accessibility +bluetooth +cdr cups +extras +fallback"
 

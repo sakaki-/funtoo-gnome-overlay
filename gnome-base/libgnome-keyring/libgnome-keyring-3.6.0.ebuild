@@ -13,7 +13,7 @@ HOMEPAGE="http://live.gnome.org/GnomeKeyring"
 
 LICENSE="LGPL-2+ GPL-2+" # tests are GPL-2
 SLOT="0"
-KEYWORDS="~*"
+KEYWORDS="*"
 IUSE="debug +introspection test vala"
 REQUIRED_USE="vala? ( introspection )"
 

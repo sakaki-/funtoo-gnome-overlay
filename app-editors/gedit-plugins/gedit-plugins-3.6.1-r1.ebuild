@@ -12,7 +12,7 @@ DESCRIPTION="Offical plugins for gedit"
 HOMEPAGE="http://live.gnome.org/GeditPlugins"
 
 LICENSE="GPL-2+"
-KEYWORDS="~*"
+KEYWORDS="*"
 SLOT="0"
 
 IUSE_plugins="charmap terminal"

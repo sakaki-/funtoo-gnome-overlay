@@ -14,7 +14,7 @@ HOMEPAGE="http://projects.gnome.org/totem/"
 LICENSE="GPL-2+ LGPL-2+"
 SLOT="0"
 IUSE="flash grilo +introspection lirc nautilus nsplugin +python test zeitgeist"
-KEYWORDS="~*"
+KEYWORDS="*"
 
 # see bug #359379
 REQUIRED_USE="flash? ( nsplugin )

@@ -13,7 +13,7 @@ HOMEPAGE="http://telepathy.freedesktop.org/wiki/Folks"
 
 LICENSE="LGPL-2.1+"
 SLOT="0/25" # subslot = libfolks soname version
-KEYWORDS="~*"
+KEYWORDS="*"
 # TODO: --enable-profiling
 IUSE="eds socialweb +telepathy test tracker utils vala"
 

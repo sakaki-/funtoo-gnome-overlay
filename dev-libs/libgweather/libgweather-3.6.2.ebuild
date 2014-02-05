@@ -12,7 +12,7 @@ HOMEPAGE="https://live.gnome.org/LibGWeather"
 LICENSE="GPL-2+"
 SLOT="2/3-1" # subslot = 3-(libgweather-3 soname suffix)
 IUSE="+introspection"
-KEYWORDS="~*"
+KEYWORDS="*"
 
 COMMON_DEPEND="
 	>=x11-libs/gtk+-2.90.0:3[introspection?]

@@ -11,7 +11,7 @@ HOMEPAGE="http://live.gnome.org/Vinagre"
 
 LICENSE="GPL-3+"
 SLOT="0"
-KEYWORDS="~*"
+KEYWORDS="*"
 IUSE="avahi rdp +ssh spice +telepathy"
 
 # cairo used in vinagre-tab

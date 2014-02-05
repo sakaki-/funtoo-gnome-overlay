@@ -15,7 +15,7 @@ SRC_URI="${SRC_URI}
 LICENSE="GPL-2+"
 SLOT="0"
 IUSE="accessibility audit +consolekit +fallback fprint +gnome-shell +introspection ipv6 ldap plymouth selinux smartcard tcpd test xinerama"
-KEYWORDS="~*"
+KEYWORDS="*"
 
 # NOTE: x11-base/xorg-server dep is for X_SERVER_PATH etc, bug #295686
 # nspr used by smartcard extension

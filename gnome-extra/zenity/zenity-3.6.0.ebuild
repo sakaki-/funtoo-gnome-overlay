@@ -11,7 +11,7 @@ HOMEPAGE="http://live.gnome.org/Zenity"
 
 LICENSE="LGPL-2+"
 SLOT="0"
-KEYWORDS="~*"
+KEYWORDS="*"
 IUSE="libnotify test +webkit"
 
 RDEPEND=">=dev-libs/glib-2.8:2

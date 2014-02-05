@@ -13,7 +13,7 @@ HOMEPAGE="http://live.gnome.org/Empathy"
 LICENSE="GPL-2 CC-BY-SA-3.0 FDL-1.3 LGPL-2.1"
 SLOT="0"
 IUSE="debug +geocode +geoloc gnome gnome-online-accounts +map sendto spell test +v4l"
-KEYWORDS="~*"
+KEYWORDS="*"
 
 # gdk-pixbuf and pango extensively used in libempathy-gtk
 COMMON_DEPEND="

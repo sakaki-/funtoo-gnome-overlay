@@ -14,7 +14,7 @@ SRC_URI="${SRC_URI}
 LICENSE="LGPL-2+"
 SLOT="2"
 IUSE="debug fam kernel_linux selinux static-libs systemtap test utils xattr"
-KEYWORDS="~*"
+KEYWORDS="*"
 
 # FIXME: want libselinux[${MULTILIB_USEDEP}] - bug #480960
 RDEPEND="

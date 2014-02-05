@@ -10,7 +10,7 @@ IUSE="cups python"
 
 # when unmasking for an arch
 # double check none of the deps are still masked !
-KEYWORDS="~*"
+KEYWORDS="*"
 
 # Note to developers:
 # This is a wrapper for the core libraries used by GNOME 3

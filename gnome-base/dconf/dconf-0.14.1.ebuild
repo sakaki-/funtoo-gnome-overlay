@@ -12,7 +12,7 @@ LICENSE="LGPL-2.1+"
 SLOT="0"
 # TODO: coverage ?
 IUSE="test +X"
-KEYWORDS="~*"
+KEYWORDS="*"
 
 RDEPEND="
 	>=dev-libs/glib-2.33.3:2

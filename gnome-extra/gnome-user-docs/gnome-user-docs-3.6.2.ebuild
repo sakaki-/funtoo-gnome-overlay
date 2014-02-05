@@ -10,7 +10,7 @@ HOMEPAGE="http://www.gnome.org/"
 
 LICENSE="CC-BY-3.0"
 SLOT="0"
-KEYWORDS="~*"
+KEYWORDS="*"
 IUSE="test"
 
 # Newer gnome-doc-utils is needed for RNGs

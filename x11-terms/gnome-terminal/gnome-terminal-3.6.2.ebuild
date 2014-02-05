@@ -11,7 +11,7 @@ HOMEPAGE="http://www.gnome.org/"
 LICENSE="GPL-3+"
 SLOT="0"
 IUSE=""
-KEYWORDS="~*"
+KEYWORDS="*"
 
 # FIXME: automagic dependency on gtk+[X]
 RDEPEND="

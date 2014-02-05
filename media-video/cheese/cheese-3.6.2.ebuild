@@ -12,7 +12,7 @@ HOMEPAGE="http://www.gnome.org/projects/cheese/"
 LICENSE="GPL-2+"
 SLOT="0/7" # subslot = libcheese soname version
 IUSE="+introspection sendto test"
-KEYWORDS="~*"
+KEYWORDS="*"
 
 COMMON_DEPEND="
 	>=dev-libs/glib-2.28:2

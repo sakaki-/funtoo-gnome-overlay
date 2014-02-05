@@ -12,7 +12,7 @@ HOMEPAGE="https://git.gnome.org/browse/gnome-control-center/"
 LICENSE="GPL-2+"
 SLOT="2"
 IUSE="+bluetooth +colord +cups +gnome-online-accounts +i18n input_devices_wacom kerberos +socialweb v4l"
-KEYWORDS="~*"
+KEYWORDS="*"
 
 # False positives caused by nested configure scripts
 QA_CONFIGURE_OPTIONS=".*"

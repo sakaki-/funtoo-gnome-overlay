@@ -11,7 +11,7 @@ HOMEPAGE="http://www.gnome.org/"
 LICENSE="GPL-2"
 SLOT="0"
 IUSE="systemd"
-KEYWORDS="~*"
+KEYWORDS="*"
 
 RDEPEND=">=dev-libs/glib-2.28:2
 	>=x11-libs/libwnck-2.91.0:3

@@ -11,7 +11,7 @@ HOMEPAGE="http://git.gnome.org/browse/sushi"
 
 LICENSE="GPL-2+"
 SLOT="0"
-KEYWORDS="~*"
+KEYWORDS="*"
 IUSE="office"
 
 # Optional app-office/unoconv support (OOo to pdf)

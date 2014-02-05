@@ -12,7 +12,7 @@ HOMEPAGE="http://www.gnome.org/projects/seahorse/index.html"
 LICENSE="GPL-2+ FDL-1.1+"
 SLOT="0"
 IUSE="avahi debug ldap"
-KEYWORDS="~*"
+KEYWORDS="*"
 
 COMMON_DEPEND="
 	>=app-crypt/gcr-3.3.4:=

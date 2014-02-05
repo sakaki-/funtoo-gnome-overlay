@@ -12,7 +12,7 @@ HOMEPAGE="https://live.gnome.org/Design/Apps/Contacts"
 LICENSE="GPL-2+"
 SLOT="0"
 IUSE="v4l"
-KEYWORDS="~*"
+KEYWORDS="*"
 
 VALA_DEPEND="$(vala_depend)
 	dev-libs/folks[vala(+)]
