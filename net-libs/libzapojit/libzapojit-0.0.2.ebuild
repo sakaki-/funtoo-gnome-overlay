@@ -42,5 +42,5 @@ src_configure() {
 src_install() {
 	gnome2_src_install
 	# Drop self-installed documentation
-	rm -r "${ED}"/usr/share/doc/${PN}/ || die
+	rm -r "${ED}"/usr/share/doc/${P}/ || die
 }
