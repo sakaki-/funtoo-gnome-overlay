@@ -37,7 +37,7 @@ RDEPEND="!gnome-base/gnome
 	>=x11-themes/gnome-themes-standard-${PV}
 
 	>=x11-terms/gnome-terminal-3.6.1
-"
+	x11-base/xorg-x11"
 DEPEND=""
 PDEPEND=">=gnome-base/gvfs-1.14.2"
 S="${WORKDIR}"
