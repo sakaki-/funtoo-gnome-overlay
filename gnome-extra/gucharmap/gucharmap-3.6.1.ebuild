@@ -38,6 +38,9 @@ DEPEND="${RDEPEND}
 "
 
 src_prepare() {
+
+	epatch "${FILESDIR}/${P}-vapigen-check.patch"
+
 	DOCS="AUTHORS ChangeLog NEWS README TODO"
 	G2CONF="${G2CONF}
 		--disable-static
