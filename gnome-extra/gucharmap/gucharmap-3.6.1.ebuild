@@ -6,7 +6,7 @@ GNOME2_LA_PUNT="yes"
 VALA_MIN_API_VERSION="0.16"
 VALA_USE_DEPEND="vapigen"
 
-inherit gnome2 vala
+inherit autotools gnome2 vala
 
 DESCRIPTION="Unicode character map viewer and library"
 HOMEPAGE="http://live.gnome.org/Gucharmap"
@@ -29,6 +29,7 @@ RDEPEND="${COMMON_DEPEND}
 "
 DEPEND="${RDEPEND}
 	app-text/yelp-tools
+	dev-libs/gobject-introspection-common
 	>=dev-util/gtk-doc-am-1
 	>=dev-util/intltool-0.40
 	sys-devel/gettext
@@ -38,9 +39,9 @@ DEPEND="${RDEPEND}
 "
 
 src_prepare() {
-
+	## fix to FL-925, eautoreconf required
 	epatch "${FILESDIR}/${P}-vapigen-check.patch"
-
+	eautoreconf
 	DOCS="AUTHORS ChangeLog NEWS README TODO"
 	G2CONF="${G2CONF}
 		--disable-static
@@ -54,9 +55,11 @@ src_prepare() {
 	sed -e "s:GETTEXT_PACKAGE=gucharmap$:GETTEXT_PACKAGE=gucharmap-${SLOT}:" \
 		-i configure.ac configure || die "sed configure.ac configure failed"
 
+
 	use vala && vala_src_prepare
 	gnome2_src_prepare
 
 	# avoid autoreconf
 	sed -e 's/-Wall //g' -i configure || die "sed failed"
 }
+
