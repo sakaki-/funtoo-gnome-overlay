@@ -4,3 +4,4 @@ sys-fs/lvm2 -static -static-libs
 net-misc/networkmanager modemmanager
 sys-auth/pambase systemd
 sys-apps/systemd gudev
+app-crypt/gcr vala
