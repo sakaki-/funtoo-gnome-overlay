@@ -72,6 +72,7 @@ src_prepare() {
 	# http://lists.freedesktop.org/archives/cogl/2013-April/001090.html
 	# https://bugs.freedesktop.org/show_bug.cgi?id=61182
 	epatch "${FILESDIR}/${P}-dont-use-MSAA.patch"
+	epatch "${FILESDIR}/${P}-glBlitFramebuffer.patch"
 	gnome2_src_prepare
 }
 

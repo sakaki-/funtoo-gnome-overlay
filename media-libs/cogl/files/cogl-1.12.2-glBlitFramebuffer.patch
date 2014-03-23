@@ -1,0 +1,37 @@
+From bf4104955c243bc34e32ef8ed900a158b1d1ef2a Mon Sep 17 00:00:00 2001
+From: Neil Roberts <neil@linux.intel.com>
+Date: Wed, 19 Dec 2012 13:58:55 +0000
+Subject: [PATCH] Clear the scissor before calling glBlitFramebuffer in
+ swap_region
+
+glBlitFramebuffer is affected by the scissor so we need to ensure
+there is an empty clip flushed before using it. This is similar to
+what is done in _cogl_blit_framebuffer().
+
+https://bugzilla.gnome.org/show_bug.cgi?id=690451
+---
+ cogl/winsys/cogl-winsys-glx.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+diff --git a/cogl/winsys/cogl-winsys-glx.c b/cogl/winsys/cogl-winsys-glx.c
+index 839464f..b24ebf1 100644
+--- a/cogl/winsys/cogl-winsys-glx.c
++++ b/cogl/winsys/cogl-winsys-glx.c
+@@ -1285,6 +1285,15 @@ _cogl_winsys_onscreen_swap_region (CoglOnscreen *onscreen,
+       int i;
+       /* XXX: checkout how this state interacts with the code to use
+        * glBlitFramebuffer in Neil's texture atlasing branch */
++
++      /* glBlitFramebuffer is affected by the scissor so we need to
++       * ensure we have flushed an empty clip stack to get rid of it.
++       * We also mark that the clip state is dirty so that it will be
++       * flushed to the correct state the next time something is
++       * drawn */
++      _cogl_clip_stack_flush (NULL, framebuffer);
++      context->current_draw_buffer_changes |= COGL_FRAMEBUFFER_STATE_CLIP;
++
+       context->glDrawBuffer (GL_FRONT);
+       for (i = 0; i < n_rectangles; i++)
+         {
+-- 
+1.7.11.3.g3c3efa5
