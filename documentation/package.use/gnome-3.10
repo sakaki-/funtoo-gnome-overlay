@@ -5,3 +5,7 @@ net-misc/networkmanager modemmanager
 sys-auth/pambase systemd
 sys-apps/systemd gudev
 app-crypt/gcr vala
+media-libs/grilo playlist
+games-puzzle/gnome-sudoku python_single_target_python3_3
+www-servers/apache apache2_modules_auth_digest
+gnome-base/gvfs cdda

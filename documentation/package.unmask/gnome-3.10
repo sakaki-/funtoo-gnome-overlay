@@ -144,3 +144,10 @@
 >=x11-themes/gnome-icon-theme-symbolic-3.10
 >=x11-themes/gnome-themes-standard-3.10
 >=x11-wm/mutter-3.10
+=sys-libs/libosinfo-0.2.10
+=dev-libs/json-glib-1.0.0
+=media-libs/libmediaart-0.4.0
+=net-libs/libgfbgraph-0.2.2
+=media-sound/sound-juicer-3.11.90
+=sys-power/upower-0.99
+=net-im/telepathy-mission-control-5.16.1
