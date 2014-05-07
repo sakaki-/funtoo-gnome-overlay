@@ -151,3 +151,6 @@
 =media-sound/sound-juicer-3.11.90
 =sys-power/upower-0.99
 =net-im/telepathy-mission-control-5.16.1
+=dev-libs/gjs-1.40.1
+=app-misc/tracker-1.0.0
+=gnome-extra/nautilus-tracker-tags-1.0.0

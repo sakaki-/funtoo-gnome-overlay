@@ -9,3 +9,4 @@ media-libs/grilo playlist
 games-puzzle/gnome-sudoku python_single_target_python3_3
 www-servers/apache apache2_modules_auth_digest
 gnome-base/gvfs cdda
+media-libs/libmediaart -qt4
