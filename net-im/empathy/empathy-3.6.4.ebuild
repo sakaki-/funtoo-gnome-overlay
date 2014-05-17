@@ -82,6 +82,9 @@ DEPEND="${COMMON_DEPEND}
 "
 PDEPEND=">=net-im/telepathy-mission-control-5.14"
 
+# FL-1242, parallel makes are not honored by this ebuild
+MAKEOPTS+=" -j1"
+
 src_configure() {
 	DOCS="CONTRIBUTORS AUTHORS ChangeLog NEWS README"
 	gnome2_src_configure \
