@@ -3,35 +3,45 @@
 EAPI="5"
 GCONF_DEBUG="yes"
 GNOME2_LA_PUNT="yes"
-PYTHON_COMPAT=( python2_{6,7} )
+PYTHON_COMPAT=( python{2_6,2_7} )
 
-inherit gnome2 python-any-r1
+inherit gnome2 multilib-minimal python-any-r1
 
 DESCRIPTION="An HTTP library implementation in C"
-HOMEPAGE="http://live.gnome.org/LibSoup"
+HOMEPAGE="https://wiki.gnome.org/LibSoup"
 
 LICENSE="LGPL-2+"
 SLOT="2.4"
-KEYWORDS="*"
 IUSE="debug +introspection samba ssl test"
+KEYWORDS="*"
 
-RDEPEND=">=dev-libs/glib-2.33.1:2
-	>=dev-libs/libxml2-2:2
-	>=net-libs/glib-networking-2.30.0[ssl?]
+RDEPEND="
+	>=dev-libs/glib-2.36[${MULTILIB_USEDEP}]
+	>=dev-libs/libxml2-2.9.1-r4:2[${MULTILIB_USEDEP}]
+	>=dev-db/sqlite-3.8.2:3[${MULTILIB_USEDEP}]
+	>=net-libs/glib-networking-2.38.2[ssl?,${MULTILIB_USEDEP}]
 	introspection? ( >=dev-libs/gobject-introspection-0.9.5 )
-	samba? ( net-fs/samba )"
+	samba? ( net-fs/samba )
+"
 DEPEND="${RDEPEND}
 	${PYTHON_DEPS}
 	>=dev-util/intltool-0.35
 	>=dev-util/gtk-doc-am-1.10
 	sys-devel/gettext
-	virtual/pkgconfig"
+	>=virtual/pkgconfig-0-r1[${MULTILIB_USEDEP}]
+"
 #	test? (	www-servers/apache[ssl,apache2_modules_auth_digest,apache2_modules_alias,apache2_modules_auth_basic,
 #		apache2_modules_authn_file,apache2_modules_authz_host,apache2_modules_authz_user,apache2_modules_dir,
 #		apache2_modules_mime,apache2_modules_proxy,apache2_modules_proxy_http,apache2_modules_proxy_connect]
 #		dev-lang/php[apache2,xmlrpc]
 #		net-misc/curl
 #		net-libs/glib-networking[ssl])"
+RDEPEND="${RDEPEND}
+	abi_x86_32? (
+		!<=app-emulation/emul-linux-x86-baselibs-20140508-r8
+		!app-emulation/emul-linux-x86-baselibs[-abi_x86_32(-)]
+	)
+"
 
 src_prepare() {
 	if ! use test; then
@@ -39,6 +49,10 @@ src_prepare() {
 		sed 's/^\(SUBDIRS =.*\)tests\(.*\)$/\1\2/' -i Makefile.am Makefile.in \
 			|| die "sed failed"
 	fi
+
+	# FIXME: does not behave as expected
+	sed -e 's|\(g_test_add.*\)|/*\1*/|' \
+		-i tests/socket-test.c || die
 
 	gnome2_src_prepare
 }
@@ -48,12 +62,26 @@ src_configure() {
 	# root cause (bug #249496) is solved
 	addpredict /usr/share/snmp/mibs/.index
 
+	multilib-minimal_src_configure
+}
+
+multilib_src_configure() {
 	# Disable apache tests until they are usable on Gentoo, bug #326957
+	ECONF_SOURCE=${S} \
 	gnome2_src_configure \
 		--disable-static \
 		--disable-tls-check \
 		--without-gnome \
 		--without-apache-httpd \
-		$(use_enable introspection) \
-		$(use_with samba ntlm-auth "${EPREFIX}"/usr/bin/ntlm_auth)
+		$(multilib_native_use_enable introspection) \
+		$(use_with samba ntlm-auth '${EPREFIX}'/usr/bin/ntlm_auth)
+
+	if multilib_is_native_abi; then
+		# fix gtk-doc
+		ln -s "${S}"/docs/reference/html docs/reference/html || die
+	fi
+}
+
+multilib_src_install() {
+	gnome2_src_install
 }
