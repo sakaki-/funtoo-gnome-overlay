@@ -1,6 +1,4 @@
-# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/gjs/gjs-1.34.0-r1.ebuild,v 1.4 2013/12/25 10:10:08 pacho Exp $
 
 EAPI="5"
 GCONF_DEBUG="no"

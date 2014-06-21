@@ -1,6 +1,4 @@
-# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/dbus-glib/dbus-glib-0.100.2.ebuild,v 1.12 2013/03/05 09:12:15 ago Exp $
 
 EAPI=5
 inherit bash-completion-r1 eutils
