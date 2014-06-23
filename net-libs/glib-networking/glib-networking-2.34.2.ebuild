@@ -4,7 +4,7 @@ EAPI="5"
 GCONF_DEBUG="no"
 GNOME2_LA_PUNT="yes"
 
-inherit gnome2 virtualx
+inherit gnome2 multilib-minimal virtualx
 
 DESCRIPTION="Network-related giomodules for glib"
 HOMEPAGE="http://git.gnome.org/browse/glib-networking/"
@@ -14,20 +14,20 @@ SLOT="0"
 IUSE="+gnome +libproxy smartcard +ssl test"
 KEYWORDS="*"
 
-RDEPEND=">=dev-libs/glib-2.34:2
+RDEPEND=">=dev-libs/glib-2.34:2[${MULTILIB_USEDEP}]
 	gnome? ( gnome-base/gsettings-desktop-schemas )
-	libproxy? ( >=net-libs/libproxy-0.4.6-r3:= )
+	libproxy? ( >=net-libs/libproxy-0.4.6-r3:=[${MULTILIB_USEDEP}] )
 	smartcard? (
-		>=app-crypt/p11-kit-0.8
-		>=net-libs/gnutls-2.12.8:=[pkcs11] )
+		>=app-crypt/p11-kit-0.8[${MULTILIB_USEDEP}]
+		>=net-libs/gnutls-2.12.8:=[pkcs11,${MULTILIB_USEDEP}] )
 	ssl? (
 		app-misc/ca-certificates
-		>=net-libs/gnutls-2.11.0:= )
+		>=net-libs/gnutls-2.11.0:=[${MULTILIB_USEDEP}] )
 "
 DEPEND="${RDEPEND}
 	>=dev-util/intltool-0.35.0
 	sys-devel/gettext
-	virtual/pkgconfig
+	>=virtual/pkgconfig-0-r1[${MULTILIB_USEDEP}]
 	test? ( sys-apps/dbus[X] )"
 # eautoreconf needs >=sys-devel/autoconf-2.65:2.5
 
@@ -39,7 +39,7 @@ src_prepare() {
 	gnome2_src_prepare
 }
 
-src_configure() {
+multilib_src_configure() {
 	# AUTHORS, ChangeLog are empty
 	DOCS="NEWS README"
 	G2CONF="${G2CONF}
@@ -52,6 +52,12 @@ src_configure() {
 	gnome2_src_configure
 }
 
-src_test() {
+multilib_src_test() {
+	multilib_is_native_abi || return 0
 	Xemake check
 }
+
+multilib_src_install() {
+        gnome2_src_install
+}
+

@@ -1,0 +1,11 @@
+diff -urN webkitgtk-1.10.2/Source/WebKit2/UIProcess/Launcher/gtk/ProcessLauncherGtk.cpp webkitgtk-1.10.2-fixed/Source/WebKit2/UIProcess/Launcher/gtk/ProcessLauncherGtk.cpp
+--- webkitgtk-1.10.2/Source/WebKit2/UIProcess/Launcher/gtk/ProcessLauncherGtk.cpp	2014-06-22 22:56:52.653641779 +0000
++++ webkitgtk-1.10.2-fixed/Source/WebKit2/UIProcess/Launcher/gtk/ProcessLauncherGtk.cpp	2014-06-22 22:58:50.540194445 +0000
+@@ -42,6 +42,7 @@
+ 
+ #if OS(LINUX)
+ #include <sys/prctl.h>
++#include <sys/socket.h>
+ #endif
+ 
+ #ifdef SOCK_SEQPACKET

@@ -13,13 +13,13 @@ HOMEPAGE="https://wiki.gnome.org/LibSoup"
 LICENSE="LGPL-2+"
 SLOT="2.4"
 IUSE="debug +introspection samba ssl test"
-KEYWORDS="*"
+KEYWORDS="alpha amd64 arm hppa ia64 ~mips ppc ppc64 ~sh sparc x86 ~amd64-fbsd ~x86-fbsd ~x86-freebsd ~amd64-linux ~arm-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~x86-solaris"
 
 RDEPEND="
-	>=dev-libs/glib-2.36[${MULTILIB_USEDEP}]
-	>=dev-libs/libxml2-2.9.1-r4:2[${MULTILIB_USEDEP}]
-	>=dev-db/sqlite-3.8.2:3[${MULTILIB_USEDEP}]
-	net-libs/glib-networking[ssl?,${MULTILIB_USEDEP}]
+	>=dev-libs/glib-2.36.0:2[${MULTILIB_USEDEP}]
+	>=dev-libs/libxml2-2:2[${MULTILIB_USEDEP}]
+	dev-db/sqlite:3[${MULTILIB_USEDEP}]
+	>=net-libs/glib-networking-2.30.0[ssl?,${MULTILIB_USEDEP}]
 	introspection? ( >=dev-libs/gobject-introspection-0.9.5 )
 	samba? ( net-fs/samba )
 "
@@ -30,19 +30,12 @@ DEPEND="${RDEPEND}
 	sys-devel/gettext
 	>=virtual/pkgconfig-0-r1[${MULTILIB_USEDEP}]
 "
-#	test? (	www-servers/apache[ssl,apache2_modules_auth_digest,apache2_modules_alias,apache2_modules_auth_basic,
-#		apache2_modules_authn_file,apache2_modules_authz_host,apache2_modules_authz_user,apache2_modules_dir,
-#		apache2_modules_mime,apache2_modules_proxy,apache2_modules_proxy_http,apache2_modules_proxy_connect]
-#		dev-lang/php[apache2,xmlrpc]
-#		net-misc/curl
-#		net-libs/glib-networking[ssl])"
 RDEPEND="${RDEPEND}
 	abi_x86_32? (
 		!<=app-emulation/emul-linux-x86-baselibs-20140508-r8
 		!app-emulation/emul-linux-x86-baselibs[-abi_x86_32(-)]
 	)
 "
-
 src_prepare() {
 	if ! use test; then
 		# don't waste time building tests (bug #226271)
@@ -50,22 +43,14 @@ src_prepare() {
 			|| die "sed failed"
 	fi
 
-	# FIXME: does not behave as expected
-	sed -e 's|\(g_test_add.*\)|/*\1*/|' \
-		-i tests/socket-test.c || die
-
 	gnome2_src_prepare
 }
 
-src_configure() {
+multilib_src_configure() {
 	# FIXME: we need addpredict to workaround bug #324779 until
 	# root cause (bug #249496) is solved
 	addpredict /usr/share/snmp/mibs/.index
 
-	multilib-minimal_src_configure
-}
-
-multilib_src_configure() {
 	# Disable apache tests until they are usable on Gentoo, bug #326957
 	ECONF_SOURCE=${S} \
 	gnome2_src_configure \
