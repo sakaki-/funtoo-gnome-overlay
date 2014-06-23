@@ -11,7 +11,7 @@ HOMEPAGE="http://www.pango.org/"
 
 LICENSE="LGPL-2+ FTL"
 SLOT="0"
-KEYWORDS="ia64 ppc ppc64 sparc"
+KEYWORDS="*"
 
 IUSE="X +introspection"
 

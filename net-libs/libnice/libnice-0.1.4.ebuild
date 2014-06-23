@@ -9,7 +9,7 @@ SRC_URI="http://nice.freedesktop.org/releases/${P}.tar.gz"
 
 LICENSE="|| ( MPL-1.1 LGPL-2.1 )"
 SLOT="0"
-KEYWORDS="alpha amd64 arm hppa ia64 ppc ppc64 sparc x86 ~amd64-linux ~x86-linux ~ppc-macos ~x86-macos"
+KEYWORDS="*"
 IUSE="+upnp"
 
 RDEPEND=">=dev-libs/glib-2.13:2

@@ -11,7 +11,7 @@ SRC_URI="http://savannah.nongnu.org/download/fluid/${P}.tar.gz"
 
 LICENSE="LGPL-2"
 SLOT="0"
-KEYWORDS="alpha amd64 hppa ppc ppc64 sparc x86 ~x86-fbsd"
+KEYWORDS="*"
 
 RDEPEND="
 	>=dev-libs/glib-2.6.5

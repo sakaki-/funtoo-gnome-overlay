@@ -13,7 +13,7 @@ HOMEPAGE="https://wiki.gnome.org/LibSoup"
 LICENSE="LGPL-2+"
 SLOT="2.4"
 IUSE="debug +introspection samba ssl test"
-KEYWORDS="alpha amd64 arm hppa ia64 ~mips ppc ppc64 ~sh sparc x86 ~amd64-fbsd ~x86-fbsd ~x86-freebsd ~amd64-linux ~arm-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~x86-solaris"
+KEYWORDS="*"
 
 RDEPEND="
 	>=dev-libs/glib-2.36.0:2[${MULTILIB_USEDEP}]

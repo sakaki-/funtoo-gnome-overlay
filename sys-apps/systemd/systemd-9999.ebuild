@@ -22,7 +22,7 @@ SRC_URI="http://www.freedesktop.org/software/systemd/${P}.tar.xz"
 
 LICENSE="GPL-2 LGPL-2.1 MIT public-domain"
 SLOT="0/2"
-KEYWORDS="~alpha ~amd64 ~arm ~ia64 ~ppc ~ppc64 ~sparc ~x86"
+KEYWORDS=""
 IUSE="acl audit cryptsetup doc +firmware-loader gcrypt gudev http introspection
 	kdbus +kmod lzma pam policykit python qrcode +seccomp selinux ssl
 	test vanilla"
@@ -93,7 +93,7 @@ DEPEND="${DEPEND}
 	>=dev-libs/libgcrypt-1.4.5:0"
 
 SRC_URI=
-KEYWORDS=
+KEYWORDS="*"
 #endif
 
 src_prepare() {

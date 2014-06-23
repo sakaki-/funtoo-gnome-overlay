@@ -1,6 +1,4 @@
-# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/app-i18n/atokx3/atokx3-3.0.0-r10.ebuild,v 1.3 2014/06/18 19:03:05 mgorny Exp $
 
 EAPI="3"
 
@@ -19,7 +17,7 @@ SRC_URI="http://www3.justsystem.co.jp/download/atok/up/lin/${MY_UPDATE_P}.tar.gz
 LICENSE="ATOK MIT"
 
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="*"
 IUSE="multilib"
 
 RESTRICT="strip mirror"

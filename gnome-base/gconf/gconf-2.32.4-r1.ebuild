@@ -12,7 +12,7 @@ HOMEPAGE="http://projects.gnome.org/gconf/"
 
 LICENSE="LGPL-2+"
 SLOT="2"
-KEYWORDS="alpha amd64 arm ia64 ~mips ppc ppc64 sh sparc x86 ~x86-fbsd"
+KEYWORDS="*"
 IUSE="debug gtk +introspection ldap policykit"
 
 RDEPEND="

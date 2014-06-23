@@ -1,6 +1,4 @@
-# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-libs/gst-plugins-bad/gst-plugins-bad-0.10.23-r2.ebuild,v 1.2 2014/06/18 19:32:16 mgorny Exp $
 
 EAPI="5"
 
@@ -12,7 +10,7 @@ HOMEPAGE="http://gstreamer.freedesktop.org/"
 SRC_URI+=" http://dev.gentoo.org/~tetromino/distfiles/${PN}/${P}-h264-patches.tar.xz"
 
 LICENSE="LGPL-2"
-KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~ppc ~ppc64 ~sparc ~x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux"
+KEYWORDS="*"
 IUSE="+orc"
 
 RDEPEND="

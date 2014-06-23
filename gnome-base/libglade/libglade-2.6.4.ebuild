@@ -12,7 +12,7 @@ HOMEPAGE="http://library.gnome.org/devel/libglade/stable/"
 
 LICENSE="LGPL-2"
 SLOT="2.0"
-KEYWORDS="alpha amd64 arm hppa ia64 ~mips ppc ppc64 sh sparc x86 ~amd64-fbsd ~x86-fbsd ~x86-interix ~amd64-linux ~arm-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~x64-solaris ~x86-solaris"
+KEYWORDS="*"
 IUSE="doc static-libs test"
 
 RDEPEND=">=dev-libs/glib-2.10:2

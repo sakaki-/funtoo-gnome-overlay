@@ -5,7 +5,7 @@ EAPI="5"
 GST_ORG_MODULE=gst-plugins-base
 inherit gstreamer
 
-KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~ppc ~ppc64 ~sh ~sparc ~x86 ~x86-fbsd"
+KEYWORDS="*"
 IUSE=""
 
 RDEPEND="dev-libs/glib:2[${MULTILIB_USEDEP}]"

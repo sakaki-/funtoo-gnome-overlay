@@ -14,7 +14,7 @@ SRC_URI="http://www.freedesktop.org/software/${PN}/${P}.tar.xz"
 
 LICENSE="GPL-3+"
 SLOT="0"
-KEYWORDS="~alpha amd64 arm ~ia64 ~ppc ~ppc64 ~sparc x86"
+KEYWORDS="*"
 IUSE="doc +introspection selinux systemd vala"
 REQUIRED_USE="vala? ( introspection )"
 

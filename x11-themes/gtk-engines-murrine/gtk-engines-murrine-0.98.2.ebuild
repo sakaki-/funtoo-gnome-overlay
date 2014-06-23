@@ -11,7 +11,7 @@ HOMEPAGE="http://www.cimitan.com/murrine/"
 
 LICENSE="LGPL-2.1 LGPL-3"
 SLOT="0"
-KEYWORDS="amd64 ~arm ppc ppc64 x86 ~x86-fbsd ~x86-freebsd ~x86-interix ~amd64-linux ~x86-linux"
+KEYWORDS="*"
 IUSE="+themes animation-rtl"
 
 RDEPEND=">=x11-libs/gtk+-2.18:2
