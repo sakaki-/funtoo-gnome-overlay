@@ -93,7 +93,7 @@ DEPEND="${DEPEND}
 	>=dev-libs/libgcrypt-1.4.5:0"
 
 SRC_URI=
-KEYWORDS="*"
+KEYWORDS=""
 #endif
 
 src_prepare() {
