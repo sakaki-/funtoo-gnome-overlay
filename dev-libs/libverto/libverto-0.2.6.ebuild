@@ -17,7 +17,7 @@ IUSE="glib +libev libevent tevent +threads static-libs"
 DEPEND="!=app-crypt/mit-krb5-1.10.1-r0
 	!=app-crypt/mit-krb5-1.10.1-r1
 	!=app-crypt/mit-krb5-1.10.1-r2
-	glib? ( >=dev-libs/glib-2.38.2-r1[${MULTILIB_USEDEP}] )
+	glib? ( dev-libs/glib:2[${MULTILIB_USEDEP}] )
 	libev? ( >=dev-libs/libev-4.15[${MULTILIB_USEDEP}] )
 	libevent? ( >=dev-libs/libevent-2.0.21[${MULTILIB_USEDEP}] )
 	tevent? ( >=sys-libs/tevent-0.9.19[${MULTILIB_USEDEP}] )"
