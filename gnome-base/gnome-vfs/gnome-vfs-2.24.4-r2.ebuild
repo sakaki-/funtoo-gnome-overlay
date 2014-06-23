@@ -16,7 +16,7 @@ KEYWORDS="*"
 IUSE="acl avahi doc fam gnutls ipv6 kerberos samba ssl"
 
 RDEPEND=">=gnome-base/gconf-2.32.4-r1[${MULTILIB_USEDEP}]
-	>=dev-libs/glib-2.38.2-r1[${MULTILIB_USEDEP}]
+	dev-libs/glib:2[${MULTILIB_USEDEP}]
 	>=dev-libs/libxml2-2.9.1-r4[${MULTILIB_USEDEP}]
 	>=app-arch/bzip2-1.0.6-r4[${MULTILIB_USEDEP}]
 	gnome-base/gnome-mime-data
