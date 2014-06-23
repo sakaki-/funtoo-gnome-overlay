@@ -23,11 +23,11 @@ RDEPEND="
 	dev-libs/glib:2[${MULTILIB_USEDEP}]
 	x11-libs/cairo[${MULTILIB_USEDEP}]
 	x11-libs/pango[${MULTILIB_USEDEP}]
-	dev-libs/libxml:2[${MULTILIB_USEDEP}]
+	dev-libs/libxml2[${MULTILIB_USEDEP}]
 	>=dev-libs/libcroco-0.6[${MULTILIB_USEDEP}]
 	x11-libs/gdk-pixbuf:2[introspection?,${MULTILIB_USEDEP}]
 	introspection? ( >=dev-libs/gobject-introspection-0.10.8 )
-	tools? ( >=x11-libs/gtk+:3 )
+	tools? ( x11-libs/gtk+:3 )
 "
 DEPEND="${RDEPEND}
 	dev-libs/gobject-introspection-common
