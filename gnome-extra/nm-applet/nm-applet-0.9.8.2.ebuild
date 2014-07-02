@@ -28,7 +28,7 @@ RDEPEND="
 	>=net-misc/networkmanager-0.9.8[introspection?]
 	net-misc/mobile-broadband-provider-info
 
-	bluetooth? ( >=net-wireless/gnome-bluetooth-2.27.6 )
+	bluetooth? ( =net-wireless/gnome-bluetooth-3.6.1 )
 	gconf? (
 		>=gnome-base/gconf-2.20:2
 		gnome-base/libgnome-keyring )
