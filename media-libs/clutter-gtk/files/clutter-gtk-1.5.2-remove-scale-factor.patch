@@ -1,0 +1,13 @@
+diff -urN clutter-gtk-1.5.2/clutter-gtk/gtk-clutter-embed.c clutter-gtk-1.5.2-fixed/clutter-gtk/gtk-clutter-embed.c
+--- clutter-gtk-1.5.2/clutter-gtk/gtk-clutter-embed.c	2014-02-14 14:39:52.000000000 +0000
++++ clutter-gtk-1.5.2-fixed/clutter-gtk/gtk-clutter-embed.c	2014-07-10 15:16:14.469722433 +0000
+@@ -499,7 +499,8 @@
+                                  GtkAllocation *allocation)
+ {
+   GtkClutterEmbedPrivate *priv = GTK_CLUTTER_EMBED (widget)->priv;
+-  int scale_factor = gtk_widget_get_scale_factor (widget);
++  // Removing gtk+ call that is only supported in 3.10+:
++  int scale_factor = 1;
+ 
+   gtk_widget_set_allocation (widget, allocation);
+ 
