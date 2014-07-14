@@ -1,6 +1,4 @@
-# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/gnome-base/gnome-control-center/gnome-control-center-3.12.1-r1.ebuild,v 1.1 2014/06/26 02:45:21 tetromino Exp $
 
 EAPI="5"
 GCONF_DEBUG="yes"
@@ -13,8 +11,8 @@ HOMEPAGE="https://git.gnome.org/browse/gnome-control-center/"
 
 LICENSE="GPL-2+"
 SLOT="2"
-IUSE="+bluetooth +colord +cups deprecated +gnome-online-accounts +i18n input_devices_wacom kerberos v4l"
-KEYWORDS="~alpha ~amd64 ~arm ~ia64 ~ppc ~ppc64 ~sh ~sparc ~x86 ~x86-fbsd ~x86-freebsd ~amd64-linux ~x86-linux ~x86-solaris"
+IUSE="+bluetooth +colord +cups +deprecated +gnome-online-accounts +i18n input_devices_wacom kerberos v4l"
+KEYWORDS="~*"
 
 # False positives caused by nested configure scripts
 QA_CONFIGURE_OPTIONS=".*"

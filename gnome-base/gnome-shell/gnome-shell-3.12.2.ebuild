@@ -1,6 +1,4 @@
-# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/gnome-base/gnome-shell/gnome-shell-3.12.2.ebuild,v 1.2 2014/06/01 08:07:31 pacho Exp $
 
 EAPI="5"
 GCONF_DEBUG="no"
@@ -14,9 +12,9 @@ HOMEPAGE="https://wiki.gnome.org/Projects/GnomeShell"
 
 LICENSE="GPL-2+ LGPL-2+"
 SLOT="0"
-IUSE="+bluetooth deprecated +i18n +networkmanager -openrc-force"
+IUSE="+bluetooth +deprecated +i18n +networkmanager"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
-KEYWORDS="~alpha ~amd64 ~arm ~ia64 ~ppc ~ppc64 ~sparc ~x86"
+KEYWORDS="~*"
 
 # libXfixes-5.0 needed for pointer barriers
 # FIXME:
@@ -87,18 +85,12 @@ RDEPEND="${COMMON_DEPEND}
 	media-libs/cogl[introspection]
 	>=sys-apps/accountsservice-0.6.14[introspection]
 	>=sys-power/upower-0.99[introspection]
-
 	>=gnome-base/gnome-session-2.91.91
 	>=gnome-base/gnome-settings-daemon-3.8.3
 	>=gnome-base/gnome-control-center-3.8.3[bluetooth(+)?]
-
-	!openrc-force? ( >=sys-apps/systemd-31 )
-
 	x11-misc/xdg-utils
-
 	media-fonts/dejavu
 	x11-themes/gnome-icon-theme-symbolic
-
 	i18n? ( >=app-i18n/ibus-1.4.99[dconf(+),gtk3,introspection] )
 	networkmanager? (
 		net-misc/mobile-broadband-provider-info
@@ -149,7 +141,7 @@ src_configure() {
 	gnome2_src_configure \
 		--enable-browser-plugin \
 		--enable-man \
-		$(use_enable !openrc-force systemd) \
+		$(use_enable systemd) \
 		$(use_with bluetooth) \
 		$(use_enable networkmanager) \
 		BROWSER_PLUGIN_DIR="${EPREFIX}"/usr/$(get_libdir)/nsbrowser/plugins
@@ -218,13 +210,5 @@ pkg_postinst() {
 		ewarn "${PN} needs Systemd to be *running* for working"
 		ewarn "properly. Please follow this guide to migrate:"
 		ewarn "http://wiki.gentoo.org/wiki/Systemd"
-	fi
-
-	if use openrc-force; then
-		ewarn "You are enabling 'openrc-force' USE flag to skip systemd requirement,"
-		ewarn "this can lead to unexpected problems and is not supported neither by"
-		ewarn "upstream neither by Gnome Gentoo maintainers. If you suffer any problem,"
-		ewarn "you will need to disable this USE flag system wide and retest before"
-		ewarn "opening any bug report."
 	fi
 }

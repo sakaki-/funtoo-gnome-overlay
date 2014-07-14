@@ -1,6 +1,4 @@
-# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
 EAPI=5
 inherit eutils systemd
@@ -11,8 +9,8 @@ SRC_URI="http://${PN}.freedesktop.org/releases/${P}.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0/2" # based on SONAME of libupower-glib.so
-KEYWORDS="~alpha amd64 arm ~ia64 ~mips ppc ppc64 ~sparc x86 ~x86-fbsd"
-IUSE="deprecated +introspection ios kernel_FreeBSD kernel_linux"
+KEYWORDS="~*"
+IUSE="+deprecated +introspection ios kernel_FreeBSD kernel_linux"
 
 RDEPEND=">=dev-libs/dbus-glib-0.100
 	>=dev-libs/glib-2.30
