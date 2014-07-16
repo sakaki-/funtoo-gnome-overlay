@@ -12,7 +12,7 @@ HOMEPAGE="https://wiki.gnome.org/Projects/GnomeShell"
 
 LICENSE="GPL-2+ LGPL-2+"
 SLOT="0"
-IUSE="+bluetooth +deprecated +i18n +networkmanager"
+IUSE="+bluetooth deprecated +i18n +networkmanager systemd"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 KEYWORDS="~*"
 
@@ -85,12 +85,18 @@ RDEPEND="${COMMON_DEPEND}
 	media-libs/cogl[introspection]
 	>=sys-apps/accountsservice-0.6.14[introspection]
 	>=sys-power/upower-0.99[introspection]
+
 	>=gnome-base/gnome-session-2.91.91
 	>=gnome-base/gnome-settings-daemon-3.8.3
 	>=gnome-base/gnome-control-center-3.8.3[bluetooth(+)?]
+
+	systemd? ( >=sys-apps/systemd-31 )
+
 	x11-misc/xdg-utils
+
 	media-fonts/dejavu
 	x11-themes/gnome-icon-theme-symbolic
+
 	i18n? ( >=app-i18n/ibus-1.4.99[dconf(+),gtk3,introspection] )
 	networkmanager? (
 		net-misc/mobile-broadband-provider-info
@@ -141,9 +147,9 @@ src_configure() {
 	gnome2_src_configure \
 		--enable-browser-plugin \
 		--enable-man \
-		$(use_enable systemd) \
 		$(use_with bluetooth) \
 		$(use_enable networkmanager) \
+		$(use_enable systemd) \
 		BROWSER_PLUGIN_DIR="${EPREFIX}"/usr/$(get_libdir)/nsbrowser/plugins
 }
 
@@ -204,11 +210,5 @@ pkg_postinst() {
 		elog "llvmpipe is used as fallback when no 3D acceleration"
 		elog "is available. You will need to enable llvm USE for"
 		elog "media-libs/mesa."
-	fi
-
-	if ! systemd_is_booted; then
-		ewarn "${PN} needs Systemd to be *running* for working"
-		ewarn "properly. Please follow this guide to migrate:"
-		ewarn "http://wiki.gentoo.org/wiki/Systemd"
 	fi
 }

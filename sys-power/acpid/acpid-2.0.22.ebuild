@@ -10,19 +10,16 @@ SRC_URI="mirror://sourceforge/${PN}2/${P}.tar.xz"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~*"
-IUSE="+gnome selinux"
+IUSE="selinux"
 
-RDEPEND="selinux? ( sec-policy/selinux-apm )
-		 gnome? ( gnome-base/gnome-settings-daemon[deprecated] )"
+RDEPEND="selinux? ( sec-policy/selinux-apm )"
 DEPEND="${RDEPEND}
 	    >=sys-kernel/linux-headers-3"
 
 src_prepare() {
-	if use gnome; then
-		# From Funtoo:
-		# 	https://bugs.funtoo.org/browse/FL-1329
-		epatch "${FILESDIR}"/${P}-rename-gnome-power-management-system-process.patch
-	fi
+	# From Funtoo:
+	# 	https://bugs.funtoo.org/browse/FL-1329
+	epatch "${FILESDIR}"/${P}-rename-gnome-power-management-system-process.patch
 }
 
 src_configure() {

@@ -207,6 +207,27 @@ diff -urN gnome-session-3.12.1/configure.ac gnome-session-3.12.1-patched/configu
          Build Docbook:            ${enable_docbook_docs}
          Build manpages:           ${enable_man}
  
+diff -urN gnome-session-3.12.1/gnome-session/Makefile.am gnome-session-3.12.1-patched/gnome-session/Makefile.am
+--- gnome-session-3.12.1/gnome-session/Makefile.am	2014-04-15 08:51:39.000000000 -0400
++++ gnome-session-3.12.1-patched/gnome-session/Makefile.am	2014-07-15 04:29:03.887076085 -0400
+@@ -10,7 +10,7 @@
+ AM_CPPFLAGS =					\
+ 	$(GTK3_CFLAGS)				\
+ 	$(GNOME_SESSION_CFLAGS)			\
+-	$(UPOWER_CFLAGS)			\
++	-I/usr/include/libupower-glib			\
+ 	$(DISABLE_DEPRECATED_CFLAGS)
+ 
+ AM_CFLAGS = $(WARN_CFLAGS)
+@@ -86,7 +86,7 @@
+ 	$(XTEST_LIBS)				\
+ 	$(XEXT_LIBS)				\
+ 	$(GNOME_SESSION_LIBS)			\
+-	$(UPOWER_LIBS)				\
++	-lupower-glib				\
+ 	$(GCONF_LIBS)				\
+ 	$(SYSTEMD_LIBS)				\
+ 	$(GIOUNIX_LIBS)				\
 diff -urN gnome-session-3.12.1/gnome-session/gsm-consolekit.c gnome-session-3.12.1-patched/gnome-session/gsm-consolekit.c
 --- gnome-session-3.12.1/gnome-session/gsm-consolekit.c	2014-04-15 08:51:39.000000000 -0400
 +++ gnome-session-3.12.1-patched/gnome-session/gsm-consolekit.c	2014-07-12 09:14:24.323022368 -0400

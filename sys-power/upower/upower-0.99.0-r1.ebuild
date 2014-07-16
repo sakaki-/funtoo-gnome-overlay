@@ -10,7 +10,7 @@ SRC_URI="http://${PN}.freedesktop.org/releases/${P}.tar.xz"
 LICENSE="GPL-2"
 SLOT="0/2" # based on SONAME of libupower-glib.so
 KEYWORDS="~*"
-IUSE="+deprecated +introspection ios kernel_FreeBSD kernel_linux"
+IUSE="deprecated +introspection ios kernel_FreeBSD kernel_linux"
 
 RDEPEND=">=dev-libs/dbus-glib-0.100
 	>=dev-libs/glib-2.30
@@ -37,7 +37,6 @@ PDEPEND="deprecated? (
 	gnome-base/gnome-session[deprecated]
 	gnome-base/gnome-settings-daemon[deprecated]
 	gnome-base/gnome-shell[deprecated]
-	sys-power/acpid[gnome]
 )"
 
 QA_MULTILIB_PATHS="usr/lib/${PN}/.*"
@@ -64,11 +63,7 @@ src_prepare() {
 }
 
 src_configure() {
-	local backend myconf
-
-	if use deprecated; then
-		myconf="--enable-deprecated"
-	fi
+	local backend
 
 	if use kernel_linux; then
 		backend=linux
@@ -81,13 +76,13 @@ src_configure() {
 	econf \
 		--libexecdir="${EPREFIX}"/usr/lib/${PN} \
 		--localstatedir="${EPREFIX}"/var \
-		$(use_enable introspection) \
 		--disable-static \
-		${myconf} \
 		--enable-man-pages \
 		--disable-tests \
 		--with-html-dir="${EPREFIX}"/usr/share/doc/${PF}/html \
 		--with-backend=${backend} \
+		$(use_enable deprecated) \
+		$(use_enable introspection) \
 		$(use_with ios idevice) \
 		"$(systemd_with_utildir)" \
 		"$(systemd_with_unitdir)"

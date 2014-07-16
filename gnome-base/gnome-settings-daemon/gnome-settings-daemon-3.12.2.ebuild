@@ -11,7 +11,7 @@ HOMEPAGE="https://git.gnome.org/browse/gnome-settings-daemon"
 
 LICENSE="GPL-2+"
 SLOT="0"
-IUSE="+colord +cups debug +deprecated +i18n input_devices_wacom packagekit policykit +short-touchpad-timeout smartcard +udev"
+IUSE="+colord +cups debug deprecated +i18n input_devices_wacom packagekit policykit +short-touchpad-timeout smartcard +udev"
 REQUIRED_USE="
 	packagekit? ( udev )
 	smartcard? ( udev )
@@ -62,7 +62,6 @@ COMMON_DEPEND="
 # Themes needed by g-s-d, gnome-shell, gtk+:3 apps to work properly
 # <gnome-color-manager-3.1.1 has file collisions with g-s-d-3.1.x
 # <gnome-power-manager-3.1.3 has file collisions with g-s-d-3.1.x
-# systemd needed for power and session management, bug #464944
 RDEPEND="${COMMON_DEPEND}
 	gnome-base/dconf
 	>=x11-themes/gnome-themes-standard-2.91
@@ -109,20 +108,14 @@ src_prepare() {
 }
 
 src_configure() {
-	local myconf
-
-	if use deprecated; then
-		myconf="--enable-deprecated"
-	fi
-
 	gnome2_src_configure \
 		--disable-static \
 		--enable-man \
-		${myconf} \
 		$(use_enable colord color) \
 		$(use_enable cups) \
 		$(use_enable debug) \
 		$(use_enable debug more-warnings) \
+		$(use_enable deprecated) \
 		$(use_enable i18n ibus) \
 		$(use_enable packagekit) \
 		$(use_enable smartcard smartcard-support) \
@@ -136,14 +129,4 @@ src_test() {
 
 src_install() {
 	gnome2_src_install udevrulesdir="$(get_udevdir)"/rules.d #509484
-}
-
-pkg_postinst() {
-	gnome2_pkg_postinst
-
-	if ! systemd_is_booted; then
-		ewarn "${PN} needs Systemd to be *running* for working"
-		ewarn "properly. Please follow the this guide to migrate:"
-		ewarn "http://wiki.gentoo.org/wiki/Systemd"
-	fi
 }

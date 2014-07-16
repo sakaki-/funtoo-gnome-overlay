@@ -11,7 +11,7 @@ HOMEPAGE="https://git.gnome.org/browse/gnome-control-center/"
 
 LICENSE="GPL-2+"
 SLOT="2"
-IUSE="+bluetooth +colord +cups +deprecated +gnome-online-accounts +i18n input_devices_wacom kerberos v4l"
+IUSE="+bluetooth +colord +cups deprecated +gnome-online-accounts +i18n input_devices_wacom kerberos v4l"
 KEYWORDS="~*"
 
 # False positives caused by nested configure scripts
@@ -159,20 +159,14 @@ src_prepare() {
 }
 
 src_configure() {
-	local myconf
-
-	if use deprecated; then
-		myconf="--enable-deprecated"
-	fi
-
 	gnome2_src_configure \
 		--disable-update-mimedb \
 		--disable-static \
 		--enable-documentation \
-		${myconf} \
 		$(use_enable bluetooth) \
 		$(use_enable colord color) \
 		$(use_enable cups) \
+		$(use_enable deprecated) \
 		$(use_enable gnome-online-accounts goa) \
 		$(use_enable i18n ibus) \
 		$(use_enable kerberos) \
