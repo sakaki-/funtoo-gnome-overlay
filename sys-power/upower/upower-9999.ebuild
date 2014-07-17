@@ -1,6 +1,4 @@
-# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
 EAPI=5
 inherit eutils git-2 systemd
@@ -12,7 +10,7 @@ EGIT_COMMIT="d1bb06985fb30a9dfd4c2eb423ac19540445b9e4"
 
 LICENSE="GPL-2"
 SLOT="0/2" # based on SONAME of libupower-glib.so
-KEYWORDS="~alpha amd64 arm ~ia64 ~mips ppc ppc64 ~sparc x86 ~x86-fbsd"
+KEYWORDS="~*"
 IUSE="deprecated +introspection ios kernel_FreeBSD kernel_linux"
 
 RDEPEND=">=dev-libs/dbus-glib-0.100
@@ -40,7 +38,6 @@ PDEPEND="deprecated? (
 	gnome-base/gnome-session[deprecated]
 	gnome-base/gnome-settings-daemon[deprecated]
 	gnome-base/gnome-shell[deprecated]
-	sys-power/acpid[gnome]
 )"
 
 QA_MULTILIB_PATHS="usr/lib/${PN}/.*"
@@ -65,11 +62,7 @@ src_prepare() {
 }
 
 src_configure() {
-	local backend myconf
-
-	if use deprecated; then
-		myconf="--enable-deprecated"
-	fi
+	local backend
 
 	if use kernel_linux; then
 		backend=linux
@@ -82,15 +75,15 @@ src_configure() {
 	econf \
 		--libexecdir="${EPREFIX}"/usr/lib/${PN} \
 		--localstatedir="${EPREFIX}"/var \
-		$(use_enable introspection) \
 		--disable-static \
-		${myconf} \
 		--enable-man-pages \
 		--disable-tests \
 		--enable-gtk-doc \
 		--enable-gtk-doc-html \
 		--with-html-dir="${EPREFIX}"/usr/share/doc/${PF}/html \
 		--with-backend=${backend} \
+		$(use_enable deprecated) \
+		$(use_enable introspection) \
 		$(use_with ios idevice) \
 		"$(systemd_with_utildir)" \
 		"$(systemd_with_unitdir)"

@@ -1,6 +1,4 @@
-# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/gnome-base/gnome-settings-daemon/gnome-settings-daemon-3.12.2.ebuild,v 1.1 2014/05/31 07:44:48 pacho Exp $
 
 EAPI="5"
 GCONF_DEBUG="no"
@@ -13,12 +11,12 @@ HOMEPAGE="https://git.gnome.org/browse/gnome-settings-daemon"
 
 LICENSE="GPL-2+"
 SLOT="0"
-IUSE="+colord +cups debug deprecated +i18n input_devices_wacom -openrc-force packagekit policykit +short-touchpad-timeout smartcard +udev"
+IUSE="+colord +cups debug deprecated +i18n input_devices_wacom packagekit policykit +short-touchpad-timeout smartcard +udev"
 REQUIRED_USE="
 	packagekit? ( udev )
 	smartcard? ( udev )
 "
-KEYWORDS="~alpha ~amd64 ~arm ~ia64 ~ppc ~ppc64 ~sparc ~x86 ~x86-fbsd ~x86-freebsd ~amd64-linux ~x86-linux ~x86-solaris"
+KEYWORDS="~*"
 
 COMMON_DEPEND="
 	>=dev-libs/glib-2.37.7:2
@@ -64,10 +62,8 @@ COMMON_DEPEND="
 # Themes needed by g-s-d, gnome-shell, gtk+:3 apps to work properly
 # <gnome-color-manager-3.1.1 has file collisions with g-s-d-3.1.x
 # <gnome-power-manager-3.1.3 has file collisions with g-s-d-3.1.x
-# systemd needed for power and session management, bug #464944
 RDEPEND="${COMMON_DEPEND}
 	gnome-base/dconf
-	!openrc-force? ( sys-apps/systemd )
 	>=x11-themes/gnome-themes-standard-2.91
 	>=x11-themes/gnome-icon-theme-2.91
 	>=x11-themes/gnome-icon-theme-symbolic-2.91
@@ -112,20 +108,14 @@ src_prepare() {
 }
 
 src_configure() {
-	local myconf
-
-	if use deprecated; then
-		myconf="--enable-deprecated"
-	fi
-
 	gnome2_src_configure \
 		--disable-static \
 		--enable-man \
-		${myconf} \
 		$(use_enable colord color) \
 		$(use_enable cups) \
 		$(use_enable debug) \
 		$(use_enable debug more-warnings) \
+		$(use_enable deprecated) \
 		$(use_enable i18n ibus) \
 		$(use_enable packagekit) \
 		$(use_enable smartcard smartcard-support) \
@@ -139,22 +129,4 @@ src_test() {
 
 src_install() {
 	gnome2_src_install udevrulesdir="$(get_udevdir)"/rules.d #509484
-}
-
-pkg_postinst() {
-	gnome2_pkg_postinst
-
-	if ! systemd_is_booted; then
-		ewarn "${PN} needs Systemd to be *running* for working"
-		ewarn "properly. Please follow the this guide to migrate:"
-		ewarn "http://wiki.gentoo.org/wiki/Systemd"
-	fi
-
-	if use openrc-force; then
-		ewarn "You are enabling 'openrc-force' USE flag to skip systemd requirement,"
-		ewarn "this can lead to unexpected problems and is not supported neither by"
-		ewarn "upstream neither by Gnome Gentoo maintainers. If you suffer any problem,"
-		ewarn "you will need to disable this USE flag system wide and retest before"
-		ewarn "opening any bug report."
-	fi
 }
