@@ -1,0 +1,47 @@
+diff -urN libical-1.0/src/libical/CMakeLists.txt libical-1.0-patched/src/libical/CMakeLists.txt
+--- libical-1.0/src/libical/CMakeLists.txt	2013-04-14 13:24:42.000000000 -0400
++++ libical-1.0-patched/src/libical/CMakeLists.txt	2014-07-16 23:38:25.850292414 -0400
+@@ -156,13 +156,6 @@
+   ${CMAKE_BINARY_DIR}/src/libical/ical.h
+ )
+ 
+-macro(_list_prefix _outvar _listvar _prefix)
+-  set(${_outvar})
+-  foreach(_item IN LISTS ${_listvar})
+-    list(APPEND ${_outvar} ${_prefix}${_item})
+-  endforeach()
+-endmacro(_list_prefix)
+-
+ # GObject Introspection
+ if(HAVE_INTROSPECTION)
+   include(GObjectIntrospectionMacros)
+@@ -170,17 +163,20 @@
+   #set(INTROSPECTION_SCANNER_ARGS "--add-include-path=${CMAKE_CURRENT_SOURCE_DIR}")
+   #set(INTROSPECTION_COMPILER_ARGS "--includedir=${CMAKE_CURRENT_SOURCE_DIR}")
+ 
+-  set(libical_0_48_gir "libical")
+-  set(libical_0_48_gir_VERSION "0.48")
++  set(LIB_VERSION ${LIBICAL_LIB_VERSION_STRING})
++  string(REPLACE "." "_" LIB_VERSION "${LIB_VERSION}")
++  string(REPLACE "-" "_" LIB_VERSION "${LIB_VERSION}")
++
++  set(libical_${LIB_VERSION}_gir "libical")
++  set(libical_${LIB_VERSION}_gir_VERSION ${LIBICAL_LIB_VERSION_STRING})
+   set(INTROSPECTION_SCANNER_ARGS ${CMAKE_BINARY_DIR}/src/libical/ical.h)
+-  set(libical_0_48_gir_LIBRARY "ical")
+-  set(libical_0_48_gir_INCLUDES GObject-2.0)
+-  get_directory_property(_tmp_includes ical_LIB_SRCS)
+-  _list_prefix(_includes _tmp_includes "-L")
+-  set(libical_0_48_gir_CFLAGS ${_includes})
+-  set(libical_0_48_gir_LIBS ical)
++  set(libical_${LIB_VERSION}_gir_LIBRARY "ical")
++  set(libical_${LIB_VERSION}_gir_INCLUDES GObject-2.0)
++  set(_includes ${_includes} "-L${LIBRARY_OUTPUT_PATH}")
++  set(libical_${LIB_VERSION}_gir_CFLAGS ${_includes})
++  set(libical_${LIB_VERSION}_gir_LIBS ical)
+ 
+-  list(APPEND INTROSPECTION_GIRS libical-0.48.gir)
++  list(APPEND INTROSPECTION_GIRS libical-${LIBICAL_LIB_VERSION_STRING}.gir)
+ 
+   gir_add_introspections(INTROSPECTION_GIRS)
+ endif()
