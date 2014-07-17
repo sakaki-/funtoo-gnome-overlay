@@ -47,7 +47,6 @@ COMMON_DEPEND="
 	>=sys-power/upower-0.99
 	>=x11-libs/libnotify-0.7.3:0=
 
-	>=gnome-extra/nm-applet-0.9.7.995
 	>=net-misc/networkmanager-0.9.8[modemmanager]
 	>=net-misc/modemmanager-0.7.990
 
@@ -83,6 +82,7 @@ COMMON_DEPEND="
 # <gnome-color-manager-3.1.2 has file collisions with g-c-c-3.1.x
 # libgnomekbd needed only for gkbd-keyboard-display tool
 RDEPEND="${COMMON_DEPEND}
+	>=gnome-extra/nm-applet-0.9.7.995
 	|| ( ( app-admin/openrc-settingsd sys-auth/consolekit ) >=sys-apps/systemd-31 )
 	>=sys-apps/accountsservice-0.6.30
 	x11-themes/gnome-icon-theme-symbolic
