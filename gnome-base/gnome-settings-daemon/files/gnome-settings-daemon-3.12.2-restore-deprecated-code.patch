@@ -1,6 +1,6 @@
 diff -urN gnome-settings-daemon-3.12.2/config.h.in gnome-settings-daemon-3.12.2-patched/config.h.in
 --- gnome-settings-daemon-3.12.2/config.h.in	2014-05-05 10:55:03.000000000 -0400
-+++ gnome-settings-daemon-3.12.2-patched/config.h.in	2014-07-13 19:23:29.427878844 -0400
++++ gnome-settings-daemon-3.12.2-patched/config.h.in	2014-07-18 11:58:24.271973974 -0400
 @@ -1,5 +1,8 @@
  /* config.h.in.  Generated from configure.ac by autoheader.  */
  
@@ -12,7 +12,7 @@ diff -urN gnome-settings-daemon-3.12.2/config.h.in gnome-settings-daemon-3.12.2-
  
 diff -urN gnome-settings-daemon-3.12.2/configure gnome-settings-daemon-3.12.2-patched/configure
 --- gnome-settings-daemon-3.12.2/configure	2014-05-05 10:54:48.000000000 -0400
-+++ gnome-settings-daemon-3.12.2-patched/configure	2014-07-13 19:23:29.446878842 -0400
++++ gnome-settings-daemon-3.12.2-patched/configure	2014-07-18 11:58:24.281973974 -0400
 @@ -721,6 +721,8 @@
  GLIB_COMPILE_SCHEMAS
  gsettingsschemadir
@@ -88,7 +88,7 @@ diff -urN gnome-settings-daemon-3.12.2/configure gnome-settings-daemon-3.12.2-pa
          IBus support:             ${enable_ibus}
 diff -urN gnome-settings-daemon-3.12.2/configure.ac gnome-settings-daemon-3.12.2-patched/configure.ac
 --- gnome-settings-daemon-3.12.2/configure.ac	2014-05-05 10:54:35.000000000 -0400
-+++ gnome-settings-daemon-3.12.2-patched/configure.ac	2014-07-13 19:23:29.447878842 -0400
++++ gnome-settings-daemon-3.12.2-patched/configure.ac	2014-07-18 11:58:24.282973974 -0400
 @@ -90,6 +90,15 @@
  AC_PATH_PROG(GLIB_GENMARSHAL, glib-genmarshal)
  AC_PATH_PROG([GLIB_MKENUMS],[glib-mkenums])
@@ -115,7 +115,7 @@ diff -urN gnome-settings-daemon-3.12.2/configure.ac gnome-settings-daemon-3.12.2
          IBus support:             ${enable_ibus}
 diff -urN gnome-settings-daemon-3.12.2/plugins/common/Makefile.am gnome-settings-daemon-3.12.2-patched/plugins/common/Makefile.am
 --- gnome-settings-daemon-3.12.2/plugins/common/Makefile.am	2014-05-05 09:49:57.000000000 -0400
-+++ gnome-settings-daemon-3.12.2-patched/plugins/common/Makefile.am	2014-07-13 19:23:29.486878839 -0400
++++ gnome-settings-daemon-3.12.2-patched/plugins/common/Makefile.am	2014-07-18 11:58:24.282973974 -0400
 @@ -9,6 +9,8 @@
  	gsd-keygrab.h		\
  	gsd-input-helper.c	\
@@ -127,7 +127,7 @@ diff -urN gnome-settings-daemon-3.12.2/plugins/common/Makefile.am gnome-settings
  
 diff -urN gnome-settings-daemon-3.12.2/plugins/common/Makefile.in gnome-settings-daemon-3.12.2-patched/plugins/common/Makefile.in
 --- gnome-settings-daemon-3.12.2/plugins/common/Makefile.in	2014-05-05 10:54:58.000000000 -0400
-+++ gnome-settings-daemon-3.12.2-patched/plugins/common/Makefile.in	2014-07-13 19:23:29.495878838 -0400
++++ gnome-settings-daemon-3.12.2-patched/plugins/common/Makefile.in	2014-07-18 11:58:24.283973974 -0400
 @@ -101,6 +101,7 @@
  	$(am__DEPENDENCIES_1)
  am_libcommon_la_OBJECTS = libcommon_la-gsd-device-mapper.lo \
@@ -169,7 +169,7 @@ diff -urN gnome-settings-daemon-3.12.2/plugins/common/Makefile.in gnome-settings
  @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libcommon_la-gsd-shell-helper.Tpo $(DEPDIR)/libcommon_la-gsd-shell-helper.Plo
 diff -urN gnome-settings-daemon-3.12.2/plugins/common/gsd-power-helper.c gnome-settings-daemon-3.12.2-patched/plugins/common/gsd-power-helper.c
 --- gnome-settings-daemon-3.12.2/plugins/common/gsd-power-helper.c	1969-12-31 19:00:00.000000000 -0500
-+++ gnome-settings-daemon-3.12.2-patched/plugins/common/gsd-power-helper.c	2014-07-13 19:23:29.495878838 -0400
++++ gnome-settings-daemon-3.12.2-patched/plugins/common/gsd-power-helper.c	2014-07-18 11:58:24.283973974 -0400
 @@ -0,0 +1,139 @@
 +/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*-
 + *
@@ -312,7 +312,7 @@ diff -urN gnome-settings-daemon-3.12.2/plugins/common/gsd-power-helper.c gnome-s
 +#endif /* ENABLE_DEPRECATED */
 diff -urN gnome-settings-daemon-3.12.2/plugins/common/gsd-power-helper.h gnome-settings-daemon-3.12.2-patched/plugins/common/gsd-power-helper.h
 --- gnome-settings-daemon-3.12.2/plugins/common/gsd-power-helper.h	1969-12-31 19:00:00.000000000 -0500
-+++ gnome-settings-daemon-3.12.2-patched/plugins/common/gsd-power-helper.h	2014-07-13 19:23:29.495878838 -0400
++++ gnome-settings-daemon-3.12.2-patched/plugins/common/gsd-power-helper.h	2014-07-18 11:58:24.284973974 -0400
 @@ -0,0 +1,35 @@
 +/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*-
 + *
@@ -351,7 +351,7 @@ diff -urN gnome-settings-daemon-3.12.2/plugins/common/gsd-power-helper.h gnome-s
 +#endif /* __GSD_POWER_HELPER_H */
 diff -urN gnome-settings-daemon-3.12.2/plugins/media-keys/gsd-media-keys-manager.c gnome-settings-daemon-3.12.2-patched/plugins/media-keys/gsd-media-keys-manager.c
 --- gnome-settings-daemon-3.12.2/plugins/media-keys/gsd-media-keys-manager.c	2014-05-05 09:49:57.000000000 -0400
-+++ gnome-settings-daemon-3.12.2-patched/plugins/media-keys/gsd-media-keys-manager.c	2014-07-13 19:40:58.659792509 -0400
++++ gnome-settings-daemon-3.12.2-patched/plugins/media-keys/gsd-media-keys-manager.c	2014-07-18 12:03:24.045988733 -0400
 @@ -56,6 +56,9 @@
  #include "shell-key-grabber.h"
  #include "gsd-screenshot-utils.h"
@@ -387,11 +387,13 @@ diff -urN gnome-settings-daemon-3.12.2/plugins/media-keys/gsd-media-keys-manager
          GList           *media_players;
  
          GDBusNodeInfo   *introspection_data;
-@@ -1810,17 +1824,30 @@
+@@ -1810,17 +1824,34 @@
                                             config_key);
          switch (action_type) {
          case GSD_POWER_ACTION_SUSPEND:
 +#ifdef ENABLE_DEPRECATED
++                do_lock_screensaver (manager);
++
 +                gsd_power_suspend (manager->priv->upower_proxy);
 +#else
                  power_action (manager, "Suspend", !in_lock_screen);
@@ -411,6 +413,8 @@ diff -urN gnome-settings-daemon-3.12.2/plugins/media-keys/gsd-media-keys-manager
                  break;
          case GSD_POWER_ACTION_HIBERNATE:
 +#ifdef ENABLE_DEPRECATED
++                do_lock_screensaver (manager);
++
 +                gsd_power_hibernate (manager->priv->upower_proxy);
 +#else
                  power_action (manager, "Hibernate", !in_lock_screen);
@@ -418,7 +422,7 @@ diff -urN gnome-settings-daemon-3.12.2/plugins/media-keys/gsd-media-keys-manager
                  break;
          case GSD_POWER_ACTION_BLANK:
          case GSD_POWER_ACTION_LOGOUT:
-@@ -2448,6 +2475,10 @@
+@@ -2448,6 +2479,10 @@
          g_clear_object (&priv->mpris_controller);
          g_clear_object (&priv->screencast_proxy);
  
@@ -429,7 +433,7 @@ diff -urN gnome-settings-daemon-3.12.2/plugins/media-keys/gsd-media-keys-manager
          if (priv->cancellable != NULL) {
                  g_cancellable_cancel (priv->cancellable);
                  g_clear_object (&priv->cancellable);
-@@ -2631,6 +2662,24 @@
+@@ -2631,6 +2666,24 @@
          }
  }
  
@@ -454,7 +458,7 @@ diff -urN gnome-settings-daemon-3.12.2/plugins/media-keys/gsd-media-keys-manager
  static void
  power_screen_ready_cb (GObject             *source_object,
                         GAsyncResult        *res,
-@@ -2748,6 +2797,19 @@
+@@ -2748,6 +2801,19 @@
                     manager->priv->bus_cancellable,
                     (GAsyncReadyCallback) on_bus_gotten,
                     manager);
@@ -476,7 +480,7 @@ diff -urN gnome-settings-daemon-3.12.2/plugins/media-keys/gsd-media-keys-manager
  GsdMediaKeysManager *
 diff -urN gnome-settings-daemon-3.12.2/plugins/power/gsd-power-manager.c gnome-settings-daemon-3.12.2-patched/plugins/power/gsd-power-manager.c
 --- gnome-settings-daemon-3.12.2/plugins/power/gsd-power-manager.c	2014-05-05 10:50:10.000000000 -0400
-+++ gnome-settings-daemon-3.12.2-patched/plugins/power/gsd-power-manager.c	2014-07-13 19:44:11.680776627 -0400
++++ gnome-settings-daemon-3.12.2-patched/plugins/power/gsd-power-manager.c	2014-07-18 13:46:15.080995726 -0400
 @@ -48,6 +48,9 @@
  #include "gnome-settings-bus.h"
  #include "gsd-enums.h"
@@ -499,11 +503,41 @@ diff -urN gnome-settings-daemon-3.12.2/plugins/power/gsd-power-manager.c gnome-s
          /* Idles */
          GnomeIdleMonitor        *idle_monitor;
          guint                    idle_dim_id;
-@@ -960,19 +968,31 @@
+@@ -955,24 +963,63 @@
+ }
+ 
+ static void
++lock_screensaver (GsdPowerManager *manager)
++{
++        gboolean do_lock;
++
++        do_lock = g_settings_get_boolean (manager->priv->settings_screensaver,
++                                          "lock-enabled");
++        if (!do_lock) {
++                g_dbus_proxy_call_sync (G_DBUS_PROXY (manager->priv->screensaver_proxy),
++                                        "SetActive",
++                                        g_variant_new ("(b)", TRUE),
++                                        G_DBUS_CALL_FLAGS_NONE,
++                                        -1, NULL, NULL);
++                return;
++        }
++
++        g_dbus_proxy_call_sync (G_DBUS_PROXY (manager->priv->screensaver_proxy),
++                                "Lock",
++                                NULL,
++                                G_DBUS_CALL_FLAGS_NONE,
++                                -1, NULL, NULL);
++}
++
++static void
+ do_power_action_type (GsdPowerManager *manager,
+                       GsdPowerActionType action_type)
  {
          switch (action_type) {
          case GSD_POWER_ACTION_SUSPEND:
 +#ifdef ENABLE_DEPRECATED
++                lock_screensaver (manager);
++
 +                gsd_power_suspend (manager->priv->upower_proxy);
 +#else
                  action_suspend (manager);
@@ -514,6 +548,8 @@ diff -urN gnome-settings-daemon-3.12.2/plugins/power/gsd-power-manager.c gnome-s
                  break;
          case GSD_POWER_ACTION_HIBERNATE:
 +#ifdef ENABLE_DEPRECATED
++                lock_screensaver (manager);
++
 +                gsd_power_hibernate (manager->priv->upower_proxy);
 +#else
                  action_hibernate (manager);
@@ -531,7 +567,37 @@ diff -urN gnome-settings-daemon-3.12.2/plugins/power/gsd-power-manager.c gnome-s
                  break;
          case GSD_POWER_ACTION_BLANK:
                  backlight_disable (manager);
-@@ -1842,6 +1862,24 @@
+@@ -1159,29 +1206,6 @@
+ }
+ 
+ static void
+-lock_screensaver (GsdPowerManager *manager)
+-{
+-        gboolean do_lock;
+-
+-        do_lock = g_settings_get_boolean (manager->priv->settings_screensaver,
+-                                          "lock-enabled");
+-        if (!do_lock) {
+-                g_dbus_proxy_call_sync (G_DBUS_PROXY (manager->priv->screensaver_proxy),
+-                                        "SetActive",
+-                                        g_variant_new ("(b)", TRUE),
+-                                        G_DBUS_CALL_FLAGS_NONE,
+-                                        -1, NULL, NULL);
+-                return;
+-        }
+-
+-        g_dbus_proxy_call_sync (G_DBUS_PROXY (manager->priv->screensaver_proxy),
+-                                "Lock",
+-                                NULL,
+-                                G_DBUS_CALL_FLAGS_NONE,
+-                                -1, NULL, NULL);
+-}
+-
+-static void
+ do_lid_closed_action (GsdPowerManager *manager)
+ {
+         /* play a sound, using sounds from the naming spec */
+@@ -1842,6 +1866,24 @@
                  handle_wake_up_screen (GSD_POWER_MANAGER (user_data));
  }
  
@@ -556,7 +622,7 @@ diff -urN gnome-settings-daemon-3.12.2/plugins/power/gsd-power-manager.c gnome-s
  static void
  power_keyboard_proxy_ready_cb (GObject             *source_object,
                                 GAsyncResult        *res,
-@@ -2383,6 +2421,18 @@
+@@ -2383,6 +2425,18 @@
          if (manager->priv->lid_is_present)
                  manager->priv->lid_is_closed = up_client_get_lid_is_closed (manager->priv->up_client);
  
@@ -575,7 +641,7 @@ diff -urN gnome-settings-daemon-3.12.2/plugins/power/gsd-power-manager.c gnome-s
          /* Set up the logind proxy */
          manager->priv->logind_proxy =
                  g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
-@@ -2397,6 +2447,7 @@
+@@ -2397,6 +2451,7 @@
                  g_debug ("No systemd (logind) support, disabling plugin");
                  return FALSE;
          }
@@ -583,7 +649,7 @@ diff -urN gnome-settings-daemon-3.12.2/plugins/power/gsd-power-manager.c gnome-s
  
          /* Check for XTEST support */
          if (supports_xtest () == FALSE) {
-@@ -2464,6 +2515,9 @@
+@@ -2464,6 +2519,9 @@
          manager->priv->devices_array = NULL;
          g_clear_object (&manager->priv->device_composite);
  
