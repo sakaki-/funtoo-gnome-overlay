@@ -1,0 +1,30 @@
+From 3b6948bc4bbdd68b5ed3a974e57a156a79c1a7b8 Mon Sep 17 00:00:00 2001
+From: Martin Pitt <martin.pitt@ubuntu.com>
+Date: Wed, 16 Jul 2014 11:45:35 +0200
+Subject: [PATCH] self-test: Add missing #include
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf8
+Content-Transfer-Encoding: 8bit
+
+up-self-test.c: In function âup_test_history_funcâ:
+up-self-test.c:274:2: warning: implicit declaration of function ârmdirâ [-Wimplicit-function-declaration]
+  rmdir (history_dir);
+---
+ src/up-self-test.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/up-self-test.c b/src/up-self-test.c
+index da10d7d..f64ecf5 100644
+--- a/src/up-self-test.c
++++ b/src/up-self-test.c
+@@ -25,6 +25,7 @@
+ #include <glib/gstdio.h>
+ #include <up-history-item.h>
+ #include <stdlib.h>
++#include <unistd.h>
+ #include <errno.h>
+ #include "up-backend.h"
+ #include "up-daemon.h"
+-- 
+2.0.0
+

@@ -27,6 +27,7 @@ RDEPEND=">=dev-libs/dbus-glib-0.100
 			>=app-pda/libplist-1:=
 			)
 		)
+	dev-util/gtk-doc
 	deprecated? ( >=sys-power/pm-utils-1.4.1-r2 )"
 DEPEND="${RDEPEND}
 	dev-libs/libxslt
@@ -45,10 +46,6 @@ QA_MULTILIB_PATHS="usr/lib/${PN}/.*"
 DOCS="AUTHORS HACKING NEWS README"
 
 src_prepare() {
-	if [[ ! -e configure ]] ; then
-		./autogen.sh || die
-	fi
-
 	if use deprecated; then
 		# From Funtoo:
 		# 	https://bugs.funtoo.org/browse/FL-1329
@@ -58,6 +55,14 @@ src_prepare() {
 		#	https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=718458
 		#	https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=718491
 		epatch "${FILESDIR}"/${PN}-0.99.0-always-use-pm-utils-backend.patch
+	fi
+
+	# From Upstream:
+	# 	http://cgit.freedesktop.org/upower/commit/?id=3b6948bc4bbdd68b5ed3a974e57a156a79c1a7b8
+	epatch "${FILESDIR}"/${PN}-0.99.0-add-missing-include.patch
+
+	if [[ ! -e configure ]] ; then
+		./autogen.sh || die
 	fi
 }
 

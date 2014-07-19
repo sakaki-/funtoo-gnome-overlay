@@ -1,0 +1,25 @@
+From b1aeed994884602b3601a7f4b98419c65be9009c Mon Sep 17 00:00:00 2001
+From: Bastien Nocera <hadess@hadess.net>
+Date: Tue, 24 Jun 2014 16:45:38 +0200
+Subject: [PATCH] daemon: Fix possible UpHistoryItem leak on failure
+
+---
+ src/up-history.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/src/up-history.c b/src/up-history.c
+index 795b093..4ed55fc 100644
+--- a/src/up-history.c
++++ b/src/up-history.c
+@@ -532,6 +532,8 @@ up_history_array_from_file (GPtrArray *list, const gchar *filename)
+ 		ret = up_history_item_set_from_string (item, parts[i]);
+ 		if (ret)
+ 			g_ptr_array_add (list, item);
++		else
++			g_object_unref (item);
+ 	}
+ 
+ out:
+-- 
+2.0.0
+

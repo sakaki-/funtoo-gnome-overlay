@@ -1,0 +1,27 @@
+From dbb9bead6d3b9e70a5d58019b1615d2a6fba5312 Mon Sep 17 00:00:00 2001
+From: Bastien Nocera <hadess@hadess.net>
+Date: Tue, 24 Jun 2014 16:34:40 +0200
+Subject: [PATCH] linux: Fix small memleak on startup with Logitech devices
+
+---
+ src/linux/up-device-unifying.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/linux/up-device-unifying.c b/src/linux/up-device-unifying.c
+index b3876e0..1819a8a 100644
+--- a/src/linux/up-device-unifying.c
++++ b/src/linux/up-device-unifying.c
+@@ -207,8 +207,8 @@ up_device_unifying_coldplug (UpDevice *device)
+ 				continue;
+ 
+ 			/* hidraw device which exposes hiddev interface is our receiver */
+-			tmp = g_build_filename(g_udev_device_get_sysfs_path (g_udev_device_get_parent(native)),
+-					"usbmisc", NULL);
++			tmp = g_build_filename (g_udev_device_get_sysfs_path (parent),
++					        "usbmisc", NULL);
+ 			dir = g_dir_open (tmp, 0, &error);
+ 			g_free(tmp);
+ 			if (error) {
+-- 
+2.0.0
+

@@ -1,0 +1,25 @@
+From 212b4397ccba17caf86206e2b265c0c2e4ad158c Mon Sep 17 00:00:00 2001
+From: Bastien Nocera <hadess@hadess.net>
+Date: Wed, 7 May 2014 09:46:49 +0200
+Subject: [PATCH] lib: Fix API doc for up_client_get_on_battery()
+
+---
+ libupower-glib/up-client.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/libupower-glib/up-client.c b/libupower-glib/up-client.c
+index cb1c035..1beb220 100644
+--- a/libupower-glib/up-client.c
++++ b/libupower-glib/up-client.c
+@@ -250,7 +250,7 @@ up_client_get_is_docked (UpClient *client)
+  *
+  * Get whether the system is running on battery power.
+  *
+- * Return value: TRUE if the system is currently running on battery, FALSE other wise.
++ * Return value: %TRUE if the system is currently running on battery, %FALSE otherwise.
+  *
+  * Since: 0.9.0
+  **/
+-- 
+2.0.0
+
