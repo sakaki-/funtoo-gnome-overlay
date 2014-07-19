@@ -3,13 +3,11 @@
 EAPI="5"
 GCONF_DEBUG="no"
 
-inherit gnome2
-if [[ ${PV} = 9999 ]]; then
-	inherit gnome2-live
-fi
+inherit gnome2-live
 
 DESCRIPTION="System log viewer for GNOME"
 HOMEPAGE="https://live.gnome.org/GnomeUtils"
+EGIT_COMMIT="6f9331590e34adbd7d3797cf1d87d2fa972afdf0"
 
 LICENSE="GPL-2+ CC-BY-SA-3.0"
 SLOT="0"
@@ -33,13 +31,24 @@ DEPEND="${COMMON_DEPEND}
 	virtual/pkgconfig
 "
 
-if [[ ${PV} = 9999 ]]; then
-	DEPEND="${DEPEND}
-		app-text/yelp-tools"
-fi
+src_prepare() {
+	if [[ ! -e configure ]] ; then
+		./autogen.sh || die
+
+		cd help; make clean; make || die; cd ..
+	fi
+
+	epatch "${FILESDIR}"/${P}-update-version-information.patch
+
+	gnome2_src_prepare
+}
 
 src_configure() {
 	gnome2_src_configure \
 		--enable-zlib \
 		ITSTOOL=$(type -P true)
+}
+
+pkg_postinst() {
+	ewarn "While this ebuild is tied to a specific git commit, instability can still occur"
 }
