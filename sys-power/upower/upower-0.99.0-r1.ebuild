@@ -32,12 +32,6 @@ DEPEND="${RDEPEND}
 	app-text/docbook-xsl-stylesheets
 	dev-util/intltool
 	virtual/pkgconfig"
-PDEPEND="deprecated? (
-	gnome-base/gnome-control-center[deprecated]
-	gnome-base/gnome-session[deprecated]
-	gnome-base/gnome-settings-daemon[deprecated]
-	gnome-base/gnome-shell[deprecated]
-)"
 
 QA_MULTILIB_PATHS="usr/lib/${PN}/.*"
 
