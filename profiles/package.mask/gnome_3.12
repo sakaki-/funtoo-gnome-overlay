@@ -1,4 +1,5 @@
-# Users should explicitly choose to unmask this package.
+# Users should explicitly choose to unmask these packages.
+=app-admin/gnome-system-log-9999
 =sys-power/upower-9999
 
 # GNOME 3.13+ is not yet supported.
