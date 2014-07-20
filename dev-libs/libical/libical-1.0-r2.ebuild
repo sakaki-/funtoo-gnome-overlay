@@ -9,7 +9,7 @@ SRC_URI="mirror://sourceforge/freeassociation/${PN}/${P}/${P}.tar.gz"
 
 LICENSE="|| ( MPL-1.1 LGPL-2 )"
 SLOT="0/1"
-KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~ppc ~ppc64 ~sparc ~x86 ~amd64-fbsd ~x86-fbsd ~x86-freebsd ~amd64-linux ~x86-linux ~ppc-macos ~x86-macos ~x86-solaris"
+KEYWORDS="*"
 IUSE="doc examples introspection static-libs"
 
 RDEPEND="introspection? ( dev-libs/gobject-introspection )"

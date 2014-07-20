@@ -14,7 +14,7 @@ LICENSE="GPL-2+ LGPL-2+"
 SLOT="0"
 IUSE="+bluetooth deprecated +i18n +networkmanager systemd"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
-KEYWORDS="~*"
+KEYWORDS="*"
 
 # libXfixes-5.0 needed for pointer barriers
 # FIXME:
