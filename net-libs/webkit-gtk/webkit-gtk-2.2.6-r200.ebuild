@@ -40,7 +40,7 @@ RDEPEND="
 	>=x11-libs/pango-1.30.0.0
 	x11-libs/libXrender
 	x11-libs/libXt
-	>=x11-libs/gtk+-2.24.10:2
+	>=x11-libs/gtk+-2.24.10:2[introspection?]
 
 	egl? ( media-libs/mesa[egl] )
 	geoloc? ( app-misc/geoclue:0 )
