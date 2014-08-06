@@ -1,6 +1,3 @@
-# Conflicts with net-wireless/bluez-5 requirement.
->=net-libs/libpcap-1.6.1
-
 # Users should explicitly choose to unmask these packages.
 =app-admin/gnome-system-log-9999
 =sys-power/upower-9999
