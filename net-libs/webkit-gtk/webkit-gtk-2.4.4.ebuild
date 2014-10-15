@@ -9,7 +9,7 @@ inherit autotools check-reqs eutils flag-o-matic gnome2 pax-utils python-any-r1 
 MY_P="webkitgtk-${PV}"
 DESCRIPTION="Open source web browser engine"
 HOMEPAGE="http://www.webkitgtk.org/"
-SRC_URI="http://www.webkitgtk.org/releases/${MY_P}.tar.xz"
+SRC_URI="http://www.webkitgtk.org/releases/${MY_P}a.tar.xz"
 
 LICENSE="LGPL-2+ BSD"
 SLOT="3/25" # soname version of libwebkit2gtk-3.0
