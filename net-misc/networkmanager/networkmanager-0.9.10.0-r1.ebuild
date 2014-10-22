@@ -35,7 +35,8 @@ COMMON_DEPEND="
 	>=dev-libs/dbus-glib-0.102
 	>=dev-libs/glib-2.32:2
 	>=dev-libs/libnl-3.2.8:3=
-	dev-libs/libndp
+	!!dev-libs/libndp
+	net-libs/libndp
 	policykit? ( >=sys-auth/polkit-0.106 )
 	>=net-libs/libsoup-2.26:2.4=
 	sys-libs/readline
