@@ -15,7 +15,7 @@ SLOT="0"
 IUSE="bluetooth gconf +introspection modemmanager"
 KEYWORDS="*"
 
-COMMON_DEPEND="
+RDEPEND="
 	app-crypt/libsecret
 	>=dev-libs/glib-2.26:2
 	>=dev-libs/dbus-glib-0.88
@@ -34,16 +34,13 @@ COMMON_DEPEND="
 		gnome-base/libgnome-keyring )
 	introspection? ( >=dev-libs/gobject-introspection-0.9.6 )
 	modemmanager? ( >=net-misc/modemmanager-0.7.990 )
-	virtual/udev[gudev]
-"
-DEPEND="${COMMON_DEPEND}
-	virtual/pkgconfig
-	>=dev-util/intltool-0.40
-"
-
-RDEPEND="${COMMON_DEPEND}
 	virtual/freedesktop-icon-theme
 	virtual/notification-daemon
+	virtual/libgudev:=
+"
+DEPEND="${RDEPEND}
+	virtual/pkgconfig
+	>=dev-util/intltool-0.40
 "
 
 src_configure() {

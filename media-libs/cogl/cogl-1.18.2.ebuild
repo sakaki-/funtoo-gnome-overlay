@@ -12,7 +12,7 @@ HOMEPAGE="http://www.cogl3d.org/"
 LICENSE="MIT BSD"
 SLOT="1.0/20" # subslot = .so version
 # doc and profile disable for now due bugs #484750 and #483332
-IUSE="examples gles2 gstreamer +introspection +opengl +pango test" # doc profile
+IUSE="examples gles2 gstreamer +introspection +opengl +pango test wayland" # doc profile
 KEYWORDS="*"
 
 COMMON_DEPEND="
@@ -34,6 +34,7 @@ COMMON_DEPEND="
 
 	introspection? ( >=dev-libs/gobject-introspection-1.34.2 )
 	pango? ( >=x11-libs/pango-1.20.0[introspection?] )
+	wayland? ( >=dev-libs/wayland-1.5.90 )
 "
 # before clutter-1.7, cogl was part of clutter
 RDEPEND="${COMMON_DEPEND}
@@ -90,6 +91,8 @@ src_configure() {
 		$(use_enable introspection) \
 		$(use_enable pango cogl-pango) \
 		$(use_enable test unit-tests) \
+		$(use_enable wayland wayland-egl-platform) \
+		$(use_enable wayland wayland-egl-server) \
 		--disable-profile
 #		$(use_enable profile)
 }

@@ -127,7 +127,7 @@ src_prepare() {
 	fi
 
 	# Change favorites defaults, bug #479918
-	epatch "${FILESDIR}/${PN}-defaults.patch"
+	epatch "${FILESDIR}/${PN}-3.12.2-defaults.patch"
 
 	# Fix automagic gnome-bluetooth dep, bug #398145
 	epatch "${FILESDIR}/${PN}-3.12-bluetooth-flag.patch"

@@ -54,5 +54,5 @@ src_configure() {
 }
 
 src_test() {
-	dbus-launch Xemake check #513502
+	Xemake check
 }

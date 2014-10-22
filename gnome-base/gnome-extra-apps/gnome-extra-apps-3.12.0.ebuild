@@ -24,7 +24,6 @@ RDEPEND="
 	>=gnome-extra/gconf-editor-3
 	>=gnome-extra/gnome-calculator-${PV}
 	>=gnome-extra/gnome-power-manager-${PV}
-	>=gnome-extra/gnome-search-tool-3.6
 	>=gnome-extra/gnome-system-monitor-${PV}
 	>=gnome-extra/gnome-tweak-tool-${PV}
 	>=gnome-extra/gucharmap-${PV}:2.90
@@ -67,7 +66,6 @@ RDEPEND="
 	x86? ( >=gnome-extra/gnome-user-share-3.10.2 )
 "
 # Note: bug-buddy is broken with GNOME 3
-# Note: aisleriot-3.4 is masked for guile-2
 # Note: we want to pull in gnome-user-share, but it's only available for amd64/x86, bug #506176
 DEPEND=""
 S=${WORKDIR}

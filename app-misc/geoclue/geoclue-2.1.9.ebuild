@@ -13,14 +13,16 @@ SRC_URI="http://www.freedesktop.org/software/${PN}/releases/${MY_PV}/${P}.tar.xz
 LICENSE="LGPL-2"
 SLOT="2.0"
 KEYWORDS="*"
-IUSE="+modemmanager"
+IUSE="+modemmanager +networkmanager"
 
 RDEPEND="
-	>=dev-libs/glib-2.34:2
-	>=dev-libs/json-glib-0.14
+	>=dev-libs/glib-2.40.0:2
+	>=dev-libs/json-glib-1.0.2
+	>=dev-libs/libxml2-2.7:2
 	net-libs/libsoup:2.4
 	sys-apps/dbus
 	modemmanager? ( >=net-misc/modemmanager-1 )
+	networkmanager? ( >=net-misc/networkmanager-0.9.10.0 )
 	!<sci-geosciences/geocode-glib-3.10.0
 "
 DEPEND="${RDEPEND}
@@ -30,12 +32,15 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig
 "
 
+RESTRICT="test"
+
 src_configure() {
 	# debug only affects CFLAGS
 	gnome2_src_configure \
 		--with-dbus-service-user=geoclue \
 		$(use_enable modemmanager 3g-source) \
 		$(use_enable modemmanager modem-gps-source) \
+		$(use_enable networkmanager network-manager) \
 		$(systemd_with_unitdir)
 }
 
