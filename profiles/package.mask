@@ -11,7 +11,6 @@
 >=app-editors/gedit-3.14.0
 >=app-editors/gedit-plugins-3.14.0
 >=app-editors/latexila-3.14.0
->=app-emulation/libvirt-glib-0.1.9
 >=app-misc/bijiben-3.14.1
 >=app-misc/gnote-3.14.0
 >=app-misc/tracker-1.2.3
@@ -124,8 +123,6 @@
 >=media-sound/sound-juicer-3.14.0
 >=media-video/cheese-3.14.1
 >=media-video/totem-3.14.0
->=net-im/empathy-3.12.7
->=net-im/telepathy-mission-control-5.16.3
 >=net-libs/glib-networking-2.42.0
 >=net-libs/gnome-online-accounts-3.14.1
 >=net-libs/gupnp-igd-0.2.4
