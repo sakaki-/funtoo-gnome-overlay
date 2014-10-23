@@ -14,7 +14,7 @@ SRC_URI="ftp://libvirt.org/libvirt/glib/${P}.tar.gz"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS="~*"
+KEYWORDS="*"
 IUSE="+introspection python +vala"
 REQUIRED_USE="
 	python? ( ${PYTHON_REQUIRED_USE} )
@@ -27,8 +27,8 @@ RESTRICT="test"
 RDEPEND="
 	dev-libs/libxml2:2
 	>=app-emulation/libvirt-0.9.10:=
-	>=dev-libs/glib-2.42.0:2
-	introspection? ( >=dev-libs/gobject-introspection-1.42.0:= )
+	>=dev-libs/glib-2.38.0:2
+	introspection? ( >=dev-libs/gobject-introspection-0.10.8:= )
 	python? ( ${PYTHON_DEPS} )
 "
 DEPEND="${RDEPEND}
