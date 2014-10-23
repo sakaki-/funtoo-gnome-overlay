@@ -14,7 +14,7 @@ HOMEPAGE="https://wiki.gnome.org/Projects/Libgit2-glib"
 
 LICENSE="LGPL-2+"
 SLOT="0"
-KEYWORDS="~*"
+KEYWORDS="*"
 IUSE="python vala"
 
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
