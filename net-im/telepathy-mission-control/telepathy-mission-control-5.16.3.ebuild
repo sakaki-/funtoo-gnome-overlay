@@ -15,7 +15,7 @@ SRC_URI="http://telepathy.freedesktop.org/releases/${PN}/${P}.tar.gz"
 LICENSE="LGPL-2.1"
 SLOT="0"
 KEYWORDS="*"
-IUSE="debug deprecated networkmanager"
+IUSE="debug +deprecated networkmanager"
 
 RDEPEND="
 	>=dev-libs/dbus-glib-0.82

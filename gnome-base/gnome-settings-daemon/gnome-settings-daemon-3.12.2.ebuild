@@ -11,7 +11,7 @@ HOMEPAGE="https://git.gnome.org/browse/gnome-settings-daemon"
 
 LICENSE="GPL-2+"
 SLOT="0"
-IUSE="+colord +cups debug deprecated +i18n input_devices_wacom packagekit policykit +short-touchpad-timeout smartcard +udev"
+IUSE="+colord +cups debug +deprecated +i18n input_devices_wacom packagekit policykit +short-touchpad-timeout smartcard +udev"
 REQUIRED_USE="
 	packagekit? ( udev )
 	smartcard? ( udev )

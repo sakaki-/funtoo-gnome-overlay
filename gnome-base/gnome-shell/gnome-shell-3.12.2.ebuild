@@ -12,7 +12,7 @@ HOMEPAGE="https://wiki.gnome.org/Projects/GnomeShell"
 
 LICENSE="GPL-2+ LGPL-2+"
 SLOT="0"
-IUSE="+bluetooth deprecated +i18n +networkmanager systemd"
+IUSE="+bluetooth +deprecated +i18n +networkmanager systemd"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 KEYWORDS="*"
 

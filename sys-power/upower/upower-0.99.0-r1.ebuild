@@ -10,7 +10,7 @@ SRC_URI="http://${PN}.freedesktop.org/releases/${P}.tar.xz"
 LICENSE="GPL-2"
 SLOT="0/2" # based on SONAME of libupower-glib.so
 KEYWORDS="*"
-IUSE="deprecated +introspection ios kernel_FreeBSD kernel_linux"
+IUSE="+deprecated +introspection ios kernel_FreeBSD kernel_linux"
 
 RDEPEND=">=dev-libs/dbus-glib-0.100
 	>=dev-libs/glib-2.30
