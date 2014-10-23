@@ -43,7 +43,6 @@
 >=dev-util/devhelp-3.14.0
 >=dev-util/gdbus-codegen-2.42.0
 >=dev-util/gnome-devel-docs-3.14.1
->=dev-util/gtk-builder-convert-2.24.25
 >=dev-vcs/gitg-3.14.0
 >=games-arcade/gnome-nibbles-3.14.1
 >=games-arcade/gnome-robots-3.14.1
