@@ -1,0 +1,19 @@
+diff -urN gnome-alsamixer-0.9.6/src/Makefile.in gnome-alsamixer-0.9.6-patched/src/Makefile.in
+--- gnome-alsamixer-0.9.6/src/Makefile.in	2003-09-09 07:44:25.000000000 -0400
++++ gnome-alsamixer-0.9.6-patched/src/Makefile.in	2014-10-23 15:46:46.362305510 -0400
+@@ -116,13 +116,13 @@
+ 
+ DEFS = @DEFS@ -I. -I$(srcdir) -I..
+ CPPFLAGS = @CPPFLAGS@
+-LDFLAGS = @LDFLAGS@
++LDFLAGS = -lm
+ LIBS = @LIBS@
+ gnome_alsamixer_OBJECTS =  gam-main.o gam-app.o gam-mixer.o gam-slider.o \
+ gam-slider-pan.o gam-slider-dual.o gam-toggle.o gam-prefs-dlg.o \
+ gam-props-dlg.o
+ gnome_alsamixer_DEPENDENCIES = 
+-gnome_alsamixer_LDFLAGS = 
++gnome_alsamixer_LDFLAGS = -lm
+ CFLAGS = @CFLAGS@
+ COMPILE = $(CC) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+ CCLD = $(CC)
