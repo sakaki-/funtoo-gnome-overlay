@@ -4,7 +4,7 @@ EAPI="5"
 GCONF_DEBUG="no"
 GNOME2_LA_PUNT="yes"
 
-inherit autotools gnome2
+inherit gnome2
 
 DESCRIPTION="CD/DVD burning application for the GNOME desktop"
 HOMEPAGE="https://wiki.gnome.org/Apps/Brasero"
@@ -12,7 +12,7 @@ HOMEPAGE="https://wiki.gnome.org/Apps/Brasero"
 LICENSE="GPL-2+ CC-BY-SA-3.0"
 SLOT="0/3.1" # subslot is 3.suffix of libbrasero-burn3
 IUSE="+css +introspection +libburn mp3 nautilus packagekit playlist test tracker"
-KEYWORDS="~*"
+KEYWORDS="*"
 
 COMMON_DEPEND="
 	>=dev-libs/glib-2.29.14:2
@@ -32,7 +32,7 @@ COMMON_DEPEND="
 		>=dev-libs/libisofs-0.6.4:= )
 	nautilus? ( >=gnome-base/nautilus-2.91.90 )
 	playlist? ( >=dev-libs/totem-pl-parser-2.29.1:= )
-	tracker? ( >=app-misc/tracker-1.2.2:0= )
+	tracker? ( >=app-misc/tracker-0.12:0= )
 "
 RDEPEND="${COMMON_DEPEND}
 	media-libs/gst-plugins-good:1.0
@@ -49,10 +49,8 @@ RDEPEND="${COMMON_DEPEND}
 	packagekit? ( app-admin/packagekit-base )
 "
 DEPEND="${COMMON_DEPEND}
-	app-text/yelp-tools
 	>=dev-util/intltool-0.50
 	>=dev-util/gtk-doc-am-1.12
-	gnome-base/gnome-common:3
 	sys-devel/gettext
 	virtual/pkgconfig
 	test? ( app-text/docbook-xml-dtd:4.3 )
@@ -62,15 +60,6 @@ DEPEND="${COMMON_DEPEND}
 #	gnome-base/gnome-common
 
 PDEPEND="gnome-base/gvfs"
-
-src_prepare() {
-	# Allow building against tracker-1.0
-	sed -e 's/\[0\.18\]\]/[0.18], [1.0]]/' \
-		-i configure.ac || die
-
-	eautoreconf
-	gnome2_src_prepare
-}
 
 src_configure() {
 	DOCS="AUTHORS ChangeLog MAINTAINERS NEWS README"
