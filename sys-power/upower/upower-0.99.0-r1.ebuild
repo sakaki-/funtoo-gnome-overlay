@@ -14,6 +14,7 @@ IUSE="+deprecated +introspection ios kernel_FreeBSD kernel_linux"
 
 RDEPEND=">=dev-libs/dbus-glib-0.100
 	>=dev-libs/glib-2.30
+	dev-util/gdbus-codegen
 	sys-apps/dbus:=
 	>=sys-auth/polkit-0.110
 	introspection? ( dev-libs/gobject-introspection )
