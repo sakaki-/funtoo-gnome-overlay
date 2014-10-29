@@ -13,7 +13,7 @@ HOMEPAGE="https://live.gnome.org/EyeOfGnome/Plugins"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~*"
-IUSE="+exif +flickr map +picasa +python"
+IUSE="+exif +flickr map +picasa +python +python_single_target_python3_3"
 
 REQUIRED_USE="
 	map? ( exif )
