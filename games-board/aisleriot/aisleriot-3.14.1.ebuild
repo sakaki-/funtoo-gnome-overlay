@@ -29,7 +29,7 @@ RDEPEND="
 	valgrind? (  dev-util/valgrind )
 "
 DEPEND="
-	${COMMON_DEPEND}
+	dev-util/appdata-tools
 	
 	yelp? (
 		>=app-text/yelp-tools-3.12.1
