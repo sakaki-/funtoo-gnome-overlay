@@ -12,7 +12,7 @@ HOMEPAGE="https://git.gnome.org/browse/gnome-control-center/"
 LICENSE="GPL-2+"
 SLOT="2"
 IUSE="+bluetooth +colord +cups +deprecated +gnome-online-accounts +i18n input_devices_wacom kerberos v4l"
-KEYWORDS="~*"
+KEYWORDS="*"
 
 # False positives caused by nested configure scripts
 QA_CONFIGURE_OPTIONS=".*"
@@ -26,36 +26,35 @@ QA_CONFIGURE_OPTIONS=".*"
 #        networkmanager is not optional
 
 COMMON_DEPEND="
-	>=dev-libs/glib-2.42.0:2
+	>=dev-libs/glib-2.39.91:2
 	>=x11-libs/gdk-pixbuf-2.23.0:2
-	>=x11-libs/gtk+-3.14.0:3
-	>=gnome-base/gsettings-desktop-schemas-3.14.0
-	>=gnome-base/gnome-desktop-3.14.0:3=
-	>=gnome-base/gnome-settings-daemon-3.14.0[colord?,policykit]
+	>=x11-libs/gtk+-3.11.1:3
+	>=gnome-base/gsettings-desktop-schemas-3.9.91
+	>=gnome-base/gnome-desktop-3.11.3:3=
+	>=gnome-base/gnome-settings-daemon-3.8.3[colord?,policykit]
 
 	>=dev-libs/libpwquality-1.2.2
 	dev-libs/libxml2:2
+	gnome-base/gnome-menus:3
 	gnome-base/libgtop:2=
 	media-libs/fontconfig
 
 	>=media-libs/libcanberra-0.13[gtk3]
 	>=media-sound/pulseaudio-2[glib]
 	>=sys-auth/polkit-0.97
-	>=sys-power/upower-0.99
-	>=x11-libs/libnotify-0.7.6:0=
+	>=sys-power/upower-0.99:=
+	>=x11-libs/libnotify-0.7.3:0=
 
-	>=gnome-extra/nm-applet-0.9.10.0
-	>=net-misc/networkmanager-0.9.10.0[modemmanager]
+	>=net-misc/networkmanager-0.9.8[modemmanager]
 	>=net-misc/modemmanager-0.7.990
 
 	virtual/opengl
 	x11-apps/xmodmap
-	x11-libs/cairo
 	x11-libs/libX11
 	x11-libs/libXxf86misc
 	>=x11-libs/libXi-1.2
 
-	bluetooth? ( >=net-wireless/gnome-bluetooth-3.14.0:= )
+	bluetooth? ( >=net-wireless/gnome-bluetooth-3.11.1:= )
 	colord? (
 		net-libs/libsoup:2.4
 		>=x11-misc/colord-0.1.34:0=
@@ -64,7 +63,7 @@ COMMON_DEPEND="
 		>=net-print/cups-1.4[dbus]
 		|| ( >=net-fs/samba-3.6.14-r1[smbclient] >=net-fs/samba-4.0.0[client] ) )
 	gnome-online-accounts? (
-		>=media-libs/grilo-0.2.11:0.2
+		>=media-libs/grilo-0.2.6:0.2
 		>=net-libs/gnome-online-accounts-3.9.90 )
 	i18n? ( >=app-i18n/ibus-1.5.2 )
 	kerberos? ( app-crypt/mit-krb5 )
@@ -74,16 +73,17 @@ COMMON_DEPEND="
 		>=media-video/cheese-3.5.91 )
 	input_devices_wacom? (
 		>=dev-libs/libwacom-0.7
-		>=media-libs/clutter-1.20.0:1.0
+		>=media-libs/clutter-1.11.3:1.0
 		media-libs/clutter-gtk:1.0
 		>=x11-libs/libXi-1.2 )
 "
 # <gnome-color-manager-3.1.2 has file collisions with g-c-c-3.1.x
 # libgnomekbd needed only for gkbd-keyboard-display tool
 RDEPEND="${COMMON_DEPEND}
+	>=gnome-extra/nm-applet-0.9.7.995
 	|| ( ( app-admin/openrc-settingsd sys-auth/consolekit ) >=sys-apps/systemd-31 )
 	>=sys-apps/accountsservice-0.6.30
-	x11-themes/adwaita-icon-theme
+	x11-themes/gnome-icon-theme-symbolic
 	colord? ( >=gnome-extra/gnome-color-manager-3 )
 	cups? (
 		>=app-admin/system-config-printer-gnome-1.3.5
@@ -123,7 +123,7 @@ src_prepare() {
 	if use deprecated; then
 		# From Funtoo:
 		# 	https://bugs.funtoo.org/browse/FL-1329
-		epatch "${FILESDIR}"/${PN}-3.14.1-restore-deprecated-code.patch
+		epatch "${FILESDIR}"/${P}-restore-deprecated-code.patch
 	fi
 
 	# Gentoo handles completions in a different directory, bugs #465094 and #477390
@@ -135,9 +135,9 @@ src_prepare() {
 	if use deprecated; then
 		# From Funtoo:
 		# 	https://bugs.funtoo.org/browse/FL-1329
-		epatch "${FILESDIR}"/${P}-optional-rebased.patch
+		epatch "${FILESDIR}"/${PN}-3.12.1-optional-r1-rebased.patch
 	else
-		epatch "${FILESDIR}"/${P}-optional.patch
+		epatch "${FILESDIR}"/${PN}-3.12.1-optional-r1.patch
 	fi
 
 	# From Funtoo:

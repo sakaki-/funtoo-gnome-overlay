@@ -52,7 +52,7 @@ RDEPEND="${COMMON_DEPEND}
 	>=x11-themes/gnome-themes-standard-2.91.92
 	sys-apps/dbus[X]
 	!systemd? ( sys-auth/consolekit )
-	deprecated? ( sys-power/upower[deprecated] )
+	deprecated? ( sys-power/upower:=[deprecated] )
 "
 DEPEND="${COMMON_DEPEND}
 	>=dev-lang/perl-5
