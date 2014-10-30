@@ -1,6 +1,6 @@
-diff -urN upower-20140630/Makefile.am upower-20140630-patched/Makefile.am
---- upower-20140630/Makefile.am	2014-07-19 06:52:00.940505978 -0400
-+++ upower-20140630-patched/Makefile.am	2014-07-19 08:11:28.598740711 -0400
+diff -urN upower-20141008/Makefile.am upower-20141008-patched/Makefile.am
+--- upower-20141008/Makefile.am	2014-07-19 06:52:04.501506153 -0400
++++ upower-20141008-patched/Makefile.am	2014-10-29 18:39:20.185930346 -0400
 @@ -2,7 +2,7 @@
  
  ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
@@ -10,10 +10,29 @@ diff -urN upower-20140630/Makefile.am upower-20140630-patched/Makefile.am
  
  if BACKEND_TYPE_LINUX
  SUBDIRS += rules
-diff -urN upower-20140630/configure.ac upower-20140630-patched/configure.ac
---- upower-20140630/configure.ac	2014-07-19 06:54:04.418512057 -0400
-+++ upower-20140630-patched/configure.ac	2014-07-19 08:11:51.329741830 -0400
-@@ -255,6 +255,7 @@
+diff -urN upower-20141008/README upower-20141008-patched/README
+--- upower-20141008/README	2014-07-19 06:52:04.502506153 -0400
++++ upower-20141008-patched/README	2014-10-29 18:39:20.185930346 -0400
+@@ -9,6 +9,7 @@
+    dbus-1           >= 1.0
+    dbus-glib-1      >= 0.76
+    gudev-1.0        >= 001
++   polkit-gobject-1 >= 0.91
+    libusb
+ 
+ UPower is an abstraction for enumerating power devices,
+diff -urN upower-20141008/configure.ac upower-20141008-patched/configure.ac
+--- upower-20141008/configure.ac	2014-10-29 18:34:56.594917368 -0400
++++ upower-20141008-patched/configure.ac	2014-10-29 18:39:20.185930346 -0400
+@@ -155,6 +155,7 @@
+ PKG_CHECK_MODULES(GLIB, [glib-2.0 >= 2.34.0])
+ PKG_CHECK_MODULES(DBUS, [dbus-1 >= 1.0])
+ PKG_CHECK_MODULES(DBUS_GLIB, [dbus-glib-1 >= 0.76])
++PKG_CHECK_MODULES(POLKIT, polkit-gobject-1 >= 0.97)
+ PKG_CHECK_MODULES(GIO, [gio-2.0 >= 2.16.1])
+ PKG_CHECK_MODULES(GIO_UNIX, [gio-unix-2.0])
+ 
+@@ -254,6 +255,7 @@
  doc/version.xml
  doc/man/Makefile
  doc/dbus/Makefile
@@ -21,9 +40,22 @@ diff -urN upower-20140630/configure.ac upower-20140630-patched/configure.ac
  rules/Makefile
  libupower-glib/Makefile
  libupower-glib/up-version.h
-diff -urN upower-20140630/etc/UPower.conf upower-20140630-patched/etc/UPower.conf
---- upower-20140630/etc/UPower.conf	2014-07-19 06:52:00.945505978 -0400
-+++ upower-20140630-patched/etc/UPower.conf	2014-07-19 07:51:35.834681986 -0400
+diff -urN upower-20141008/doc/man/UPower.xml upower-20141008-patched/doc/man/UPower.xml
+--- upower-20141008/doc/man/UPower.xml	2014-07-19 06:52:04.504506153 -0400
++++ upower-20141008-patched/doc/man/UPower.xml	2014-10-29 18:39:20.185930346 -0400
+@@ -22,7 +22,8 @@
+       on the system and control system-wide power management. Any
+       application can access
+       the <emphasis>org.freedesktop.UPower</emphasis> service
+-      on the system message bus.
++      on the system message bus. Some operations (such as suspending
++      the system) is restricted using PolicyKit.
+     </para>
+   </refsect1>
+ 
+diff -urN upower-20141008/etc/UPower.conf upower-20141008-patched/etc/UPower.conf
+--- upower-20141008/etc/UPower.conf	2014-07-19 06:52:04.506506154 -0400
++++ upower-20141008-patched/etc/UPower.conf	2014-10-29 18:39:20.185930346 -0400
 @@ -3,6 +3,29 @@
  
  [UPower]
@@ -54,9 +86,9 @@ diff -urN upower-20140630/etc/UPower.conf upower-20140630-patched/etc/UPower.con
  # Enable the Watts Up Pro device.
  #
  # The Watts Up Pro contains a generic FTDI USB device without a specific
-diff -urN upower-20140630/libupower-glib/Makefile.am upower-20140630-patched/libupower-glib/Makefile.am
---- upower-20140630/libupower-glib/Makefile.am	2014-07-19 06:52:00.946505978 -0400
-+++ upower-20140630-patched/libupower-glib/Makefile.am	2014-07-19 07:51:48.435682606 -0400
+diff -urN upower-20141008/libupower-glib/Makefile.am upower-20141008-patched/libupower-glib/Makefile.am
+--- upower-20141008/libupower-glib/Makefile.am	2014-07-19 06:52:04.506506154 -0400
++++ upower-20141008-patched/libupower-glib/Makefile.am	2014-10-29 18:39:20.185930346 -0400
 @@ -1,5 +1,6 @@
  AM_CPPFLAGS = \
  	$(GLIB_CFLAGS)						\
@@ -72,9 +104,9 @@ diff -urN upower-20140630/libupower-glib/Makefile.am upower-20140630-patched/lib
  	$(GIO_UNIX_LIBS)
  
  libupower_glib_la_LDFLAGS =					\
-diff -urN upower-20140630/libupower-glib/up-client.c upower-20140630-patched/libupower-glib/up-client.c
---- upower-20140630/libupower-glib/up-client.c	2014-07-19 06:52:00.946505978 -0400
-+++ upower-20140630-patched/libupower-glib/up-client.c	2014-07-19 07:55:55.114694751 -0400
+diff -urN upower-20141008/libupower-glib/up-client.c upower-20141008-patched/libupower-glib/up-client.c
+--- upower-20141008/libupower-glib/up-client.c	2014-07-19 06:52:04.507506154 -0400
++++ upower-20141008-patched/libupower-glib/up-client.c	2014-10-29 18:39:20.186930346 -0400
 @@ -35,6 +35,11 @@
  #include <stdio.h>
  #include <glib-object.h>
@@ -679,9 +711,9 @@ diff -urN upower-20140630/libupower-glib/up-client.c upower-20140630-patched/lib
  	G_OBJECT_CLASS (up_client_parent_class)->finalize (object);
  }
  
-diff -urN upower-20140630/libupower-glib/up-client.h upower-20140630-patched/libupower-glib/up-client.h
---- upower-20140630/libupower-glib/up-client.h	2014-07-19 06:52:00.946505978 -0400
-+++ upower-20140630-patched/libupower-glib/up-client.h	2014-07-19 08:02:22.665713832 -0400
+diff -urN upower-20141008/libupower-glib/up-client.h upower-20141008-patched/libupower-glib/up-client.h
+--- upower-20141008/libupower-glib/up-client.h	2014-07-19 06:52:04.507506154 -0400
++++ upower-20141008-patched/libupower-glib/up-client.h	2014-10-29 18:39:20.186930346 -0400
 @@ -57,6 +57,12 @@
  							 UpDevice		*device);
  	void			(*device_removed)	(UpClient		*client,
@@ -724,9 +756,9 @@ diff -urN upower-20140630/libupower-glib/up-client.h upower-20140630-patched/lib
  gboolean	 up_client_get_on_battery		(UpClient		*client);
  
  G_END_DECLS
-diff -urN upower-20140630/libupower-glib/up-types.c upower-20140630-patched/libupower-glib/up-types.c
---- upower-20140630/libupower-glib/up-types.c	2014-07-19 06:52:00.946505978 -0400
-+++ upower-20140630-patched/libupower-glib/up-types.c	2014-07-19 08:03:22.053716756 -0400
+diff -urN upower-20141008/libupower-glib/up-types.c upower-20141008-patched/libupower-glib/up-types.c
+--- upower-20141008/libupower-glib/up-types.c	2014-07-19 06:52:04.507506154 -0400
++++ upower-20141008-patched/libupower-glib/up-types.c	2014-10-29 18:39:20.186930346 -0400
 @@ -292,3 +292,58 @@
  		return UP_DEVICE_LEVEL_ACTION;
  	return UP_DEVICE_LEVEL_UNKNOWN;
@@ -786,9 +818,9 @@ diff -urN upower-20140630/libupower-glib/up-types.c upower-20140630-patched/libu
 +	return UP_SLEEP_KIND_UNKNOWN;
 +}
 +#endif /* ENABLE_DEPRECATED */
-diff -urN upower-20140630/libupower-glib/up-types.h upower-20140630-patched/libupower-glib/up-types.h
---- upower-20140630/libupower-glib/up-types.h	2014-07-19 06:52:00.946505978 -0400
-+++ upower-20140630-patched/libupower-glib/up-types.h	2014-07-19 08:03:31.135717203 -0400
+diff -urN upower-20141008/libupower-glib/up-types.h upower-20141008-patched/libupower-glib/up-types.h
+--- upower-20141008/libupower-glib/up-types.h	2014-07-19 06:52:04.507506154 -0400
++++ upower-20141008-patched/libupower-glib/up-types.h	2014-10-29 18:39:20.186930346 -0400
 @@ -98,6 +98,19 @@
  	UP_DEVICE_LEVEL_LAST
  } UpDeviceLevel;
@@ -818,9 +850,9 @@ diff -urN upower-20140630/libupower-glib/up-types.h upower-20140630-patched/libu
  
  G_END_DECLS
  
-diff -urN upower-20140630/policy/Makefile.am upower-20140630-patched/policy/Makefile.am
---- upower-20140630/policy/Makefile.am	1969-12-31 19:00:00.000000000 -0500
-+++ upower-20140630-patched/policy/Makefile.am	2014-07-13 21:34:35.217231000 -0400
+diff -urN upower-20141008/policy/Makefile.am upower-20141008-patched/policy/Makefile.am
+--- upower-20141008/policy/Makefile.am	1969-12-31 19:00:00.000000000 -0500
++++ upower-20141008-patched/policy/Makefile.am	2014-10-29 18:39:20.186930346 -0400
 @@ -0,0 +1,18 @@
 +polkit_policydir = $(datadir)/polkit-1/actions
 +polkit_policy_DATA =					\
@@ -840,9 +872,9 @@ diff -urN upower-20140630/policy/Makefile.am upower-20140630-patched/policy/Make
 +	rm -f *~
 +
 +-include $(top_srcdir)/git.mk
-diff -urN upower-20140630/policy/org.freedesktop.upower.policy.in upower-20140630-patched/policy/org.freedesktop.upower.policy.in
---- upower-20140630/policy/org.freedesktop.upower.policy.in	1969-12-31 19:00:00.000000000 -0500
-+++ upower-20140630-patched/policy/org.freedesktop.upower.policy.in	2014-07-13 21:34:35.218230000 -0400
+diff -urN upower-20141008/policy/org.freedesktop.upower.policy.in upower-20141008-patched/policy/org.freedesktop.upower.policy.in
+--- upower-20141008/policy/org.freedesktop.upower.policy.in	1969-12-31 19:00:00.000000000 -0500
++++ upower-20141008-patched/policy/org.freedesktop.upower.policy.in	2014-10-29 18:39:20.186930346 -0400
 @@ -0,0 +1,41 @@
 +<?xml version="1.0" encoding="utf-8"?>
 +
@@ -885,10 +917,35 @@ diff -urN upower-20140630/policy/org.freedesktop.upower.policy.in upower-2014063
 +  </action>
 +
 +</policyconfig>
-diff -urN upower-20140630/src/Makefile.am upower-20140630-patched/src/Makefile.am
---- upower-20140630/src/Makefile.am	2014-07-19 06:54:04.418512057 -0400
-+++ upower-20140630-patched/src/Makefile.am	2014-07-19 08:06:47.099726851 -0400
-@@ -122,6 +122,11 @@
+diff -urN upower-20141008/src/Makefile.am upower-20141008-patched/src/Makefile.am
+--- upower-20141008/src/Makefile.am	2014-07-19 06:52:04.509506154 -0400
++++ upower-20141008-patched/src/Makefile.am	2014-10-29 18:39:20.186930346 -0400
+@@ -21,6 +21,7 @@
+ 	$(GIO_CFLAGS)						\
+ 	$(DBUS_GLIB_CFLAGS)					\
+ 	$(GUDEV_CFLAGS)						\
++	$(POLKIT_CFLAGS)					\
+ 	$(GLIB_CFLAGS)
+ 
+ UPOWER_LIBS = $(top_builddir)/libupower-glib/libupower-glib.la
+@@ -61,6 +62,8 @@
+ 	org.freedesktop.UPower.Wakeups.xml
+ 
+ upowerd_SOURCES =						\
++	up-polkit.h						\
++	up-polkit.c						\
+ 	up-daemon.h						\
+ 	up-daemon.c						\
+ 	up-device.h						\
+@@ -89,6 +92,7 @@
+ 	$(USB_LIBS)						\
+ 	$(GIO_LIBS)						\
+ 	$(DBUS_GLIB_LIBS)					\
++	$(POLKIT_LIBS)						\
+ 	$(UPOWER_LIBS)
+ 
+ if BACKEND_TYPE_DUMMY
+@@ -118,6 +122,11 @@
  	$(PIE_LDFLAGS)						\
  	$(RELRO_LDFLAGS)
  
@@ -900,7 +957,16 @@ diff -urN upower-20140630/src/Makefile.am upower-20140630-patched/src/Makefile.a
  if UP_BUILD_TESTS
  check-local: upowerd
  	env GI_TYPELIB_PATH=$(top_builddir)/libupower-glib:$(GI_TYPELIB_PATH) LD_LIBRARY_PATH=$(top_builddir)/libupower-glib/.libs:$(LD_LIBRARY_PATH) top_builddir=$(top_builddir) $(srcdir)/linux/integration-test -v
-@@ -217,6 +222,7 @@
+@@ -136,6 +145,8 @@
+ 
+ up_self_test_SOURCES =						\
+ 	up-self-test.c						\
++	up-polkit.h						\
++	up-polkit.c						\
+ 	up-config.h						\
+ 	up-config.c						\
+ 	up-daemon.h						\
+@@ -211,6 +222,7 @@
  	org.freedesktop.UPower.KbdBacklight.xml			\
  	org.freedesktop.UPower.Wakeups.xml			\
  	up-marshal.list						\
@@ -908,10 +974,10 @@ diff -urN upower-20140630/src/Makefile.am upower-20140630-patched/src/Makefile.a
  	$(systemdservice_in_files)				\
  	$(dbusservice_in_files)					\
  	$(dbusconf_in_files)
-diff -urN upower-20140630/src/dummy/up-backend.c upower-20140630-patched/src/dummy/up-backend.c
---- upower-20140630/src/dummy/up-backend.c	2014-07-19 06:52:00.948505978 -0400
-+++ upower-20140630-patched/src/dummy/up-backend.c	2014-07-19 08:03:42.952717785 -0400
-@@ -253,3 +253,76 @@
+diff -urN upower-20141008/src/dummy/up-backend.c upower-20141008-patched/src/dummy/up-backend.c
+--- upower-20141008/src/dummy/up-backend.c	2014-10-29 18:34:56.594917368 -0400
++++ upower-20141008-patched/src/dummy/up-backend.c	2014-10-29 18:39:20.186930346 -0400
+@@ -251,3 +251,76 @@
  {
  	return g_object_new (UP_TYPE_BACKEND, NULL);
  }
@@ -988,9 +1054,9 @@ diff -urN upower-20140630/src/dummy/up-backend.c upower-20140630-patched/src/dum
 +	return FALSE;
 +}
 +#endif /* ENABLE_DEPRECATED */
-diff -urN upower-20140630/src/freebsd/up-backend.c upower-20140630-patched/src/freebsd/up-backend.c
---- upower-20140630/src/freebsd/up-backend.c	2014-07-19 06:52:00.948505978 -0400
-+++ upower-20140630-patched/src/freebsd/up-backend.c	2014-07-19 08:04:01.673718707 -0400
+diff -urN upower-20141008/src/freebsd/up-backend.c upower-20141008-patched/src/freebsd/up-backend.c
+--- upower-20141008/src/freebsd/up-backend.c	2014-07-19 06:52:04.510506154 -0400
++++ upower-20141008-patched/src/freebsd/up-backend.c	2014-10-29 18:39:20.186930346 -0400
 @@ -44,6 +44,10 @@
  #include "up-device.h"
  
@@ -1109,10 +1175,10 @@ diff -urN upower-20140630/src/freebsd/up-backend.c upower-20140630-patched/src/f
  /**
   * up_backend_class_init:
   * @klass: The UpBackendClass
-diff -urN upower-20140630/src/linux/integration-test upower-20140630-patched/src/linux/integration-test
---- upower-20140630/src/linux/integration-test	2014-07-19 06:52:00.949505978 -0400
-+++ upower-20140630-patched/src/linux/integration-test	2014-07-19 08:04:25.516719881 -0400
-@@ -775,7 +775,10 @@
+diff -urN upower-20141008/src/linux/integration-test upower-20141008-patched/src/linux/integration-test
+--- upower-20141008/src/linux/integration-test	2014-10-29 18:34:56.595917368 -0400
++++ upower-20141008-patched/src/linux/integration-test	2014-10-29 18:39:20.186930346 -0400
+@@ -811,7 +811,10 @@
  
          self.start_daemon()
          client = UPowerGlib.Client.new()
@@ -1123,9 +1189,9 @@ diff -urN upower-20140630/src/linux/integration-test upower-20140630-patched/src
          self.assertIn(client.get_lid_is_present(), [False, True])
          self.assertIn(client.get_lid_is_closed(), [False, True])
          self.assertEqual(client.get_on_battery(), False)
-diff -urN upower-20140630/src/linux/up-backend.c upower-20140630-patched/src/linux/up-backend.c
---- upower-20140630/src/linux/up-backend.c	2014-07-19 06:52:00.949505978 -0400
-+++ upower-20140630-patched/src/linux/up-backend.c	2014-07-19 08:05:33.995723252 -0400
+diff -urN upower-20141008/src/linux/up-backend.c upower-20141008-patched/src/linux/up-backend.c
+--- upower-20141008/src/linux/up-backend.c	2014-10-29 18:34:56.595917368 -0400
++++ upower-20141008-patched/src/linux/up-backend.c	2014-10-29 18:39:20.187930346 -0400
 @@ -48,6 +48,15 @@
  #include <dbus/dbus-glib.h>
  #include <dbus/dbus-glib-lowlevel.h>
@@ -1166,7 +1232,7 @@ diff -urN upower-20140630/src/linux/up-backend.c upower-20140630-patched/src/lin
  /**
   * up_backend_device_new:
   **/
-@@ -425,6 +444,271 @@
+@@ -437,6 +456,271 @@
  			   NULL);
  }
  
@@ -1438,7 +1504,7 @@ diff -urN upower-20140630/src/linux/up-backend.c upower-20140630-patched/src/lin
  /**
   * up_backend_class_init:
   * @klass: The UpBackendClass
-@@ -447,10 +731,35 @@
+@@ -459,10 +743,35 @@
  			      G_STRUCT_OFFSET (UpBackendClass, device_removed),
  			      NULL, NULL, up_marshal_VOID__POINTER_POINTER,
  			      G_TYPE_NONE, 2, G_TYPE_POINTER, G_TYPE_POINTER);
@@ -1474,7 +1540,7 @@ diff -urN upower-20140630/src/linux/up-backend.c upower-20140630-patched/src/lin
  /**
   * up_backend_init:
   **/
-@@ -468,6 +777,15 @@
+@@ -480,6 +789,15 @@
  								     LOGIND_DBUS_INTERFACE,
  								     NULL,
  								     NULL);
@@ -1490,7 +1556,7 @@ diff -urN upower-20140630/src/linux/up-backend.c upower-20140630-patched/src/lin
  }
  
  /**
-@@ -493,6 +811,11 @@
+@@ -505,6 +823,11 @@
  
  	g_object_unref (backend->priv->managed_devices);
  
@@ -1502,9 +1568,9 @@ diff -urN upower-20140630/src/linux/up-backend.c upower-20140630-patched/src/lin
  	G_OBJECT_CLASS (up_backend_parent_class)->finalize (object);
  }
  
-diff -urN upower-20140630/src/notify-upower.sh upower-20140630-patched/src/notify-upower.sh
---- upower-20140630/src/notify-upower.sh	1969-12-31 19:00:00.000000000 -0500
-+++ upower-20140630-patched/src/notify-upower.sh	2014-07-13 21:34:35.222229000 -0400
+diff -urN upower-20141008/src/notify-upower.sh upower-20141008-patched/src/notify-upower.sh
+--- upower-20141008/src/notify-upower.sh	1969-12-31 19:00:00.000000000 -0500
++++ upower-20141008-patched/src/notify-upower.sh	2014-10-29 18:39:20.187930346 -0400
 @@ -0,0 +1,7 @@
 +#!/bin/bash
 +[ "$1" = "post" ] && exec /usr/bin/dbus-send	\
@@ -1513,9 +1579,9 @@ diff -urN upower-20140630/src/notify-upower.sh upower-20140630-patched/src/notif
 +	/org/freedesktop/UPower			\
 +	org.freedesktop.UPower.Resuming
 +exit 0
-diff -urN upower-20140630/src/openbsd/up-backend.c upower-20140630-patched/src/openbsd/up-backend.c
---- upower-20140630/src/openbsd/up-backend.c	2014-07-19 06:52:00.950505979 -0400
-+++ upower-20140630-patched/src/openbsd/up-backend.c	2014-07-19 08:06:29.967726008 -0400
+diff -urN upower-20141008/src/openbsd/up-backend.c upower-20141008-patched/src/openbsd/up-backend.c
+--- upower-20141008/src/openbsd/up-backend.c	2014-10-29 18:34:56.596917368 -0400
++++ upower-20141008-patched/src/openbsd/up-backend.c	2014-10-29 18:39:20.187930346 -0400
 @@ -27,6 +27,12 @@
  #include "up-device.h"
  #include <string.h> /* strcmp() */
@@ -1604,9 +1670,9 @@ diff -urN upower-20140630/src/openbsd/up-backend.c upower-20140630-patched/src/o
  /**
   * OpenBSD specific code
   **/
-diff -urN upower-20140630/src/org.freedesktop.UPower.xml upower-20140630-patched/src/org.freedesktop.UPower.xml
---- upower-20140630/src/org.freedesktop.UPower.xml	2014-07-19 06:52:00.950505979 -0400
-+++ upower-20140630-patched/src/org.freedesktop.UPower.xml	2014-07-19 08:07:25.013728718 -0400
+diff -urN upower-20141008/src/org.freedesktop.UPower.xml upower-20141008-patched/src/org.freedesktop.UPower.xml
+--- upower-20141008/src/org.freedesktop.UPower.xml	2014-07-19 06:52:04.513506154 -0400
++++ upower-20141008-patched/src/org.freedesktop.UPower.xml	2014-10-29 18:39:20.187930346 -0400
 @@ -166,12 +166,219 @@
  
      <!-- ************************************************************ -->
@@ -1852,9 +1918,9 @@ diff -urN upower-20140630/src/org.freedesktop.UPower.xml upower-20140630-patched
      </property>
  
    </interface>
-diff -urN upower-20140630/src/up-backend.h upower-20140630-patched/src/up-backend.h
---- upower-20140630/src/up-backend.h	2014-07-19 06:52:00.950505979 -0400
-+++ upower-20140630-patched/src/up-backend.h	2014-07-19 08:07:36.865729302 -0400
+diff -urN upower-20141008/src/up-backend.h upower-20141008-patched/src/up-backend.h
+--- upower-20141008/src/up-backend.h	2014-07-19 06:52:04.513506154 -0400
++++ upower-20141008-patched/src/up-backend.h	2014-10-29 18:39:20.187930346 -0400
 @@ -61,6 +61,9 @@
  	void		(* device_removed)	(UpBackend	*backend,
  						 GObject	*native,
@@ -1882,10 +1948,18 @@ diff -urN upower-20140630/src/up-backend.h upower-20140630-patched/src/up-backen
  
  G_END_DECLS
  
-diff -urN upower-20140630/src/up-daemon.c upower-20140630-patched/src/up-daemon.c
---- upower-20140630/src/up-daemon.c	2014-07-19 06:54:04.419512057 -0400
-+++ upower-20140630-patched/src/up-daemon.c	2014-07-19 08:09:59.810736339 -0400
-@@ -46,9 +46,16 @@
+diff -urN upower-20141008/src/up-daemon.c upower-20141008-patched/src/up-daemon.c
+--- upower-20141008/src/up-daemon.c	2014-10-29 18:34:56.615917369 -0400
++++ upower-20141008-patched/src/up-daemon.c	2014-10-29 18:39:20.187930346 -0400
+@@ -33,6 +33,7 @@
+ #include <dbus/dbus-glib-lowlevel.h>
+ 
+ #include "up-config.h"
++#include "up-polkit.h"
+ #include "up-device-list.h"
+ #include "up-device.h"
+ #include "up-backend.h"
+@@ -45,9 +46,16 @@
  {
  	PROP_0,
  	PROP_DAEMON_VERSION,
@@ -1902,7 +1976,7 @@ diff -urN upower-20140630/src/up-daemon.c upower-20140630-patched/src/up-daemon.
  	PROP_LAST
  };
  
-@@ -56,6 +63,12 @@
+@@ -55,6 +63,12 @@
  {
  	SIGNAL_DEVICE_ADDED,
  	SIGNAL_DEVICE_REMOVED,
@@ -1915,7 +1989,15 @@ diff -urN upower-20140630/src/up-daemon.c upower-20140630-patched/src/up-daemon.
  	SIGNAL_LAST,
  };
  
-@@ -77,6 +90,19 @@
+@@ -65,6 +79,7 @@
+ 	DBusGConnection		*connection;
+ 	DBusGProxy		*proxy;
+ 	UpConfig		*config;
++	UpPolkit		*polkit;
+ 	UpBackend		*backend;
+ 	UpDeviceList		*power_devices;
+ 	guint			 action_timeout_id;
+@@ -75,6 +90,19 @@
  	UpDeviceLevel		 warning_level;
  	gboolean		 lid_is_closed;
  	gboolean		 lid_is_present;
@@ -1935,7 +2017,7 @@ diff -urN upower-20140630/src/up-daemon.c upower-20140630-patched/src/up-daemon.
  
  	/* PropertiesChanged to be emitted */
  	GHashTable		*changed_props;
-@@ -114,6 +140,14 @@
+@@ -112,6 +140,14 @@
  
  #define UP_DAEMON_ACTION_DELAY				20 /* seconds */
  
@@ -1950,7 +2032,7 @@ diff -urN upower-20140630/src/up-daemon.c upower-20140630-patched/src/up-daemon.
  /**
   * up_daemon_get_on_battery_local:
   *
-@@ -381,6 +415,35 @@
+@@ -382,6 +418,35 @@
  	return result;
  }
  
@@ -1986,7 +2068,7 @@ diff -urN upower-20140630/src/up-daemon.c upower-20140630-patched/src/up-daemon.
  /**
   * up_daemon_refresh_battery_devices:
   **/
-@@ -462,6 +525,387 @@
+@@ -463,6 +528,387 @@
  	return TRUE;
  }
  
@@ -2374,7 +2456,7 @@ diff -urN upower-20140630/src/up-daemon.c upower-20140630-patched/src/up-daemon.
  /**
   * up_daemon_register_power_daemon:
   **/
-@@ -540,6 +984,11 @@
+@@ -541,6 +987,11 @@
  		goto out;
  	}
  
@@ -2386,7 +2468,7 @@ diff -urN upower-20140630/src/up-daemon.c upower-20140630-patched/src/up-daemon.
  out:
  	return ret;
  }
-@@ -698,6 +1147,20 @@
+@@ -699,6 +1150,20 @@
  	up_daemon_queue_changed_property (daemon, "LidIsClosed", g_variant_new_boolean (lid_is_closed));
  }
  
@@ -2407,7 +2489,7 @@ diff -urN upower-20140630/src/up-daemon.c upower-20140630-patched/src/up-daemon.
  /**
   * up_daemon_set_lid_is_present:
   **/
-@@ -855,6 +1318,12 @@
+@@ -859,6 +1324,12 @@
  	ret = (up_daemon_get_on_battery_local (daemon) && !up_daemon_get_on_ac_local (daemon));
  	if (ret != priv->on_battery) {
  		up_daemon_set_on_battery (daemon, ret);
@@ -2420,7 +2502,11 @@ diff -urN upower-20140630/src/up-daemon.c upower-20140630-patched/src/up-daemon.
  	}
  	warning_level = up_daemon_get_warning_level_local (daemon);
  	if (warning_level != priv->warning_level)
-@@ -1107,6 +1576,10 @@
+@@ -1114,9 +1585,14 @@
+ up_daemon_init (UpDaemon *daemon)
+ {
+ 	daemon->priv = UP_DAEMON_GET_PRIVATE (daemon);
++	daemon->priv->polkit = up_polkit_new ();
  	daemon->priv->config = up_config_new ();
  	daemon->priv->power_devices = up_device_list_new ();
  	daemon->priv->display_device = up_device_new ();
@@ -2431,7 +2517,7 @@ diff -urN upower-20140630/src/up-daemon.c upower-20140630-patched/src/up-daemon.
  
  	daemon->priv->use_percentage_for_policy = up_config_get_boolean (daemon->priv->config, "UsePercentageForPolicy");
  	load_percentage_policy (daemon, FALSE);
-@@ -1119,8 +1592,24 @@
+@@ -1129,8 +1605,24 @@
  	g_signal_connect (daemon->priv->backend, "device-removed",
  			  G_CALLBACK (up_daemon_device_removed_cb), daemon);
  
@@ -2456,7 +2542,7 @@ diff -urN upower-20140630/src/up-daemon.c upower-20140630-patched/src/up-daemon.
  }
  
  /**
-@@ -1170,6 +1659,17 @@
+@@ -1180,6 +1672,17 @@
  	case PROP_DAEMON_VERSION:
  		g_value_set_string (value, PACKAGE_VERSION);
  		break;
@@ -2474,7 +2560,7 @@ diff -urN upower-20140630/src/up-daemon.c upower-20140630-patched/src/up-daemon.
  	case PROP_ON_BATTERY:
  		g_value_set_boolean (value, priv->on_battery);
  		break;
-@@ -1179,6 +1679,11 @@
+@@ -1189,6 +1692,11 @@
  	case PROP_LID_IS_PRESENT:
  		g_value_set_boolean (value, priv->lid_is_present);
  		break;
@@ -2486,7 +2572,7 @@ diff -urN upower-20140630/src/up-daemon.c upower-20140630-patched/src/up-daemon.
  	default:
  		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
  		break;
-@@ -1213,6 +1718,40 @@
+@@ -1223,6 +1731,40 @@
  			      g_cclosure_marshal_generic,
  			      G_TYPE_NONE, 1, DBUS_TYPE_G_OBJECT_PATH);
  
@@ -2527,7 +2613,7 @@ diff -urN upower-20140630/src/up-daemon.c upower-20140630-patched/src/up-daemon.
  	g_object_class_install_property (object_class,
  					 PROP_DAEMON_VERSION,
  					 g_param_spec_string ("daemon-version",
-@@ -1229,6 +1768,32 @@
+@@ -1239,6 +1781,32 @@
  							       FALSE,
  							       G_PARAM_READABLE));
  
@@ -2560,8 +2646,11 @@ diff -urN upower-20140630/src/up-daemon.c upower-20140630-patched/src/up-daemon.
  	g_object_class_install_property (object_class,
  					 PROP_ON_BATTERY,
  					 g_param_spec_boolean ("on-battery",
-@@ -1275,6 +1840,9 @@
- 	g_object_unref (priv->polkit);
+@@ -1282,8 +1850,12 @@
+ 	if (priv->connection != NULL)
+ 		dbus_g_connection_unref (priv->connection);
+ 	g_object_unref (priv->power_devices);
++	g_object_unref (priv->polkit);
  	g_object_unref (priv->config);
  	g_object_unref (priv->backend);
 +#ifdef ENABLE_DEPRECATED
@@ -2570,10 +2659,18 @@ diff -urN upower-20140630/src/up-daemon.c upower-20140630-patched/src/up-daemon.
  
  	G_OBJECT_CLASS (up_daemon_parent_class)->finalize (object);
  }
-diff -urN upower-20140630/src/up-daemon.h upower-20140630-patched/src/up-daemon.h
---- upower-20140630/src/up-daemon.h	2014-07-19 06:54:04.419512057 -0400
-+++ upower-20140630-patched/src/up-daemon.h	2014-07-19 08:10:44.788738554 -0400
-@@ -77,6 +77,10 @@
+diff -urN upower-20141008/src/up-daemon.h upower-20141008-patched/src/up-daemon.h
+--- upower-20141008/src/up-daemon.h	2014-07-19 06:52:04.514506154 -0400
++++ upower-20141008-patched/src/up-daemon.h	2014-10-29 18:39:20.187930346 -0400
+@@ -22,6 +22,7 @@
+ #define __UP_DAEMON_H__
+ 
+ #include <glib-object.h>
++#include <polkit/polkit.h>
+ #include <dbus/dbus-glib.h>
+ 
+ #include "up-types.h"
+@@ -76,6 +77,10 @@
  						 gboolean		 lid_is_closed);
  void		 up_daemon_set_lid_is_present	(UpDaemon		*daemon,
  						 gboolean		 lid_is_present);
@@ -2584,7 +2681,7 @@ diff -urN upower-20140630/src/up-daemon.h upower-20140630-patched/src/up-daemon.
  void		 up_daemon_set_on_battery	(UpDaemon		*daemon,
  						 gboolean		 on_battery);
  void		 up_daemon_set_warning_level	(UpDaemon		*daemon,
-@@ -103,6 +107,25 @@
+@@ -102,6 +107,25 @@
  						 DBusGMethodInvocation	*context);
  gboolean	 up_daemon_get_critical_action	(UpDaemon		*daemon,
  						 DBusGMethodInvocation	*context);
@@ -2610,9 +2707,437 @@ diff -urN upower-20140630/src/up-daemon.h upower-20140630-patched/src/up-daemon.
  
  G_END_DECLS
  
-diff -urN upower-20140630/tools/up-tool.c upower-20140630-patched/tools/up-tool.c
---- upower-20140630/tools/up-tool.c	2014-07-19 06:52:00.952505979 -0400
-+++ upower-20140630-patched/tools/up-tool.c	2014-07-19 08:11:20.441740309 -0400
+diff -urN upower-20141008/src/up-device.h upower-20141008-patched/src/up-device.h
+--- upower-20141008/src/up-device.h	2014-07-19 06:52:04.514506154 -0400
++++ upower-20141008-patched/src/up-device.h	2014-10-29 18:39:20.188930346 -0400
+@@ -23,6 +23,7 @@
+ #define __UP_DEVICE_H__
+ 
+ #include <glib-object.h>
++#include <polkit/polkit.h>
+ #include <dbus/dbus-glib.h>
+ 
+ #include "up-daemon.h"
+diff -urN upower-20141008/src/up-polkit.c upower-20141008-patched/src/up-polkit.c
+--- upower-20141008/src/up-polkit.c	1969-12-31 19:00:00.000000000 -0500
++++ upower-20141008-patched/src/up-polkit.c	2014-10-29 18:39:20.188930346 -0400
+@@ -0,0 +1,278 @@
++/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*-
++ *
++ * Copyright (C) 2008 David Zeuthen <davidz@redhat.com>
++ * Copyright (C) 2008 Richard Hughes <richard@hughsie.com>
++ *
++ * Licensed under the GNU General Public License Version 2
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 2 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
++ */
++
++#ifdef HAVE_CONFIG_H
++#  include <config.h>
++#endif
++
++#include <glib.h>
++#include <dbus/dbus-glib.h>
++#include <dbus/dbus-glib-lowlevel.h>
++
++#include <polkit/polkit.h>
++
++#include "up-polkit.h"
++#include "up-daemon.h"
++
++#define UP_POLKIT_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), UP_TYPE_POLKIT, UpPolkitPrivate))
++
++struct UpPolkitPrivate
++{
++	DBusGConnection		*connection;
++	PolkitAuthority         *authority;
++};
++
++G_DEFINE_TYPE (UpPolkit, up_polkit, G_TYPE_OBJECT)
++static gpointer up_polkit_object = NULL;
++
++/**
++ * up_polkit_get_subject:
++ **/
++PolkitSubject *
++up_polkit_get_subject (UpPolkit *polkit, DBusGMethodInvocation *context)
++{
++	GError *error;
++	gchar *sender;
++	PolkitSubject *subject;
++
++	sender = dbus_g_method_get_sender (context);
++	subject = polkit_system_bus_name_new (sender);
++	g_free (sender);
++
++	if (subject == NULL) {
++		error = g_error_new (UP_DAEMON_ERROR, UP_DAEMON_ERROR_GENERAL, "failed to get PolicyKit subject");
++		dbus_g_method_return_error (context, error);
++		g_error_free (error);
++	}
++
++	return subject;
++}
++
++/**
++ * up_polkit_check_auth:
++ **/
++gboolean
++up_polkit_check_auth (UpPolkit *polkit, PolkitSubject *subject, const gchar *action_id, DBusGMethodInvocation *context)
++{
++	gboolean ret = FALSE;
++	GError *error;
++	GError *error_local = NULL;
++	PolkitAuthorizationResult *result;
++
++	/* check auth */
++	result = polkit_authority_check_authorization_sync (polkit->priv->authority,
++							    subject, action_id, NULL,
++							    POLKIT_CHECK_AUTHORIZATION_FLAGS_ALLOW_USER_INTERACTION,
++							    NULL, &error_local);
++	if (result == NULL) {
++		error = g_error_new (UP_DAEMON_ERROR, UP_DAEMON_ERROR_GENERAL, "failed to check authorisation: %s", error_local->message);
++		dbus_g_method_return_error (context, error);
++		g_error_free (error_local);
++		g_error_free (error);
++		goto out;
++	}
++
++	/* okay? */
++	if (polkit_authorization_result_get_is_authorized (result)) {
++		ret = TRUE;
++	} else {
++		error = g_error_new (UP_DAEMON_ERROR, UP_DAEMON_ERROR_GENERAL, "not authorized");
++		dbus_g_method_return_error (context, error);
++		g_error_free (error);
++	}
++out:
++	if (result != NULL)
++		g_object_unref (result);
++	return ret;
++}
++
++/**
++ * up_polkit_is_allowed:
++ **/
++gboolean
++up_polkit_is_allowed (UpPolkit *polkit, PolkitSubject *subject, const gchar *action_id, GError **error)
++{
++	gboolean ret = FALSE;
++	GError *error_local = NULL;
++	PolkitAuthorizationResult *result;
++
++	/* check auth */
++	result = polkit_authority_check_authorization_sync (polkit->priv->authority,
++							    subject, action_id, NULL,
++							    POLKIT_CHECK_AUTHORIZATION_FLAGS_NONE,
++							    NULL, &error_local);
++	if (result == NULL) {
++		g_set_error (error, UP_DAEMON_ERROR, UP_DAEMON_ERROR_GENERAL, "failed to check authorisation: %s", error_local->message);
++		g_error_free (error_local);
++		goto out;
++	}
++
++	ret = polkit_authorization_result_get_is_authorized (result) ||
++	      polkit_authorization_result_get_is_challenge (result);
++out:
++	if (result != NULL)
++		g_object_unref (result);
++	return ret;
++}
++
++/**
++ * up_polkit_get_uid:
++ **/
++gboolean
++up_polkit_get_uid (UpPolkit *polkit, PolkitSubject *subject, uid_t *uid)
++{
++	DBusConnection *connection;
++	const gchar *name;
++
++	if (!POLKIT_IS_SYSTEM_BUS_NAME (subject)) {
++		g_debug ("not system bus name");
++		return FALSE;
++	}
++
++	connection = dbus_g_connection_get_connection (polkit->priv->connection);
++	name = polkit_system_bus_name_get_name (POLKIT_SYSTEM_BUS_NAME (subject));
++	*uid = dbus_bus_get_unix_user (connection, name, NULL);
++	return TRUE;
++}
++
++/**
++ * up_polkit_get_pid:
++ **/
++gboolean
++up_polkit_get_pid (UpPolkit *polkit, PolkitSubject *subject, pid_t *pid)
++{
++	gboolean ret = FALSE;
++	GError *error = NULL;
++	const gchar *name;
++	DBusGProxy *proxy = NULL;
++
++	/* bus name? */
++	if (!POLKIT_IS_SYSTEM_BUS_NAME (subject)) {
++		g_debug ("not system bus name");
++		goto out;
++	}
++
++	name = polkit_system_bus_name_get_name (POLKIT_SYSTEM_BUS_NAME (subject));
++	proxy = dbus_g_proxy_new_for_name_owner (polkit->priv->connection,
++						 "org.freedesktop.DBus",
++						 "/org/freedesktop/DBus/Bus",
++						 "org.freedesktop.DBus", &error);
++	if (proxy == NULL) {
++		g_warning ("DBUS error: %s", error->message);
++		g_error_free (error);
++		goto out;
++	}
++
++	/* get pid from DBus (quite slow) */
++	ret = dbus_g_proxy_call (proxy, "GetConnectionUnixProcessID", &error,
++				 G_TYPE_STRING, name,
++				 G_TYPE_INVALID,
++				 G_TYPE_UINT, pid,
++				 G_TYPE_INVALID);
++	if (!ret) {
++		g_warning ("failed to get pid: %s", error->message);
++		g_error_free (error);
++		goto out;
++        }
++out:
++	if (proxy != NULL)
++		g_object_unref (proxy);
++	return ret;
++}
++
++/**
++ * up_polkit_finalize:
++ **/
++static void
++up_polkit_finalize (GObject *object)
++{
++	UpPolkit *polkit;
++	g_return_if_fail (UP_IS_POLKIT (object));
++	polkit = UP_POLKIT (object);
++
++	if (polkit->priv->connection != NULL)
++		dbus_g_connection_unref (polkit->priv->connection);
++	g_object_unref (polkit->priv->authority);
++
++	G_OBJECT_CLASS (up_polkit_parent_class)->finalize (object);
++}
++
++/**
++ * up_polkit_class_init:
++ **/
++static void
++up_polkit_class_init (UpPolkitClass *klass)
++{
++	GObjectClass *object_class = G_OBJECT_CLASS (klass);
++	object_class->finalize = up_polkit_finalize;
++	g_type_class_add_private (klass, sizeof (UpPolkitPrivate));
++}
++
++/**
++ * up_polkit_init:
++ *
++ * initializes the polkit class. NOTE: We expect polkit objects
++ * to *NOT* be removed or added during the session.
++ * We only control the first polkit object if there are more than one.
++ **/
++static void
++up_polkit_init (UpPolkit *polkit)
++{
++	GError *error = NULL;
++
++	polkit->priv = UP_POLKIT_GET_PRIVATE (polkit);
++
++	polkit->priv->connection = dbus_g_bus_get (DBUS_BUS_SYSTEM, &error);
++	if (polkit->priv->connection == NULL) {
++		if (error != NULL) {
++			g_critical ("error getting system bus: %s", error->message);
++			g_error_free (error);
++		}
++		goto out;
++	}
++
++	polkit->priv->authority = polkit_authority_get_sync (NULL, &error);
++	if (polkit->priv->authority == NULL) {
++		g_error ("failed to get pokit authority: %s", error->message);
++		g_error_free (error);
++		goto out;
++	}
++out:
++	return;
++}
++
++/**
++ * up_polkit_new:
++ * Return value: A new polkit class instance.
++ **/
++UpPolkit *
++up_polkit_new (void)
++{
++	if (up_polkit_object != NULL) {
++		g_object_ref (up_polkit_object);
++	} else {
++		up_polkit_object = g_object_new (UP_TYPE_POLKIT, NULL);
++		g_object_add_weak_pointer (up_polkit_object, &up_polkit_object);
++	}
++	return UP_POLKIT (up_polkit_object);
++}
++
+diff -urN upower-20141008/src/up-polkit.h upower-20141008-patched/src/up-polkit.h
+--- upower-20141008/src/up-polkit.h	1969-12-31 19:00:00.000000000 -0500
++++ upower-20141008-patched/src/up-polkit.h	2014-10-29 18:39:20.188930346 -0400
+@@ -0,0 +1,74 @@
++/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*-
++ *
++ * Copyright (C) 2008 Richard Hughes <richard@hughsie.com>
++ *
++ * Licensed under the GNU General Public License Version 2
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 2 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
++ */
++
++#ifndef __UP_POLKIT_H
++#define __UP_POLKIT_H
++
++#include <glib-object.h>
++#include <polkit/polkit.h>
++
++G_BEGIN_DECLS
++
++#define UP_TYPE_POLKIT		(up_polkit_get_type ())
++#define UP_POLKIT(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), UP_TYPE_POLKIT, UpPolkit))
++#define UP_POLKIT_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), UP_TYPE_POLKIT, UpPolkitClass))
++#define UP_IS_POLKIT(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), UP_TYPE_POLKIT))
++#define UP_IS_POLKIT_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), UP_TYPE_POLKIT))
++#define UP_POLKIT_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), UP_TYPE_POLKIT, UpPolkitClass))
++
++typedef struct UpPolkitPrivate UpPolkitPrivate;
++
++typedef struct
++{
++	GObject parent;
++	UpPolkitPrivate	*priv;
++} UpPolkit;
++
++typedef struct
++{
++	GObjectClass parent_class;
++} UpPolkitClass;
++
++GType		 up_polkit_get_type		(void);
++UpPolkit	*up_polkit_new			(void);
++void		 up_polkit_test			(gpointer		 user_data);
++
++PolkitSubject	*up_polkit_get_subject		(UpPolkit		*polkit,
++						 DBusGMethodInvocation	*context);
++gboolean	 up_polkit_check_auth		(UpPolkit		*polkit,
++						 PolkitSubject		*subject,
++						 const gchar		*action_id,
++						 DBusGMethodInvocation	*context);
++gboolean	 up_polkit_is_allowed		(UpPolkit		*polkit,
++						 PolkitSubject		*subject,
++						 const gchar		*action_id,
++						 GError		 	**error);
++gboolean         up_polkit_get_uid		(UpPolkit              *polkit,
++                                                 PolkitSubject          *subject,
++                                                 uid_t                  *uid);
++gboolean         up_polkit_get_pid		(UpPolkit              *polkit,
++                                                 PolkitSubject          *subject,
++                                                 pid_t                  *pid);
++
++G_END_DECLS
++
++#endif /* __UP_POLKIT_H */
++
+diff -urN upower-20141008/src/up-self-test.c upower-20141008-patched/src/up-self-test.c
+--- upower-20141008/src/up-self-test.c	2014-07-19 06:52:04.515506154 -0400
++++ upower-20141008-patched/src/up-self-test.c	2014-10-29 18:39:20.188930346 -0400
+@@ -33,6 +33,7 @@
+ #include "up-device-list.h"
+ #include "up-history.h"
+ #include "up-native.h"
++#include "up-polkit.h"
+ #include "up-wakeups.h"
+ 
+ gchar *history_dir = NULL;
+@@ -65,6 +66,12 @@
+ {
+ 	UpDaemon *daemon;
+ 
++	/* needs polkit, which only listens to the system bus */
++	if (!g_file_test (DBUS_SYSTEM_SOCKET, G_FILE_TEST_EXISTS)) {
++		puts("No system D-BUS running, skipping test");
++		return;
++	}
++
+ 	daemon = up_daemon_new ();
+ 	g_assert (daemon != NULL);
+ 
+@@ -276,6 +283,24 @@
+ }
+ 
+ static void
++up_test_polkit_func (void)
++{
++	UpPolkit *polkit;
++
++	/* polkit only listens to the system bus */
++	if (!g_file_test (DBUS_SYSTEM_SOCKET, G_FILE_TEST_EXISTS)) {
++		puts("No system D-BUS running, skipping test");
++		return;
++	}
++
++	polkit = up_polkit_new ();
++	g_assert (polkit != NULL);
++
++	/* unref */
++	g_object_unref (polkit);
++}
++
++static void
+ up_test_wakeups_func (void)
+ {
+ 	UpWakeups *wakeups;
+@@ -307,6 +332,7 @@
+ 	g_test_add_func ("/power/device_list", up_test_device_list_func);
+ 	g_test_add_func ("/power/history", up_test_history_func);
+ 	g_test_add_func ("/power/native", up_test_native_func);
++	g_test_add_func ("/power/polkit", up_test_polkit_func);
+ 	g_test_add_func ("/power/wakeups", up_test_wakeups_func);
+ 	g_test_add_func ("/power/daemon", up_test_daemon_func);
+ 
+diff -urN upower-20141008/tools/up-tool.c upower-20141008-patched/tools/up-tool.c
+--- upower-20141008/tools/up-tool.c	2014-07-19 06:52:04.515506154 -0400
++++ upower-20141008-patched/tools/up-tool.c	2014-10-29 18:39:20.188930346 -0400
 @@ -119,6 +119,10 @@
  up_client_print (UpClient *client)
  {
@@ -2645,9 +3170,9 @@ diff -urN upower-20140630/tools/up-tool.c upower-20140630-patched/tools/up-tool.
  	g_print ("  on-battery:      %s\n", on_battery ? "yes" : "no");
  	g_print ("  lid-is-closed:   %s\n", lid_is_closed ? "yes" : "no");
  	g_print ("  lid-is-present:  %s\n", lid_is_present ? "yes" : "no");
-diff -urN upower-20140630/upower-glib.pc.in upower-20140630-patched/upower-glib.pc.in
---- upower-20140630/upower-glib.pc.in	2014-07-19 06:52:00.952505979 -0400
-+++ upower-20140630-patched/upower-glib.pc.in	2014-07-19 08:12:06.312742568 -0400
+diff -urN upower-20141008/upower-glib.pc.in upower-20141008-patched/upower-glib.pc.in
+--- upower-20141008/upower-glib.pc.in	2014-07-19 06:52:04.515506154 -0400
++++ upower-20141008-patched/upower-glib.pc.in	2014-10-29 18:39:20.188930346 -0400
 @@ -6,7 +6,7 @@
  Name: upower-glib
  Description: UPower is a system daemon for managing power devices

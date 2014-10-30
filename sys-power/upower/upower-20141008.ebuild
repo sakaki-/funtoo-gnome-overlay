@@ -1,20 +1,21 @@
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
-inherit eutils git-2 systemd
+EAPI="5"
+
+inherit autotools eutils git-2 systemd
 
 DESCRIPTION="D-Bus abstraction for enumerating power devices and querying history and statistics"
 HOMEPAGE="http://upower.freedesktop.org/"
 EGIT_REPO_URI="git://anongit.freedesktop.org/upower"
-EGIT_COMMIT="d1bb06985fb30a9dfd4c2eb423ac19540445b9e4"
+EGIT_COMMIT="3a5f3e552635a6935d5238eb37c555fd05eddbd9"
 
 LICENSE="GPL-2"
-SLOT="0/2" # based on SONAME of libupower-glib.so
+SLOT="0/3" # based on SONAME of libupower-glib.so
 KEYWORDS="-*"
-IUSE="+deprecated +introspection ios kernel_FreeBSD kernel_linux"
+IUSE="doc +deprecated +introspection ios kernel_FreeBSD kernel_linux"
 
 RDEPEND=">=dev-libs/dbus-glib-0.100
-	>=dev-libs/glib-2.30
+	>=dev-libs/glib-2.40
 	dev-util/gdbus-codegen
 	sys-apps/dbus:=
 	>=sys-auth/polkit-0.110
@@ -28,8 +29,8 @@ RDEPEND=">=dev-libs/dbus-glib-0.100
 			>=app-pda/libplist-1:=
 			)
 		)
-	dev-util/gtk-doc
-	deprecated? ( >=sys-power/pm-utils-1.4.1-r2 )"
+	deprecated? ( >=sys-power/pm-utils-1.4.1-r2 )
+	doc? ( dev-util/gtk-doc )"
 DEPEND="${RDEPEND}
 	dev-libs/libxslt
 	app-text/docbook-xsl-stylesheets
@@ -52,13 +53,7 @@ src_prepare() {
 		epatch "${FILESDIR}"/${PN}-0.99.0-always-use-pm-utils-backend.patch
 	fi
 
-	# From Upstream:
-	# 	http://cgit.freedesktop.org/upower/commit/?id=3b6948bc4bbdd68b5ed3a974e57a156a79c1a7b8
-	epatch "${FILESDIR}"/${PN}-0.99.0-add-missing-include.patch
-
-	if [[ ! -e configure ]] ; then
-		./autogen.sh || die
-	fi
+	eautoreconf
 }
 
 src_configure() {
@@ -78,11 +73,11 @@ src_configure() {
 		--disable-static \
 		--enable-man-pages \
 		--disable-tests \
-		--enable-gtk-doc \
-		--enable-gtk-doc-html \
 		--with-html-dir="${EPREFIX}"/usr/share/doc/${PF}/html \
 		--with-backend=${backend} \
 		$(use_enable deprecated) \
+		$(use_enable doc gtk-doc) \
+		$(use_enable doc gtk-doc-html) \
 		$(use_enable introspection) \
 		$(use_with ios idevice) \
 		"$(systemd_with_utildir)" \
@@ -92,10 +87,12 @@ src_configure() {
 src_install() {
 	default
 
-	# http://bugs.gentoo.org/487400
-	insinto /usr/share/doc/${PF}/html/UPower
-	doins doc/html/*
-	dosym /usr/share/doc/${PF}/html/UPower /usr/share/gtk-doc/html/UPower
+	if use doc; then
+		# http://bugs.gentoo.org/487400
+		insinto /usr/share/doc/${PF}/html/UPower
+		doins doc/html/*
+		dosym /usr/share/doc/${PF}/html/UPower /usr/share/gtk-doc/html/UPower
+	fi
 
 	keepdir /var/lib/upower #383091
 	prune_libtool_files

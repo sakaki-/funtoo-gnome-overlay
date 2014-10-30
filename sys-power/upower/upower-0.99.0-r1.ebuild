@@ -1,6 +1,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI="5"
+
 inherit eutils systemd
 
 DESCRIPTION="D-Bus abstraction for enumerating power devices and querying history and statistics"
