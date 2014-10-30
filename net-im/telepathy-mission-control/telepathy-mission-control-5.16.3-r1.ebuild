@@ -23,7 +23,7 @@ RDEPEND="
 	>=sys-apps/dbus-0.95
 	>=net-libs/telepathy-glib-0.20
 	networkmanager? ( >=net-misc/networkmanager-0.7 )
-	deprecated? ( >=sys-power/upower-0.99.0[deprecated]:= )
+	deprecated? ( >=sys-power/upower-0.99.0:=[deprecated] )
 "
 DEPEND="${RDEPEND}
 	${PYTHON_DEPS}
