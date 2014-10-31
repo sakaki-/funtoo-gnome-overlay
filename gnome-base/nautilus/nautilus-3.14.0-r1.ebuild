@@ -76,6 +76,10 @@ src_prepare() {
 			close the previewer, press space again."
 	fi
 
+	# From Funtoo
+	# 	https://bugs.funtoo.org/browse/FL-1694
+	epatch "${FILESDIR}/${P}-restore-new-window-functionality.patch"
+
 	# Restore the nautilus-2.x Delete shortcut (Ctrl+Delete will still work);
 	# bug #393663
 	epatch "${FILESDIR}/${PN}-3.5.91-delete.patch"
