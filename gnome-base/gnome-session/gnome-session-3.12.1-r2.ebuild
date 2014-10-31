@@ -103,7 +103,7 @@ src_install() {
 
 	dodir /usr/share/gnome/applications/
 	insinto /usr/share/gnome/applications/
-	newins "${FILESDIR}/defaults.list-r1" defaults.list
+	newins "${FILESDIR}/${P}-defaults.list" defaults.list
 
 	dodir /etc/X11/xinit/xinitrc.d/
 	exeinto /etc/X11/xinit/xinitrc.d/
