@@ -3,6 +3,7 @@
 EAPI="5"
 GCONF_DEBUG="no"
 VALA_MIN_API_VERSION="0.26"
+VALA_MAX_API_VERSION="0.26"
 
 inherit gnome-games vala
 
@@ -15,6 +16,7 @@ KEYWORDS="~*"
 IUSE=""
 
 RDEPEND="
+	$(vala_depend)
 	>=dev-libs/glib-2.40:2
 	dev-libs/libgee:0.8[introspection]
 	dev-libs/json-glib
@@ -24,6 +26,7 @@ RDEPEND="
 	x11-libs/pango[introspection]
 "
 DEPEND="${RDEPEND}
+	$(vala_depend)
 	app-text/yelp-tools
 	dev-util/appdata-tools
 	>=dev-util/intltool-0.50
