@@ -3,7 +3,6 @@
 EAPI="5"
 GCONF_DEBUG="no"
 VALA_MIN_API_VERSION="0.26"
-VALA_MAX_API_VERSION="0.26"
 
 inherit gnome-games vala
 
@@ -16,7 +15,6 @@ KEYWORDS="~*"
 IUSE=""
 
 RDEPEND="
-	$(vala_depend)
 	>=dev-libs/glib-2.40:2
 	dev-libs/libgee:0.8[introspection]
 	dev-libs/json-glib
