@@ -1,0 +1,25 @@
+From 434f894cf191d30a8b4f9a1d59601e1405ae2b69 Mon Sep 17 00:00:00 2001
+From: Michael Catanzaro <mcatanzaro@gnome.org>
+Date: Sun, 5 Oct 2014 22:33:28 -0500
+Subject: Increase default width even more
+
+I think this is the third time I've changed this. The sidebar keeps
+getting bigger. We might need to compute this dynamically when it's
+unset, to ensure four columns of results regardless of theme or filename
+length.
+
+diff --git a/src/nautilus-window-private.h b/src/nautilus-window-private.h
+index 2fd0355..5531d8e 100644
+--- a/src/nautilus-window-private.h
++++ b/src/nautilus-window-private.h
+@@ -82,7 +82,7 @@ struct NautilusWindowDetails
+ 
+ #define NAUTILUS_WINDOW_MIN_WIDTH		200
+ #define NAUTILUS_WINDOW_MIN_HEIGHT		200
+-#define NAUTILUS_WINDOW_DEFAULT_WIDTH		855
++#define NAUTILUS_WINDOW_DEFAULT_WIDTH		890
+ #define NAUTILUS_WINDOW_DEFAULT_HEIGHT		550
+ 
+ typedef void (*NautilusBookmarkFailedCallback) (NautilusWindow *window,
+-- 
+cgit v0.10.1

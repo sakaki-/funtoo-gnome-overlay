@@ -77,6 +77,14 @@ src_prepare() {
 	fi
 
 	# From Funtoo
+	# 	https://bugs.funtoo.org/browse/FL-1717
+	epatch "${FILESDIR}/${P}"-avoid-unreadable-names.patch
+	epatch "${FILESDIR}/${P}"-increase-nautilus-window-default-width.patch
+	epatch "${FILESDIR}/${P}"-remove-useless-boolean-flag.patch
+	epatch "${FILESDIR}/${P}"-set-max-width-for-labels.patch
+	epatch "${FILESDIR}/${P}"-use-umount-name-if-available.patch
+
+	# From Funtoo
 	# 	https://bugs.funtoo.org/browse/FL-1694
 	epatch "${FILESDIR}/${P}-restore-new-window-functionality.patch"
 

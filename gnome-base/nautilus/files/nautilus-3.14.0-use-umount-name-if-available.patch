@@ -1,0 +1,57 @@
+From 7c31e775c84114a7ff83dfb970d7f16dac3c9a4d Mon Sep 17 00:00:00 2001
+From: Carlos Soriano <carlos.soriano89@gmail.com>
+Date: Tue, 7 Oct 2014 15:04:36 +0200
+Subject: nautilus-file-operations: Use mount name if available
+
+Currently custom_basename_to_string uses the base name or display name
+of the files for the copying and moving dialog.
+In the cases of unlabeled removable drives, the name is a code, showing
+in the dialog a not very friendly name.
+gtkplacessidebar and nautilus-pathbar uses the mount name retrieved by
+g_mount_name if available.
+Use that fir the operations dialogs as well to display a more friendly
+name to the user and to be consistent with the sidebar and pathbar name.
+
+https://bugzilla.gnome.org/show_bug.cgi?id=738087
+
+diff --git a/libnautilus-private/nautilus-file-operations.c b/libnautilus-private/nautilus-file-operations.c
+index 517d131..0315a46 100644
+--- a/libnautilus-private/nautilus-file-operations.c
++++ b/libnautilus-private/nautilus-file-operations.c
+@@ -792,19 +792,24 @@ custom_basename_to_string (char *format, va_list va)
+ 	GFile *file;
+ 	GFileInfo *info;
+ 	char *name, *basename, *tmp;
++	GMount *mount;
+ 
+ 	file = va_arg (va, GFile *);
+ 
+-	info = g_file_query_info (file,
+-				  G_FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME,
+-				  0,
+-				  g_cancellable_get_current (),
+-				  NULL);
+-	
+-	name = NULL;
+-	if (info) {
+-		name = g_strdup (g_file_info_get_display_name (info));
+-		g_object_unref (info);
++	if ((mount = nautilus_get_mounted_mount_for_root (file)) != NULL) {
++		name = g_mount_get_name (mount);
++		g_object_unref (mount);
++	} else {
++		info = g_file_query_info (file,
++					  G_FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME,
++					  0,
++					  g_cancellable_get_current (),
++					  NULL);
++		name = NULL;
++		if (info) {
++			name = g_strdup (g_file_info_get_display_name (info));
++			g_object_unref (info);
++		}
+ 	}
+ 	
+ 	if (name == NULL) {
+-- 
+cgit v0.10.1

@@ -1,0 +1,24 @@
+From ac8394203a80e882f3c282ef6879c69abe08e26c Mon Sep 17 00:00:00 2001
+From: Lars Uebernickel <lars.uebernickel@canonical.com>
+Date: Mon, 6 Oct 2014 18:17:50 +0200
+Subject: properties-window: set max-width for value labels
+
+Not setting it can lead to very wide windows, because gtk doesn't
+enforce a maximum window size anymore.
+
+https://bugzilla.gnome.org/show_bug.cgi?id=732117
+
+diff --git a/src/nautilus-properties-window.c b/src/nautilus-properties-window.c
+index 81bd351..efc1466 100644
+--- a/src/nautilus-properties-window.c
++++ b/src/nautilus-properties-window.c
+@@ -1288,6 +1288,7 @@ attach_label (GtkGrid *grid,
+ 
+ 	if (ellipsize_text) {
+ 		gtk_widget_set_hexpand (label_field, TRUE);
++		gtk_label_set_max_width_chars (GTK_LABEL (label_field), 72);
+ 	}
+ 
+ 	if (sibling != NULL) {
+-- 
+cgit v0.10.1
