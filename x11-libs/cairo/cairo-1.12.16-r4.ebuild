@@ -105,6 +105,10 @@ src_prepare() {
 	# allow the automagically injected -flto flag to be not injected
 	epatch "${FILESDIR}"/${PN}-1.12.16-lto-optional.patch
 
+	# From Funtoo
+	# 	https://bugs.funtoo.org/browse/FL-1720
+	epatch "${FILESDIR}"/"${P}"-webkit.patch
+
 	# tests and perf tools require X, bug #483574
 	if ! use X; then
 		sed -e '/^SUBDIRS/ s#boilerplate test perf# #' -i Makefile.am || die
