@@ -10,7 +10,7 @@ HOMEPAGE="https://wiki.gnome.org/Apps/Bijiben"
 
 LICENSE="GPL-3+"
 SLOT="0"
-KEYWORDS="~*"
+KEYWORDS="*"
 IUSE=""
 
 # zeitgeist is optional but automagic

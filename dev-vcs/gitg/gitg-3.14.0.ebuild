@@ -12,7 +12,7 @@ HOMEPAGE="https://wiki.gnome.org/Apps/Gitg"
 
 LICENSE="|| ( GPL-2 GPL-3 )"
 SLOT="0"
-KEYWORDS="~*"
+KEYWORDS="*"
 IUSE="debug glade +python"
 
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"

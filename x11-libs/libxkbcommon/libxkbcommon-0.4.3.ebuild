@@ -6,7 +6,7 @@ XORG_MULTILIB="yes"
 
 XORG_BASE_INDIVIDUAL_URI=""
 SRC_URI="http://xkbcommon.org/download/${P}.tar.xz"
-KEYWORDS="~*"
+KEYWORDS="*"
 
 inherit xorg-2 ${GIT_ECLASS}
 

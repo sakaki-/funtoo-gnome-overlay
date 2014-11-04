@@ -11,7 +11,7 @@ HOMEPAGE="http://live.gnome.org/Aisleriot"
 
 LICENSE="GPL-3 LGPL-3 FDL-1.1"
 SLOT="0"
-KEYWORDS="~*"
+KEYWORDS="*"
 IUSE="clutter gnome pysolfc sound valgrind yelp"
 
 RDEPEND="
@@ -22,7 +22,7 @@ RDEPEND="
 	>=gnome-base/gconf-3.2.6
 	>=gnome-base/librsvg-2.40.2
 	>=x11-libs/libSM-1.2.2
-	
+
 	clutter? (  >=media-libs/clutter-1.18.2 )
 	pysolfc? (  games-board/pysolfc )
 	sound? ( >=media-libs/libcanberra-0.30[gtk3] )
@@ -30,7 +30,7 @@ RDEPEND="
 "
 DEPEND="
 	dev-util/appdata-tools
-	
+
 	yelp? (
 		>=app-text/yelp-tools-3.12.1
 		>=gnome-extra/yelp-xsl-3.12.0

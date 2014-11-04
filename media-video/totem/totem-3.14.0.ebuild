@@ -20,7 +20,7 @@ REQUIRED_USE="
 	zeitgeist? ( introspection )
 "
 
-KEYWORDS="~*"
+KEYWORDS="*"
 
 # TODO:
 # Cone (VLC) plugin needs someone with the right setup to test it

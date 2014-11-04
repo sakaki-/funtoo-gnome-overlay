@@ -12,7 +12,7 @@ HOMEPAGE="http://developer.gnome.org/libpeas/stable/"
 
 LICENSE="LGPL-2+"
 SLOT="0"
-KEYWORDS="~*"
+KEYWORDS="*"
 IUSE="+gtk glade +python seed"
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 

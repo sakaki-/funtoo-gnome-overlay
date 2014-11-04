@@ -10,7 +10,7 @@ HOMEPAGE="https://wiki.gnome.org/Projects/Zenity"
 
 LICENSE="LGPL-2+"
 SLOT="0"
-KEYWORDS="~*"
+KEYWORDS="*"
 IUSE="libnotify test +webkit"
 
 RDEPEND="

@@ -13,7 +13,7 @@ HOMEPAGE="https://wiki.gnome.org/Projects/NetworkManager"
 LICENSE="GPL-2+"
 SLOT="0"
 IUSE="bluetooth gconf +introspection modemmanager"
-KEYWORDS="~*"
+KEYWORDS="*"
 
 RDEPEND="
 	app-crypt/libsecret

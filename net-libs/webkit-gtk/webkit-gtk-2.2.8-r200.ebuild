@@ -13,7 +13,7 @@ SRC_URI="http://www.webkitgtk.org/releases/${MY_P}.tar.xz"
 
 LICENSE="LGPL-2+ BSD"
 SLOT="2"
-KEYWORDS="~*"
+KEYWORDS="*"
 IUSE="aqua coverage debug +egl +geoloc gles2 +gstreamer +introspection +jit libsecret +opengl spell +webgl"
 # bugs 372493, 416331
 REQUIRED_USE="
@@ -156,7 +156,7 @@ src_prepare() {
 	# Do not build unittests unless requested, upstream bug #128163
 	epatch "${FILESDIR}"/${PN}-2.2.4-unittests-build.patch
 
-	# Deadlock causing infinite compilations with nvidia-drivers: 
+	# Deadlock causing infinite compilations with nvidia-drivers:
 	# https://bugs.gentoo.org/show_bug.cgi?id=463960
 	# http://osdyson.org/issues/161
 	# https://bugs.webkit.org/show_bug.cgi?id=125651

@@ -11,7 +11,7 @@ DESCRIPTION="Library for embedding a Clutter canvas (stage) in GTK+"
 HOMEPAGE="http://live.gnome.org/Clutter"
 
 SLOT="1.0"
-KEYWORDS="~*"
+KEYWORDS="*"
 IUSE="examples +introspection"
 
 RDEPEND="

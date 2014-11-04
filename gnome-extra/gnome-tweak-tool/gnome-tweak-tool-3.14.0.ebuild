@@ -15,7 +15,7 @@ SLOT="0"
 IUSE=""
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
-KEYWORDS="~*"
+KEYWORDS="*"
 
 # Newer pygobject needed due upstream bug #723951
 COMMON_DEPEND="

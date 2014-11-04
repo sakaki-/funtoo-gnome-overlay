@@ -11,7 +11,7 @@ HOMEPAGE="https://wiki.gnome.org/Projects/GnomeOnlineAccounts"
 LICENSE="LGPL-2+"
 SLOT="0/1"
 IUSE="gnome +introspection kerberos" # telepathy"
-KEYWORDS="~*"
+KEYWORDS="*"
 
 # pango used in goaeditablelabel
 # libsoup used in goaoauthprovider

@@ -8,7 +8,7 @@ LICENSE="metapackage"
 SLOT="3.0"
 IUSE="+epiphany +evolution +games +shotwell +tracker"
 
-KEYWORDS="~*"
+KEYWORDS="*"
 
 RDEPEND="
 	>=gnome-base/gnome-core-libs-${PV}

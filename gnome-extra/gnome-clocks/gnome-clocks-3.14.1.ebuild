@@ -11,7 +11,7 @@ HOMEPAGE="http://live.gnome.org/GnomeClocks"
 
 LICENSE="GPL-2+"
 SLOT="0"
-KEYWORDS="~*"
+KEYWORDS="*"
 IUSE=""
 
 RDEPEND="

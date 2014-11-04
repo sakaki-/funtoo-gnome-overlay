@@ -13,7 +13,7 @@ HOMEPAGE="https://wiki.gnome.org/Projects/GnomeKeyring"
 LICENSE="GPL-2+ LGPL-2+"
 SLOT="0"
 IUSE="+caps debug pam selinux +ssh-agent"
-KEYWORDS="~*"
+KEYWORDS="*"
 
 RDEPEND="
 	>=app-crypt/gcr-3.14.0:=[gtk]

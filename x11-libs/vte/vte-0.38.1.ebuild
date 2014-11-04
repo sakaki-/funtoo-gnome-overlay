@@ -13,7 +13,7 @@ HOMEPAGE="https://wiki.gnome.org/action/show/Apps/Terminal/VTE"
 LICENSE="LGPL-2+"
 SLOT="2.90"
 IUSE="debug glade +introspection vala"
-KEYWORDS="~*"
+KEYWORDS="*"
 
 PDEPEND="~x11-libs/gnome-pty-helper-${PV}"
 RDEPEND="

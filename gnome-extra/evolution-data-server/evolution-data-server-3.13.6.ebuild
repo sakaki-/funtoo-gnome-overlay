@@ -18,7 +18,7 @@ SLOT="0/51" # subslot = libcamel-1.2 soname version
 IUSE="api-doc-extras +gnome-online-accounts +gtk +introspection ipv6 ldap kerberos vala +weather"
 REQUIRED_USE="vala? ( introspection )"
 
-KEYWORDS="~*"
+KEYWORDS="*"
 
 RDEPEND="
 	>=app-crypt/gcr-3.14.0

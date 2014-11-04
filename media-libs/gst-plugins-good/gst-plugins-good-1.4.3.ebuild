@@ -9,7 +9,7 @@ DESCRIPTION="Basepack of plugins for gstreamer"
 HOMEPAGE="http://gstreamer.freedesktop.org/"
 
 LICENSE="LGPL-2.1+"
-KEYWORDS="~*"
+KEYWORDS="*"
 IUSE="+orc"
 
 # dtmf plugin moved from bad to good in 1.2

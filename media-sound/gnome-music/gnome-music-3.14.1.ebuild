@@ -15,7 +15,7 @@ IUSE="+python_single_target_python3_3"
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
-KEYWORDS="~*"
+KEYWORDS="*"
 
 COMMON_DEPEND="
 	${PYTHON_DEPS}

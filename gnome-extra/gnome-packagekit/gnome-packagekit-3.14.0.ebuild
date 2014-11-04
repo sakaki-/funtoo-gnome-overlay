@@ -10,7 +10,7 @@ HOMEPAGE="http://www.freedesktop.org/software/PackageKit/"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~*"
+KEYWORDS="*"
 IUSE="systemd test udev"
 
 # gdk-pixbuf used in gpk-animated-icon

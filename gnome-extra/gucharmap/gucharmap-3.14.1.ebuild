@@ -12,7 +12,7 @@ HOMEPAGE="http://live.gnome.org/Gucharmap"
 
 LICENSE="GPL-3"
 SLOT="2.90"
-KEYWORDS="~*"
+KEYWORDS="*"
 IUSE="cjk +introspection test vala"
 REQUIRED_USE="vala? ( introspection )"
 

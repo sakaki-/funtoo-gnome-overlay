@@ -11,7 +11,7 @@ HOMEPAGE="http://wiki.gnome.org/Apps/California"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS="~*"
+KEYWORDS="*"
 IUSE=""
 
 RDEPEND="

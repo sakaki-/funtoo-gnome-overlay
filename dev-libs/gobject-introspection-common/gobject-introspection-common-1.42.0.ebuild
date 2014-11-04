@@ -10,7 +10,7 @@ HOMEPAGE="http://live.gnome.org/GObjectIntrospection/"
 
 LICENSE="HPND"
 SLOT="0"
-KEYWORDS="~*"
+KEYWORDS="*"
 IUSE=""
 
 RDEPEND="!<${CATEGORY}/${PN/-common}-${PV}"

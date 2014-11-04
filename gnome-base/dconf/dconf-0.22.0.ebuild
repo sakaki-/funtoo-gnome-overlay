@@ -14,7 +14,7 @@ SLOT="0"
 # TODO: coverage ?
 IUSE="test +X"
 
-KEYWORDS="~*"
+KEYWORDS="*"
 
 RDEPEND="
 	>=dev-libs/glib-2.42.0:2

@@ -16,7 +16,7 @@ SRC_URI="${SRC_URI//-gnome}"
 LICENSE="LGPL-2+"
 SLOT="2.4"
 IUSE="debug +introspection"
-KEYWORDS="~*"
+KEYWORDS="*"
 
 RDEPEND="
 	~net-libs/libsoup-${PV}[introspection?]

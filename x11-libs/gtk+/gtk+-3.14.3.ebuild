@@ -22,7 +22,7 @@ REQUIRED_USE="
 	xinerama? ( X )
 "
 
-KEYWORDS="~*"
+KEYWORDS="*"
 
 # FIXME: introspection data is built against system installation of gtk+:3
 # NOTE: cairo[svg] dep is due to bug 291283 (not patched to avoid eautoreconf)

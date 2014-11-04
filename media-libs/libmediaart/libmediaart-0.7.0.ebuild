@@ -12,7 +12,7 @@ HOMEPAGE="https://github.com/curlybeast/libmediaart"
 
 LICENSE="LGPL-2.1+"
 SLOT="1.0"
-KEYWORDS="~*"
+KEYWORDS="*"
 IUSE="gtk +introspection qt4 qt5 vala"
 REQUIRED_USE="
 	?? ( gtk qt4 qt5 )

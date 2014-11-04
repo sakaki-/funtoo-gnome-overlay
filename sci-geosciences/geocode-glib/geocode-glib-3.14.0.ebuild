@@ -13,7 +13,7 @@ HOMEPAGE="http://git.gnome.org/browse/geocode-glib"
 
 LICENSE="LGPL-2"
 SLOT="0"
-KEYWORDS="~*"
+KEYWORDS="*"
 IUSE="+introspection test"
 
 RDEPEND="

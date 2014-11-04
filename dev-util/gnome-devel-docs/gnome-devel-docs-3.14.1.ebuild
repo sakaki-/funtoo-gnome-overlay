@@ -11,7 +11,7 @@ HOMEPAGE="http://developer.gnome.org/"
 # https://bugzilla.gnome.org/show_bug.cgi?id=735882
 LICENSE="FDL-1.1+ CC-BY-SA-3.0 CC-BY-SA-4.0"
 SLOT="0"
-KEYWORDS="~*"
+KEYWORDS="*"
 IUSE=""
 
 RDEPEND=""

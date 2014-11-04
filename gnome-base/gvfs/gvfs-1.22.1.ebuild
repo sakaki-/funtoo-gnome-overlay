@@ -19,7 +19,7 @@ REQUIRED_USE="
 	udisks? ( udev )
 	systemd? ( udisks )
 "
-KEYWORDS="~*"
+KEYWORDS="*"
 
 # Can use libgphoto-2.5.0 as well. Automagic detection.
 RDEPEND="

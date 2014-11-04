@@ -12,7 +12,7 @@ HOMEPAGE="http://fileroller.sourceforge.net/ https://wiki.gnome.org/Apps/FileRol
 LICENSE="GPL-2+ CC-BY-SA-3.0"
 SLOT="0"
 IUSE="nautilus packagekit"
-KEYWORDS="~*"
+KEYWORDS="*"
 
 # gdk-pixbuf used extensively in the source
 # cairo used in eggtreemultidnd.c

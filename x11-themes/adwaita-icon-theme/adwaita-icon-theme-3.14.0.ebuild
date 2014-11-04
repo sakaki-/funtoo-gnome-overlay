@@ -15,7 +15,7 @@ LICENSE="|| ( LGPL-3 CC-BY-SA-3.0 )
 	branding? ( CC-Sampling-Plus-1.0 )"
 SLOT="0"
 IUSE="branding"
-KEYWORDS="~*"
+KEYWORDS="*"
 
 COMMON_DEPEND="
 	>=x11-themes/hicolor-icon-theme-0.10

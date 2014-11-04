@@ -13,7 +13,7 @@ SRC_URI="https://tecnocode.co.uk/downloads/uhttpmock/${P}.tar.xz"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS="~*"
+KEYWORDS="*"
 IUSE="vala" # static
 
 DEPEND="

@@ -15,7 +15,7 @@ IUSE="+colord +cups debug +deprecated input_devices_wacom networkmanager policyk
 REQUIRED_USE="
 	smartcard? ( udev )
 "
-KEYWORDS="~*"
+KEYWORDS="*"
 
 COMMON_DEPEND="
 	>=dev-libs/glib-2.42.0:2

@@ -17,7 +17,7 @@ REQUIRED_USE="
 	${PYTHON_REQUIRED_USE}
 	test? ( cairo )
 "
-KEYWORDS="~*"
+KEYWORDS="*"
 
 # virtual/pkgconfig needed at runtime, bug #505408
 # We force glib and goi to be in sync by this way as explained in bug #518424

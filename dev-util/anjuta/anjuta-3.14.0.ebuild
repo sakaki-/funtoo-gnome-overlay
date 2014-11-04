@@ -16,7 +16,7 @@ HOMEPAGE="http://projects.gnome.org/anjuta/"
 
 LICENSE="GPL-2+"
 SLOT="0"
-KEYWORDS="~*"
+KEYWORDS="*"
 IUSE="debug devhelp glade +introspection packagekit subversion terminal test vala"
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"

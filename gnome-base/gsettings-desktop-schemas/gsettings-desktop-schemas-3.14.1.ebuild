@@ -11,7 +11,7 @@ HOMEPAGE="https://git.gnome.org/browse/gsettings-desktop-schemas"
 LICENSE="LGPL-2.1+"
 SLOT="0"
 IUSE="+introspection"
-KEYWORDS="~*"
+KEYWORDS="*"
 
 RDEPEND="
 	>=dev-libs/glib-2.42.0:2

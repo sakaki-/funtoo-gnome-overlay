@@ -11,7 +11,7 @@ HOMEPAGE="https://live.gnome.org/GnomeUtils"
 LICENSE="GPL-2+"
 SLOT="0"
 IUSE=""
-KEYWORDS="~*"
+KEYWORDS="*"
 
 # libcanberra 0.26-r2 is needed for gtk+:3 fixes
 COMMON_DEPEND="

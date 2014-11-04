@@ -10,7 +10,7 @@ IUSE="cups python"
 
 # when unmasking for an arch
 # double check none of the deps are still masked !
-KEYWORDS="~*"
+KEYWORDS="*"
 
 # Note to developers:
 # This is a wrapper for the core libraries used by GNOME 3
@@ -30,7 +30,7 @@ RDEPEND="
 	>=gnome-base/dconf-0.22.0
 
 	>=media-libs/gstreamer-1.4.3:1.0
-	>=media-libs/gst-plugins-base-1.4.3:1.0 
+	>=media-libs/gst-plugins-base-1.4.3:1.0
 	>=media-libs/gst-plugins-good-1.4.3:1.0
 	python? ( >=dev-python/pygobject-3.14.0:3 )
 "

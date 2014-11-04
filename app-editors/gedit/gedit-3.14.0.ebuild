@@ -18,7 +18,7 @@ SLOT="0"
 IUSE="+introspection +python spell vala"
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
-KEYWORDS="~*"
+KEYWORDS="*"
 
 # X libs are not needed for OSX (aqua)
 COMMON_DEPEND="

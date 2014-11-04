@@ -26,7 +26,7 @@ REQUIRED_USE="
 	test? ( ${PYTHON_REQUIRED_USE} )
 "
 
-KEYWORDS="~*"
+KEYWORDS="*"
 
 RDEPEND="
 	!<dev-util/gdbus-codegen-${PV}

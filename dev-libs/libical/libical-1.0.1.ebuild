@@ -9,7 +9,7 @@ SRC_URI="https://github.com/${PN}/${PN}/archive/v${PV}.tar.gz"
 
 LICENSE="|| ( MPL-1.1 LGPL-2 )"
 SLOT="0/1"
-KEYWORDS="~*"
+KEYWORDS="*"
 IUSE="doc examples introspection static-libs"
 
 RDEPEND="introspection? ( dev-libs/gobject-introspection )"

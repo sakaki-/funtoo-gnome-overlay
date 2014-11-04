@@ -11,7 +11,7 @@ HOMEPAGE="https://live.gnome.org/GnomeUtils"
 LICENSE="GPL-2+ LGPL-2.1+"
 SLOT="0"
 IUSE=""
-KEYWORDS="~*"
+KEYWORDS="*"
 
 COMMON_DEPEND="
 	>=dev-libs/glib-2.42.0:2

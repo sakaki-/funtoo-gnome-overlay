@@ -10,7 +10,7 @@ SRC_URI="http://${PN}.freedesktop.org/src/${PN}/${P}.tar.xz"
 
 LICENSE="LGPL-2+"
 SLOT="1.0"
-KEYWORDS="~*"
+KEYWORDS="*"
 IUSE="+introspection nls +orc test"
 
 RDEPEND="

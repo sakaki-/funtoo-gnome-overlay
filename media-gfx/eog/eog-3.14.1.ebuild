@@ -12,7 +12,7 @@ HOMEPAGE="https://wiki.gnome.org/Apps/EyeOfGnome"
 LICENSE="GPL-2+"
 SLOT="1"
 IUSE="+exif +introspection +jpeg lcms +svg tiff xmp"
-KEYWORDS="~*"
+KEYWORDS="*"
 
 REQUIRED_USE="exif? ( jpeg )"
 
