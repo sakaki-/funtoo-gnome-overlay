@@ -11,7 +11,7 @@ DESCRIPTION="Library providing a virtual terminal emulator widget"
 HOMEPAGE="https://wiki.gnome.org/action/show/Apps/Terminal/VTE"
 
 LICENSE="LGPL-2+"
-SLOT="2.90"
+SLOT="2.91"
 IUSE="debug glade +introspection vala"
 KEYWORDS="*"
 
