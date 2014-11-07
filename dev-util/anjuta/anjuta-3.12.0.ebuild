@@ -48,7 +48,7 @@ COMMON_DEPEND="
 		>=net-libs/serf-1.2:1=
 		>=dev-libs/apr-1:=
 		>=dev-libs/apr-util-1:= )
-	terminal? ( x11-libs/vte:2.90 )
+	terminal? ( x11-libs/vte:2.91 )
 	vala? ( $(vala_depend) )
 "
 RDEPEND="${COMMON_DEPEND}

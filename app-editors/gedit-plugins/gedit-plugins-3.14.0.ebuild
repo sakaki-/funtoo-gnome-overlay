@@ -45,7 +45,7 @@ RDEPEND="
 	)
 	charmap? ( >=gnome-extra/gucharmap-3.14.0:2.90[introspection] )
 	git? ( >=dev-libs/libgit2-glib-0.0.6 )
-	terminal? ( x11-libs/vte:2.90[introspection] )
+	terminal? ( x11-libs/vte:2.91[introspection] )
 	zeitgeist? ( >=gnome-extra/zeitgeist-0.9.12[introspection] )
 "
 DEPEND="${RDEPEND}

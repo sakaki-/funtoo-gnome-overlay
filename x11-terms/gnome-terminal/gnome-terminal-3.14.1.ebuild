@@ -18,7 +18,7 @@ KEYWORDS="*"
 RDEPEND="
 	>=dev-libs/glib-2.42.0:2
 	>=x11-libs/gtk+-3.14.0:3[X]
-	x11-libs/vte:2.90
+	x11-libs/vte:2.91
 	>=gnome-base/dconf-0.14
 	>=gnome-base/gconf-2.31.3
 	>=gnome-base/gsettings-desktop-schemas-3.14.0
