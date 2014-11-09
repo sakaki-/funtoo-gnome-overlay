@@ -122,12 +122,12 @@ src_prepare() {
 	if use deprecated; then
 		# From Funtoo:
 		# 	https://bugs.funtoo.org/browse/FL-1329
-		epatch "${FILESDIR}"/${P}-restore-deprecated-code.patch
+		epatch "${FILESDIR}"/${PN}-3.14.1-restore-deprecated-code.patch
 		epatch "${FILESDIR}"/${PN}-3.12.2-expose-hibernate-functionality.patch
 	fi
 
 	# Change favorites defaults, bug #479918
-	epatch "${FILESDIR}/${P}-defaults.patch"
+	epatch "${FILESDIR}/${PN}-3.14.1-defaults.patch"
 
 	# Fix automagic gnome-bluetooth dep, bug #398145
 	epatch "${FILESDIR}/${PN}-3.12-bluetooth-flag.patch"
