@@ -16,7 +16,7 @@ LICENSE="GPL-2+ CC-BY-SA-3.0"
 SLOT="0"
 
 IUSE="+introspection +python spell vala"
-REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
+REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} ) vala? ( introspection )"
 
 KEYWORDS="*"
 
@@ -52,7 +52,6 @@ RDEPEND="${COMMON_DEPEND}
 	python? ( dev-libs/libpeas[${PYTHON_USEDEP}] )
 "
 DEPEND="${COMMON_DEPEND}
-	${vala_depend}
 	app-text/docbook-xml-dtd:4.1.2
 	>=app-text/scrollkeeper-0.3.11
 	dev-libs/libxml2:2
@@ -60,6 +59,7 @@ DEPEND="${COMMON_DEPEND}
 	>=dev-util/intltool-0.50.1
 	>=sys-devel/gettext-0.18
 	virtual/pkgconfig
+	vala? ( $(vala_depend) )
 "
 # yelp-tools, gnome-common needed to eautoreconf
 
@@ -68,7 +68,7 @@ src_prepare() {
 	#sed -e '/g_test_add_func/d' \
 	#	-i tests/document-loader.c || die
 
-	vala_src_prepare
+	use vala && vala_src_prepare
 	gnome2_src_prepare
 
 	python_copy_sources
