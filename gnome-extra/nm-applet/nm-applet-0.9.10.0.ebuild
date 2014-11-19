@@ -35,14 +35,13 @@ RDEPEND="
 	introspection? ( >=dev-libs/gobject-introspection-1.42.0 )
 	modemmanager? ( >=net-misc/modemmanager-1.4.0 )
 	virtual/freedesktop-icon-theme
-	virtual/notification-daemon
 	virtual/libgudev:=
 "
 DEPEND="${RDEPEND}
 	virtual/pkgconfig
 	>=dev-util/intltool-0.40
 "
-
+PDEPEND="virtual/notification-daemon"
 src_configure() {
 	gnome2_src_configure \
 		--disable-more-warnings \
