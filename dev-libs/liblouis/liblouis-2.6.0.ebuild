@@ -44,7 +44,7 @@ src_compile() {
 	default
 
 	if use python; then
-		LD_LIBRARY_PATH="$(pwd)/../liblouis/.libs" distutils_src_compile
+		LD_LIBRARY_PATH="${S}/liblouis/.libs" distutils_src_compile
 	fi
 }
 
@@ -53,7 +53,7 @@ src_install() {
 	dohtml doc/liblouis.html
 
 	if use python; then
-		LD_LIBRARY_PATH="$(pwd)/../liblouis/.libs" distutils_src_install
+		LD_LIBRARY_PATH="${S}/liblouis/.libs" distutils_src_install
 	fi
 }
 
