@@ -24,6 +24,7 @@ RDEPEND="
 	net-libs/webkit-gtk:3
 	sys-apps/util-linux
 	>=x11-libs/gtk+-3.14.0:3
+	>=mail-client/evolution-3.13.6
 "
 DEPEND="${RDEPEND}
 	>=dev-util/intltool-0.35.0
