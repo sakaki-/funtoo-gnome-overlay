@@ -21,7 +21,8 @@ RDEPEND="
 	>=dev-libs/libgee-0.16.0:0.8
 	>=net-libs/gnome-online-accounts-3.14.0:0/1
 	>=net-libs/libsoup-2.48.0:2.4
-	>=x11-libs/gtk+-3.14.0:3"
+	>=x11-libs/gtk+-3.14.0:3
+	>=gnome-extra/evolution-data-server-3.13.6"
 DEPEND="${RDEPEND}
 	$(vala_depend)
 	>=dev-util/intltool-0.35.0"
