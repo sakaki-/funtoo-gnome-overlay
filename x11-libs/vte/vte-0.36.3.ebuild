@@ -13,7 +13,7 @@ SLOT="2.90"
 IUSE="debug glade +introspection"
 KEYWORDS="*"
 
-PDEPEND="~x11-libs/gnome-pty-helper-${PV}"
+PDEPEND=">=x11-libs/gnome-pty-helper-${PV}"
 RDEPEND="
 	>=dev-libs/glib-2.31.13:2
 	>=x11-libs/gtk+-3.1.9:3[introspection?]
