@@ -2,7 +2,7 @@
 
 EAPI="5"
 GCONF_DEBUG="no"
-PYTHON_COMPAT=( python3_3 )
+PYTHON_COMPAT=( python{3_3,3_4} )
 PYTHON_REQ_USE="xml"
 
 inherit autotools gnome2 eutils python-single-r1 versionator
