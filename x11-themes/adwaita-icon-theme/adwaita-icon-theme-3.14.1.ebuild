@@ -22,6 +22,7 @@ COMMON_DEPEND="
 "
 RDEPEND="${COMMON_DEPEND}
 	!<x11-themes/gnome-themes-standard-3.14
+	gnome-base/librsvg
 "
 DEPEND="${COMMON_DEPEND}
 	>=x11-misc/icon-naming-utils-0.8.7
