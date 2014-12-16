@@ -173,7 +173,6 @@
 ->=dev-cpp/gtkmm-3.13
 ->=dev-lang/vala-0.25
 ->=dev-libs/atk-2.13
-->=dev-libs/folks-0.10
 ->=dev-libs/gdl-3.13
 ->=dev-libs/gjs-1.41
 ->=dev-libs/glib-2.41
