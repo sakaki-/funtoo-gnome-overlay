@@ -1,7 +1,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="5"
-PYTHON_COMPAT=( python2_{6,7} )
+PYTHON_COMPAT=( python2_7 )
 # Building with --disable-debug highly unrecommended.  It will build glib in
 # an unusable form as it disables some commonly used API.  Please do not
 # convert this to the use_enable form, as it results in a broken build.
