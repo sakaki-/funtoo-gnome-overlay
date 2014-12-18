@@ -1,0 +1,24 @@
+diff -urN gnome-terminal-3.14.1/src/org.gnome.Terminal.gschema.xml gnome-terminal-3.14.1-noF1/src/org.gnome.Terminal.gschema.xml
+--- gnome-terminal-3.14.1/src/org.gnome.Terminal.gschema.xml	2014-09-23 12:15:23.000000000 -0600
++++ gnome-terminal-3.14.1-noF1/src/org.gnome.Terminal.gschema.xml	2014-12-16 23:20:42.488824411 -0700
+@@ -548,7 +548,7 @@
+       <summary>Keyboard shortcut to switch to the numbered tab</summary>
+     </key>
+     <key name="help" type="s">
+-      <default>'F1'</default>
++      <default>'disabled'</default>
+       <summary>Keyboard shortcut to launch help</summary>
+     </key>
+     <key name="zoom-in" type="s">
+diff -urN gnome-terminal-3.14.1/src/terminal-window.c gnome-terminal-3.14.1-noF1/src/terminal-window.c
+--- gnome-terminal-3.14.1/src/terminal-window.c	2014-09-23 12:15:23.000000000 -0600
++++ gnome-terminal-3.14.1-noF1/src/terminal-window.c	2014-12-16 23:21:02.272223061 -0700
+@@ -2480,7 +2480,7 @@
+         G_CALLBACK (tabs_detach_tab_callback) },
+ 
+       /* Help menu */
+-      { "HelpContents", "help-browser", N_("_Contents"), "F1",
++      { "HelpContents", "help-browser", N_("_Contents"), NULL,
+         NULL,
+         G_CALLBACK (help_contents_callback) },
+       { "HelpAbout", "help-about", N_("_About"), NULL,
