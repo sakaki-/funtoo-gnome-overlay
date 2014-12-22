@@ -4,7 +4,7 @@ EAPI="5"
 GCONF_DEBUG="no"
 GNOME2_LA_PUNT="yes"
 
-inherit eutils flag-o-matic gnome2 multilib virtualx multilib-minimal
+inherit eutils flag-o-matic autotools gnome2 multilib virtualx multilib-minimal
 
 DESCRIPTION="Gimp ToolKit +"
 HOMEPAGE="http://www.gtk.org/"
@@ -28,28 +28,28 @@ KEYWORDS="*"
 # NOTE: cairo[svg] dep is due to bug 291283 (not patched to avoid eautoreconf)
 # Use gtk+:2 for gtk-update-icon-cache
 COMMON_DEPEND="
-	>=dev-libs/atk-2.14.0[introspection?,${MULTILIB_USEDEP}]
-	>=dev-libs/glib-2.42.0:2[${MULTILIB_USEDEP}]
+	>=dev-libs/atk-2.12[introspection?,${MULTILIB_USEDEP}]
+	>=dev-libs/glib-2.41.2:2[${MULTILIB_USEDEP}]
 	media-libs/fontconfig[${MULTILIB_USEDEP}]
 	>=x11-libs/cairo-1.12[aqua?,glib,svg,X?,${MULTILIB_USEDEP}]
-	>=x11-libs/gdk-pixbuf-2.31.0:2[introspection?,X?,${MULTILIB_USEDEP}]
-	>=x11-libs/gtk+-2.24.25:2[${MULTILIB_USEDEP}]
-	>=x11-libs/pango-1.36.8[introspection?,${MULTILIB_USEDEP}]
+	>=x11-libs/gdk-pixbuf-2.30:2[introspection?,X?,${MULTILIB_USEDEP}]
+	>=x11-libs/gtk+-2.24:2[${MULTILIB_USEDEP}]
+	>=x11-libs/pango-1.36.7[introspection?,${MULTILIB_USEDEP}]
 	x11-misc/shared-mime-info
 
 	cloudprint? (
 		>=net-libs/rest-0.7[${MULTILIB_USEDEP}]
-		>=dev-libs/json-glib-1.0.0[${MULTILIB_USEDEP}] )
+		>=dev-libs/json-glib-1.0[${MULTILIB_USEDEP}] )
 	colord? ( >=x11-misc/colord-0.1.9:0=[${MULTILIB_USEDEP}] )
 	cups? ( >=net-print/cups-1.2[${MULTILIB_USEDEP}] )
-	introspection? ( >=dev-libs/gobject-introspection-1.42.0 )
+	introspection? ( >=dev-libs/gobject-introspection-1.39 )
 	wayland? (
-		>=dev-libs/wayland-1.3.90[${MULTILIB_USEDEP}]
+		>=dev-libs/wayland-1.5.91[${MULTILIB_USEDEP}]
 		media-libs/mesa[wayland,${MULTILIB_USEDEP}]
 		>=x11-libs/libxkbcommon-0.2[${MULTILIB_USEDEP}]
 	)
 	X? (
-		>=app-accessibility/at-spi2-atk-2.14.0[${MULTILIB_USEDEP}]
+		>=app-accessibility/at-spi2-atk-2.5.3[${MULTILIB_USEDEP}]
 		x11-libs/libXrender[${MULTILIB_USEDEP}]
 		x11-libs/libX11[${MULTILIB_USEDEP}]
 		>=x11-libs/libXi-1.3[${MULTILIB_USEDEP}]
@@ -89,6 +89,10 @@ RDEPEND="${COMMON_DEPEND}
 	!<gnome-base/gail-1000
 	!<x11-libs/vte-0.31.0:2.90
 	X? ( !<x11-base/xorg-server-1.11.4 )
+	abi_x86_32? (
+		!<=app-emulation/emul-linux-x86-gtklibs-20140508-r3
+		!app-emulation/emul-linux-x86-gtklibs[-abi_x86_32(-)]
+	)
 "
 PDEPEND="vim-syntax? ( app-vim/gtk-syntax )"
 
@@ -106,6 +110,9 @@ strip_builddir() {
 }
 
 src_prepare() {
+	# see bug #525928
+	epatch "${FILESDIR}/${PN}-non-bash-support.patch"
+
 	# -O3 and company cause random crashes in applications. Bug #133469
 	replace-flags -O3 -O2
 	strip-flags
@@ -126,6 +133,7 @@ src_prepare() {
 		strip_builddir SRC_SUBDIRS examples Makefile.in
 	fi
 
+	eautoreconf
 	gnome2_src_prepare
 }
 
@@ -153,7 +161,8 @@ multilib_src_configure() {
 		--enable-man \
 		--enable-gtk2-dependency \
 		--with-xml-catalog="${EPREFIX}"/etc/xml/catalog \
-		--libdir="${EPREFIX}"/usr/$(get_libdir)
+		--libdir="${EPREFIX}"/usr/$(get_libdir) \
+		CUPS_CONFIG="${EPREFIX}/usr/bin/${CHOST}-cups-config"
 
 	# work-around gtk-doc out-of-source brokedness
 	if multilib_is_native_abi; then
