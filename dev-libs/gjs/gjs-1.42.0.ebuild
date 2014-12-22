@@ -3,7 +3,7 @@
 EAPI="5"
 GCONF_DEBUG="no"
 
-inherit gnome2 pax-utils virtualx
+inherit eutils gnome2 pax-utils virtualx
 
 DESCRIPTION="Javascript bindings for GNOME"
 HOMEPAGE="https://wiki.gnome.org/Projects/Gjs"
@@ -14,8 +14,8 @@ IUSE="+cairo examples gtk test"
 KEYWORDS="*"
 
 RDEPEND="
-	>=dev-libs/glib-2.42.0:2
-	>=dev-libs/gobject-introspection-1.42.0
+	>=dev-libs/glib-2.36:2
+	>=dev-libs/gobject-introspection-1.41.4
 
 	sys-libs/readline:0
 	dev-lang/spidermonkey:24
@@ -29,9 +29,6 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig
 	test? ( sys-apps/dbus )
 "
-
-# Large amount of tests are broken even in master.
-#RESTRICT="test"
 
 src_prepare() {
 	# Disable broken unittests
