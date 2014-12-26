@@ -188,6 +188,7 @@
 ->=dev-util/devhelp-3.13
 ->=dev-util/gdbus-codegen-2.41
 ->=dev-util/gnome-devel-docs-3.13
+->=dev-vcs/gitg-3.14.1
 ->=games-arcade/gnome-nibbles-3.13
 ->=games-arcade/gnome-robots-3.13
 ->=games-board/four-in-a-row-3.13
@@ -253,6 +254,7 @@
 ->=media-video/cheese-3.13
 ->=media-video/totem-3.13
 ->=net-irc/polari-3.13
+->=net-libs/farstream-0.2.6
 ->=net-libs/glib-networking-2.41
 ->=net-libs/gnome-online-accounts-3.13
 ->=net-libs/libsoup-2.47
