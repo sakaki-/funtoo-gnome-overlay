@@ -32,5 +32,6 @@ src_configure() {
 }
 
 src_test() {
+	unset DBUS_SESSION_BUS_ADDRESS
 	Xemake check
 }

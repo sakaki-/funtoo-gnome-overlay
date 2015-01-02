@@ -37,6 +37,7 @@ multilib_src_configure() {
 }
 
 multilib_src_test() {
+	unset DBUS_SESSION_BUS_ADDRESS
 	Xemake check
 }
 
