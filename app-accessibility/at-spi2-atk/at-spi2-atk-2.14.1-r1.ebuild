@@ -15,13 +15,17 @@ KEYWORDS="*"
 IUSE=""
 
 COMMON_DEPEND="
-	>=app-accessibility/at-spi2-core-2.14.0[${MULTILIB_USEDEP}]
-	>=dev-libs/atk-2.14.0[${MULTILIB_USEDEP}]
-	>=dev-libs/glib-2.42.0:2[${MULTILIB_USEDEP}]
+	>=app-accessibility/at-spi2-core-2.11.2[${MULTILIB_USEDEP}]
+	>=dev-libs/atk-2.11.90[${MULTILIB_USEDEP}]
+	>=dev-libs/glib-2.32:2[${MULTILIB_USEDEP}]
 	>=sys-apps/dbus-1.5[${MULTILIB_USEDEP}]
 "
 RDEPEND="${COMMON_DEPEND}
 	!<gnome-extra/at-spi-1.32.0-r1
+	abi_x86_32? (
+		!<=app-emulation/emul-linux-x86-gtklibs-20140508-r3
+		!app-emulation/emul-linux-x86-gtklibs[-abi_x86_32(-)]
+	)
 "
 DEPEND="${COMMON_DEPEND}
 	virtual/pkgconfig[${MULTILIB_USEDEP}]
@@ -33,6 +37,7 @@ multilib_src_configure() {
 }
 
 multilib_src_test() {
+	unset DBUS_SESSION_BUS_ADDRESS
 	Xemake check
 }
 

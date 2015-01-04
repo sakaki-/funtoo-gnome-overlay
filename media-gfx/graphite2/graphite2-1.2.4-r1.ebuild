@@ -17,10 +17,13 @@ KEYWORDS="*"
 IUSE="perl test"
 
 RDEPEND="
-	perl? ( dev-lang/perl )
+	perl? ( dev-lang/perl:= )
 "
 DEPEND="${RDEPEND}
-	perl? ( virtual/perl-Module-Build )
+	perl? (
+		virtual/perl-Module-Build
+		dev-perl/locale-maketext-lexicon
+		)
 	test? (
 		dev-libs/glib:2
 		media-libs/fontconfig
@@ -37,7 +40,7 @@ PATCHES=(
 )
 
 pkg_setup() {
-	use perl && perl-module_pkg_setup
+	use perl && perl_set_version
 	use test && python-any-r1_pkg_setup
 }
 
@@ -75,7 +78,7 @@ src_compile() {
 	cmake-multilib_src_compile
 	if use perl; then
 		cd contrib/perl || die
-		perl-module_src_prep
+		perl-module_src_configure
 		perl-module_src_compile
 	fi
 }
@@ -93,7 +96,7 @@ src_install() {
 	if use perl; then
 		cd contrib/perl || die
 		perl-module_src_install
-		fixlocalpod
+		perl_delete_localpod
 	fi
 
 	prune_libtool_files --all

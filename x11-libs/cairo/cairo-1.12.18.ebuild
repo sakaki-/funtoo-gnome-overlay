@@ -84,7 +84,7 @@ MULTILIB_WRAPPED_HEADERS=(
 )
 
 src_prepare() {
-	epatch "${FILESDIR}"/${PN}-1.8.8-interix.patch
+	epatch "${FILESDIR}"/${PN}-1.12.18-disable-test-suite.patch
 	epatch "${FILESDIR}"/${PN}-respect-fontconfig.patch
 
 	# tests and perf tools require X, bug #483574
@@ -101,8 +101,6 @@ src_prepare() {
 		touch ChangeLog
 	fi
 
-	# We need to run elibtoolize to ensure correct so versioning on FreeBSD
-	# upgraded to an eautoreconf for the above interix patch.
 	eautoreconf
 }
 

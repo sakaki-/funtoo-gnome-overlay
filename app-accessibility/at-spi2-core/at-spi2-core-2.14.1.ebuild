@@ -17,16 +17,22 @@ KEYWORDS="*"
 # x11-libs/libSM is needed until upstream #719808 is solved either
 # making the dep unneeded or fixing their configure
 # Only libX11 is optional right now
-RDEPEND="
-	>=dev-libs/glib-2.42.0:2[${MULTILIB_USEDEP}]
+COMMON_DEPEND="
+	>=dev-libs/glib-2.36:2[${MULTILIB_USEDEP}]
 	>=sys-apps/dbus-1[${MULTILIB_USEDEP}]
 	x11-libs/libSM[${MULTILIB_USEDEP}]
 	x11-libs/libXi[${MULTILIB_USEDEP}]
 	x11-libs/libXtst[${MULTILIB_USEDEP}]
-	introspection? ( >=dev-libs/gobject-introspection-1.42.0 )
+	introspection? ( >=dev-libs/gobject-introspection-0.9.6 )
 	X? ( x11-libs/libX11[${MULTILIB_USEDEP}] )
 "
-DEPEND="${RDEPEND}
+RDEPEND="${COMMON_DEPEND}
+	abi_x86_32? (
+		!<=app-emulation/emul-linux-x86-gtklibs-20140508-r3
+		!app-emulation/emul-linux-x86-gtklibs[-abi_x86_32(-)]
+	)
+"
+DEPEND="${COMMON_DEPEND}
 	>=dev-util/gtk-doc-am-1.9
 	>=dev-util/intltool-0.40
 	virtual/pkgconfig[${MULTILIB_USEDEP}]
