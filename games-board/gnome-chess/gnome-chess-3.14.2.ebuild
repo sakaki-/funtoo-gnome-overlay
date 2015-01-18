@@ -11,28 +11,25 @@ HOMEPAGE="https://wiki.gnome.org/Apps/Chess"
 
 LICENSE="LGPL-2+"
 SLOT="0"
-KEYWORDS="*"
+KEYWORDS="~amd64 ~arm ~x86"
 IUSE=""
 
 RDEPEND="
-	>=dev-libs/glib-2.42.0:2
-	>=gnome-base/librsvg-2.40.0
-	virtual/glu
-	virtual/opengl
-	>=x11-libs/gtk+-3.14.0:3
-	x11-libs/libX11
+    >=dev-libs/glib-2.40:2
+    >=gnome-base/librsvg-2.32
+    >=x11-libs/gtk+-3.13.2:3
 "
 DEPEND="${RDEPEND}
-	$(vala_depend)
-	app-text/yelp-tools
-	>=dev-util/intltool-0.50
-	sys-devel/gettext
-	virtual/pkgconfig
+    $(vala_depend)
+    app-text/yelp-tools
+    dev-util/appdata-tools
+    >=dev-util/intltool-0.50
+    sys-devel/gettext
+    virtual/pkgconfig
 "
-
 src_prepare() {
-	vala_src_prepare
-	gnome-games_src_prepare
+    vala_src_prepare
+    gnome-games_src_prepare
 }
 
 src_configure() {
