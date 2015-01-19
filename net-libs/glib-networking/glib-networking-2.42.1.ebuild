@@ -20,10 +20,10 @@ RDEPEND="
 	libproxy? ( >=net-libs/libproxy-0.4.11-r1:=[${MULTILIB_USEDEP}] )
 	smartcard? (
 		>=app-crypt/p11-kit-0.18.4[${MULTILIB_USEDEP}]
-		>=net-libs/gnutls-2.12.23-r6:=[pkcs11,${MULTILIB_USEDEP}] )
+		>=net-libs/gnutls-3:=[pkcs11,${MULTILIB_USEDEP}] )
 	ssl? (
 		app-misc/ca-certificates
-		>=net-libs/gnutls-2.12.23-r6:=[${MULTILIB_USEDEP}] )
+		>=net-libs/gnutls-3:=[${MULTILIB_USEDEP}] )
 "
 DEPEND="${RDEPEND}
 	>=dev-util/intltool-0.35.0
