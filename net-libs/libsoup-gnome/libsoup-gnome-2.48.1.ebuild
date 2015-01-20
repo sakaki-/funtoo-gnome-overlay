@@ -35,7 +35,7 @@ S=${WORKDIR}/${MY_P}
 
 src_prepare() {
 	# Use lib present on the system
-	epatch "${FILESDIR}"/${PN}-2.46.0-system-lib.patch
+	epatch "${FILESDIR}"/${PN}-2.48.0-system-lib.patch
 	eautoreconf
 	gnome2_src_prepare
 }
@@ -55,5 +55,6 @@ multilib_src_configure() {
 		--with-gnome \
 		--without-apache-httpd
 }
+
 multilib_src_compile() { gnome2_src_compile; }
 multilib_src_install() { gnome2_src_install; }
