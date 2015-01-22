@@ -135,22 +135,25 @@ src_prepare() {
 	if use deprecated; then
 		# From Funtoo:
 		# 	https://bugs.funtoo.org/browse/FL-1329
-		epatch "${FILESDIR}"/${P}-optional-rebased.patch
+		epatch "${FILESDIR}"/${PN}-3.14.1-optional-rebased.patch
 	else
-		epatch "${FILESDIR}"/${P}-optional.patch
+		epatch "${FILESDIR}"/${PN}-3.14.1-optional.patch
 	fi
 
 	# From Funtoo:
 	# 	https://bugs.funtoo.org/browse/FL-1389
-	epatch "${FILESDIR}"/${P}-disable-automatic-datetime-and-timezone-options.patch
+	epatch "${FILESDIR}"/${PN}-3.14.1-disable-automatic-datetime-and-timezone-options.patch
 
 	# From Funtoo:
 	# 	https://bugs.funtoo.org/browse/FL-1391
-	epatch "${FILESDIR}"/${P}-disable-changing-hostname.patch
+	epatch "${FILESDIR}"/${PN}-3.14.1-disable-changing-hostname.patch
 
 	# Fix some absolute paths to be appropriate for Gentoo
 	epatch "${FILESDIR}"/${PN}-3.10.2-gentoo-paths.patch
 
+	# Fix NM version checking, bug #536224 (from 3.14 branch)
+	epatch "${FILESDIR}"/${PN}-3.14.2-networkmanager-version.patch
+	
 	epatch_user
 
 	eautoreconf

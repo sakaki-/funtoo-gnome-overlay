@@ -13,6 +13,7 @@ LICENSE="GPL-2+"
 SLOT="0"
 IUSE="+colord +cups debug +deprecated input_devices_wacom networkmanager policykit +short-touchpad-timeout smartcard +udev wayland"
 REQUIRED_USE="
+	input_devices_wacom? ( udev )
 	smartcard? ( udev )
 "
 KEYWORDS="*"
@@ -86,7 +87,7 @@ src_prepare() {
 	if use deprecated; then
 		# From Funtoo:
 		# 	https://bugs.funtoo.org/browse/FL-1329
-		epatch "${FILESDIR}"/${P}-restore-deprecated-code.patch
+		epatch "${FILESDIR}"/${PN}-3.14.1-restore-deprecated-code.patch
 	fi
 
 	# https://bugzilla.gnome.org/show_bug.cgi?id=621836
@@ -94,10 +95,10 @@ src_prepare() {
 	# people, so revert it if USE=short-touchpad-timeout.
 	# Revisit if/when upstream adds a setting for customizing the timeout.
 	use short-touchpad-timeout &&
-		epatch "${FILESDIR}/${PN}-3.7.90-short-touchpad-timeout.patch"
+		epatch "${FILESDIR}"/${PN}-3.7.90-short-touchpad-timeout.patch
 
 	# Make colord and wacom optional; requires eautoreconf
-	epatch "${FILESDIR}/${P}-optional.patch"
+	epatch "${FILESDIR}"/${PN}-3.14.1-optional.patch
 
 	epatch_user
 	eautoreconf
