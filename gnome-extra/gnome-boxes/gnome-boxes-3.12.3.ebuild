@@ -2,7 +2,7 @@
 
 EAPI="5"
 GCONF_DEBUG="no"
-VALA_USE_DEPEND="vapigen(+)"
+VALA_USE_DEPEND="vapigen"
 VALA_MIN_API_VERSION="0.24"
 
 inherit linux-info gnome2 readme.gentoo vala

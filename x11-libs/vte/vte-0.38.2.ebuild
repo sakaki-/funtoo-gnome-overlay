@@ -17,14 +17,13 @@ KEYWORDS="*"
 
 PDEPEND=">=x11-libs/gnome-pty-helper-${PV}"
 RDEPEND="
+	!x11-libs/vte:2.90[glade]
 	>=dev-libs/glib-2.42.0:2
 	>=x11-libs/gtk+-3.14.0:3[introspection?]
 	>=x11-libs/pango-1.36.0
-
 	sys-libs/ncurses
 	x11-libs/libX11
 	x11-libs/libXft
-
 	glade? ( >=dev-util/glade-3.18.0:3.10 )
 	introspection? ( >=dev-libs/gobject-introspection-1.42.0 )
 "

@@ -4,7 +4,7 @@ EAPI="5"
 GCONF_DEBUG="no"
 GNOME2_LA_PUNT="yes"
 
-inherit eutils flag-o-matic autotools gnome2 multilib virtualx multilib-minimal
+inherit autotools eutils flag-o-matic gnome2 multilib virtualx multilib-minimal
 
 DESCRIPTION="Gimp ToolKit +"
 HOMEPAGE="http://www.gtk.org/"
@@ -66,7 +66,8 @@ DEPEND="${COMMON_DEPEND}
 	app-text/docbook-xsl-stylesheets
 	app-text/docbook-xml-dtd:4.1.2
 	dev-libs/libxslt
-	dev-util/gdbus-codegen
+	dev-libs/gobject-introspection-common
+	>=dev-util/gdbus-codegen-2.38.2
 	>=dev-util/gtk-doc-am-1.20
 	sys-devel/gettext
 	virtual/pkgconfig[${MULTILIB_USEDEP}]
@@ -88,6 +89,7 @@ DEPEND="${COMMON_DEPEND}
 RDEPEND="${COMMON_DEPEND}
 	!<gnome-base/gail-1000
 	!<x11-libs/vte-0.31.0:2.90
+	>=x11-themes/adwaita-icon-theme-3.14
 	X? ( !<x11-base/xorg-server-1.11.4 )
 	abi_x86_32? (
 		!<=app-emulation/emul-linux-x86-gtklibs-20140508-r3
@@ -111,7 +113,7 @@ strip_builddir() {
 
 src_prepare() {
 	# see bug #525928
-	epatch "${FILESDIR}/${PN}-non-bash-support.patch"
+	epatch "${FILESDIR}"/${PN}-non-bash-support.patch
 
 	# -O3 and company cause random crashes in applications. Bug #133469
 	replace-flags -O3 -O2
@@ -119,19 +121,17 @@ src_prepare() {
 
 	if ! use test ; then
 		# don't waste time building tests
-		strip_builddir SRC_SUBDIRS testsuite Makefile.am
-		strip_builddir SRC_SUBDIRS testsuite Makefile.in
-		strip_builddir SRC_SUBDIRS tests Makefile.am
-		strip_builddir SRC_SUBDIRS tests Makefile.in
+		strip_builddir SRC_SUBDIRS testsuite Makefile.{am,in}
+		strip_builddir SRC_SUBDIRS tests Makefile.{am,in}
 	fi
 
 	if ! use examples; then
 		# don't waste time building demos
-		strip_builddir SRC_SUBDIRS demos Makefile.am
-		strip_builddir SRC_SUBDIRS demos Makefile.in
-		strip_builddir SRC_SUBDIRS examples Makefile.am
-		strip_builddir SRC_SUBDIRS examples Makefile.in
+		strip_builddir SRC_SUBDIRS demos Makefile.{am,in}
+		strip_builddir SRC_SUBDIRS examples Makefile.{am,in}
 	fi
+
+	epatch_user
 
 	eautoreconf
 	gnome2_src_prepare
@@ -188,6 +188,7 @@ multilib_src_test() {
 	"${EROOT}${GLIB_COMPILE_SCHEMAS}" --allow-any-name "${S}/gtk" || die
 
 	unset DBUS_SESSION_BUS_ADDRESS
+	unset DISPLAY #527682
 	GSETTINGS_SCHEMA_DIR="${S}/gtk" Xemake check
 }
 
@@ -198,7 +199,7 @@ multilib_src_install() {
 	if use aqua ; then
 		for i in gtk+-3.0.pc gtk+-quartz-3.0.pc gtk+-unix-print-3.0.pc; do
 			sed -e "s:Libs\: :Libs\: -framework Carbon :" \
-				-i "${ED}"usr/$(get_libdir)/pkgconfig/$i || die "sed failed"
+				-i "${ED%/}"/usr/$(get_libdir)/pkgconfig/$i || die "sed failed"
 		done
 	fi
 }
@@ -214,7 +215,7 @@ pkg_preinst() {
 	gnome2_pkg_preinst
 
 	multilib_pkg_preinst() {
-		# Make sure loaders.cache belongs to gdk-pixbuf alone
+		# Make immodules.cache belongs to gtk+ alone
 		local cache="usr/$(get_libdir)/gtk-3.0/3.0.0/immodules.cache"
 
 		if [[ -e ${EROOT}${cache} ]]; then
@@ -228,7 +229,12 @@ pkg_preinst() {
 
 pkg_postinst() {
 	gnome2_pkg_postinst
-	gnome2_query_immodules_gtk3
+
+	multilib_pkg_postinst() {
+		gnome2_query_immodules_gtk3 \
+			|| die "Update immodules cache failed (for ${ABI})"
+	}
+	multilib_parallel_foreach_abi multilib_pkg_postinst
 
 	if ! has_version "app-text/evince"; then
 		elog "Please install app-text/evince for print preview functionality."
