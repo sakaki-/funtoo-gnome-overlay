@@ -1,5 +1,9 @@
 # Distributed under the terms of the GNU General Public License v2
 
+# Until bug #537330 glib is a reverse dependency of pkgconfig and, then
+# adding new dependencies end up making stage3 to grow. Every addition needs
+# then to be think very closely.
+
 EAPI="5"
 PYTHON_COMPAT=( python2_7 )
 # Building with --disable-debug highly unrecommended.  It will build glib in
@@ -20,7 +24,7 @@ SRC_URI="${SRC_URI}
 
 LICENSE="LGPL-2+"
 SLOT="2"
-IUSE="fam kernel_linux +mime selinux static-libs systemtap test utils xattr"
+IUSE="dbus fam kernel_linux +mime selinux static-libs systemtap test utils xattr"
 REQUIRED_USE="
 	utils? ( ${PYTHON_REQUIRED_USE} )
 	test? ( ${PYTHON_REQUIRED_USE} )
@@ -66,9 +70,11 @@ DEPEND="${RDEPEND}
 # different g-i and glib major versions
 
 PDEPEND="!<gnome-base/gvfs-1.6.4-r990
+	dbus? ( gnome-base/dconf )
 	mime? ( x11-misc/shared-mime-info )
 "
 # shared-mime-info needed for gio/xdgmime, bug #409481
+# dconf is needed to be able to save settings, bug #498436
 # Earlier versions of gvfs do not work with glib
 
 pkg_setup() {
@@ -86,11 +92,6 @@ pkg_setup() {
 src_prepare() {
 	# Prevent build failure in stage3 where pkgconfig is not available, bug #481056
 	mv -f "${WORKDIR}"/pkg-config-*/pkg.m4 "${S}"/m4macros/ || die
-
-	# Fix gmodule issues on fbsd; bug #184301, upstream bug #107626
-	# Upstream doesn't even know if this is needed, looks like openBSD
-	# people is not needing it
-	#epatch "${FILESDIR}"/${PN}-2.12.12-fbsd.patch
 
 	if use test; then
 		# Do not try to remove files on live filesystem, upstream bug #619274
