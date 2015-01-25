@@ -12,7 +12,7 @@ LICENSE="LGPL-2.1+"
 SLOT="0"
 
 # TODO: coverage ?
-IUSE="test +X"
+IUSE="test X"
 
 KEYWORDS="*"
 
