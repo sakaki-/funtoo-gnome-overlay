@@ -48,11 +48,6 @@ DEPEND="${COMMON_DEPEND}
 	virtual/pkgconfig
 "
 
-src_prepare() {
-	epatch "${FILESDIR}"/${PN}-3.14.3-music-dir.patch
-	gnome2_src_prepare
-}	
-
 src_configure() {
 	gnome2_src_configure ITSTOOL="$(type -P true)"
 }
