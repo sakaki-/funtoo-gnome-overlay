@@ -47,7 +47,6 @@ pkg_setup() {
 }
 
 src_configure() {
-	unset DISPLAY
 	plugins="fsrawconference,fsrtpconference,fsfunnel,fsrtcpfilter,fsvideoanyrate"
 	use msn && plugins="${plugins},fsmsnconference"
 	gnome2_src_configure \
@@ -56,6 +55,11 @@ src_configure() {
 		$(use_enable upnp gupnp) \
 		--with-plugins=${plugins}
 }
+
+src_compile() { 
+	unset DISPLAY
+	gnome2_src_compile
+}	
 
 src_test() {
 	# FIXME: do an out-of-tree build for tests if USE=-msn
