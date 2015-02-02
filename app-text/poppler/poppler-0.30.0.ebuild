@@ -4,9 +4,16 @@ EAPI=5
 
 inherit cmake-utils toolchain-funcs
 
-SRC_URI="http://poppler.freedesktop.org/${P}.tar.xz"
-KEYWORDS="*"
-SLOT="0/46"
+if [[ "${PV}" == "9999" ]] ; then
+	inherit git-r3
+	EGIT_REPO_URI="git://git.freedesktop.org/git/${PN}/${PN}"
+	KEYWORDS=""
+	SLOT="0/9999"
+else
+	SRC_URI="http://poppler.freedesktop.org/${P}.tar.xz"
+	KEYWORDS="~*"
+	SLOT="0/49"   # CHECK THIS WHEN BUMPING!!! SUBSLOT IS libpoppler.so SOVERSION
+fi
 
 DESCRIPTION="PDF rendering library based on the xpdf-3.0 code base"
 HOMEPAGE="http://poppler.freedesktop.org/"
@@ -51,7 +58,10 @@ RDEPEND="${COMMON_DEPEND}
 
 DOCS=(AUTHORS NEWS README README-XPDF TODO)
 
-PATCHES=( "${FILESDIR}/${PN}-0.26.0-qt5-dependencies.patch" )
+PATCHES=(
+	"${FILESDIR}/${PN}-0.26.0-qt5-dependencies.patch"
+	"${FILESDIR}/${PN}-0.28.1-respect-cflags.patch"
+	"${FILESDIR}/${PN}-0.28.1-fix-multilib-configuration.patch" )
 
 src_configure() {
 	local mycmakeargs=(
@@ -82,6 +92,7 @@ src_configure() {
 
 	cmake-utils_src_configure
 }
+src_compile() { cmake-utils_src_compile -j1; }
 
 src_install() {
 	cmake-utils_src_install
