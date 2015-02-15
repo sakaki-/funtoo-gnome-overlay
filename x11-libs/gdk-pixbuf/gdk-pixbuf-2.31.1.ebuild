@@ -2,6 +2,7 @@
 
 EAPI="5"
 GCONF_DEBUG="no"
+GNOME2_LA_PUNT="yes"
 
 inherit eutils flag-o-matic gnome2 multilib libtool multilib-minimal
 

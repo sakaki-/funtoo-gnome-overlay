@@ -152,6 +152,3 @@
 >=x11-themes/gnome-themes-standard-3.15.0
 >=x11-wm/metacity-3.15.1
 >=x11-wm/mutter-3.15.1
-
-# Masked for testing.
->=app-text/poppler-0.28.0
