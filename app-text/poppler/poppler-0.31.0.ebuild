@@ -12,7 +12,7 @@ if [[ "${PV}" == "9999" ]] ; then
 else
 	SRC_URI="http://poppler.freedesktop.org/${P}.tar.xz"
 	KEYWORDS="~*"
-	SLOT="0/47"   # CHECK THIS WHEN BUMPING!!! SUBSLOT IS libpoppler.so SOVERSION
+	SLOT="0/50"   # CHECK THIS WHEN BUMPING!!! SUBSLOT IS libpoppler.so SOVERSION
 fi
 
 DESCRIPTION="PDF rendering library based on the xpdf-3.0 code base"
@@ -60,7 +60,8 @@ DOCS=(AUTHORS NEWS README README-XPDF TODO)
 
 PATCHES=(
 	"${FILESDIR}/${PN}-0.26.0-qt5-dependencies.patch"
-	"${FILESDIR}/${P}-respect-cflags.patch" )
+	"${FILESDIR}/${PN}-0.28.1-respect-cflags.patch"
+	"${FILESDIR}/${PN}-0.28.1-fix-multilib-configuration.patch" )
 
 src_configure() {
 	local mycmakeargs=(
@@ -91,7 +92,10 @@ src_configure() {
 
 	cmake-utils_src_configure
 }
-src_compile() { cmake-utils_src_compile -j1; }
+
+src_compile() {
+	cmake-utils_src_compile -j1
+}
 
 src_install() {
 	cmake-utils_src_install
