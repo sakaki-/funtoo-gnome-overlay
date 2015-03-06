@@ -60,8 +60,8 @@ src_configure() {
 	# To prevent crosscompiling problems, bug #414105
 	gnome2_src_configure \
 		--disable-static \
-		CC=$(tc-getCC) \
-		YACC=$(type -p yacc) \
+		CC="$(tc-getCC)" \
+		YACC="$(type -p yacc)" \
 		$(use_with cairo) \
 		$(use_enable doctool)
 }
