@@ -94,10 +94,6 @@ src_prepare() {
 	mv -f "${WORKDIR}"/pkg-config-*/pkg.m4 "${S}"/m4macros/ || die
 
 	if use test; then
-		# Do not try to remove files on live filesystem, upstream bug #619274
-		sed 's:^\(.*"/desktop-app-info/delete".*\):/*\1*/:' \
-			-i "${S}"/gio/tests/desktop-app-info.c || die "sed failed"
-
 		# Disable tests requiring dev-util/desktop-file-utils when not installed, bug #286629, upstream bug #629163
 		if ! has_version dev-util/desktop-file-utils ; then
 			ewarn "Some tests will be skipped due dev-util/desktop-file-utils not being present on your system,"
@@ -132,16 +128,15 @@ src_prepare() {
 
 		# Some tests need ipv6, upstream bug #667468
 		if [[ -n "${IPV6_DISABLED}" ]]; then
-			sed -i -e "/socket\/ipv6_sync/d" gio/tests/socket.c || die
-			sed -i -e "/socket\/ipv6_async/d" gio/tests/socket.c || die
-			sed -i -e "/socket\/ipv6_v4mapped/d" gio/tests/socket.c || die
+			sed -i -e "/gdbus\/peer-to-peer/d" gio/tests/gdbus-peer.c || die
+			sed -i -e "/gdbus\/delayed-message-processing/d" gio/tests/gdbus-peer.c || die
+			sed -i -e "/gdbus\/nonce-tcp/d" gio/tests/gdbus-peer.c || die
 		fi
 
-		# Test relies on /usr/bin/true, but we have /bin/true, upstream bug #698655
-		sed -i -e "s:/usr/bin/true:/bin/true:" gio/tests/desktop-app-info.c || die
-
 		# thread test fails, upstream bug #679306
-		epatch "${FILESDIR}/${PN}-2.34.0-testsuite-skip-thread4.patch"
+		# FIXME: we need to check if it's still failing as upstream thinks something
+		# is wrong in our setups
+		#epatch "${FILESDIR}/${PN}-2.34.0-testsuite-skip-thread4.patch"
 
 		# This test is prone to fail, bug #504024, upstream bug #723719
 		sed -i -e '/gdbus-close-pending/d' gio/tests/Makefile.am || die
@@ -194,7 +189,8 @@ multilib_src_configure() {
 	# Only used by the gresource bin
 	multilib_is_native_abi || myconf="${myconf} --disable-libelf"
 
-	# Always use internal libpcre, bug #254659
+	# FIXME: Always use internal libpcre, bug #254659
+	# (maybe consider going back to system lib
 	ECONF_SOURCE="${S}" gnome2_src_configure ${myconf} \
 		$(use_enable xattr) \
 		$(use_enable fam) \
