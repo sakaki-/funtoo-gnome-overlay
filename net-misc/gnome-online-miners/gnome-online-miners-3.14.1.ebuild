@@ -14,7 +14,7 @@ IUSE=""
 KEYWORDS="*"
 
 RDEPEND="
-	>=dev-libs/libgdata-0.16.0:0=
+	>=dev-libs/libgdata-0.16.0:0=[gnome]
 	>=dev-libs/glib-2.42.0:2
 	>=net-libs/gnome-online-accounts-3.14
 	>=media-libs/grilo-0.2.11:0.2

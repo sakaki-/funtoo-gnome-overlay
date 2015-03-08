@@ -43,6 +43,12 @@ pkg_setup() {
 	python-single-r1_pkg_setup
 }
 
+src_prepare() {
+	# scanner: don't pass certain debug level flags to cpp (from 'master')
+	epatch "${FILESDIR}"/${PN}-1.42.0-cpp-flags.patch
+	gnome2_src_prepare
+}
+
 src_configure() {
 	if ! has_version "x11-libs/cairo[glib]"; then
 		# Bug #391213: enable cairo-gobject support even if it's not installed
@@ -54,8 +60,8 @@ src_configure() {
 	# To prevent crosscompiling problems, bug #414105
 	gnome2_src_configure \
 		--disable-static \
-		CC=$(tc-getCC) \
-		YACC=$(type -p yacc) \
+		CC="$(tc-getCC)" \
+		YACC="$(type -p yacc)" \
 		$(use_with cairo) \
 		$(use_enable doctool)
 }

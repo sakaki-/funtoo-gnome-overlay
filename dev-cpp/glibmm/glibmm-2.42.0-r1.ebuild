@@ -3,7 +3,7 @@
 EAPI="5"
 GCONF_DEBUG="no"
 
-inherit gnome2
+inherit gnome2 multilib-minimal
 
 DESCRIPTION="C++ interface for glib2"
 HOMEPAGE="http://www.gtkmm.org"
@@ -13,11 +13,16 @@ SLOT="2"
 KEYWORDS="*"
 IUSE="doc debug examples test"
 
-RDEPEND="
-	>=dev-libs/libsigc++-2.2.10:2
-	>=dev-libs/glib-2.42:2
+COMMON_DEPEND="
+	>=dev-libs/libsigc++-2.3.2:2[${MULTILIB_USEDEP}]
+	>=dev-libs/glib-2.42:2[${MULTILIB_USEDEP}]
 "
-DEPEND="${RDEPEND}
+RDEPEND="${COMMON_DEPEND}
+	abi_x86_32? (
+		!<=app-emulation/emul-linux-x86-gtkmmlibs-20140508
+		!app-emulation/emul-linux-x86-gtkmmlibs[-abi_x86_32(-)] )
+"
+DEPEND="${COMMON_DEPEND}
 	virtual/pkgconfig
 	doc? ( app-doc/doxygen )
 "
@@ -43,15 +48,15 @@ src_prepare() {
 	gnome2_src_prepare
 }
 
-src_configure() {
-	gnome2_src_configure \
+multilib_src_configure() {
+	ECONF_SOURCE="${S}" gnome2_src_configure \
 		$(use_enable debug debug-refcounting) \
-		$(use_enable doc documentation) \
+		$(multilib_native_use_enable doc documentation) \
 		--enable-deprecated-api
 }
 
-src_test() {
-	cd "${S}/tests/"
+multilib_src_test() {
+	cd tests
 	default
 
 	for i in */test; do
@@ -59,8 +64,12 @@ src_test() {
 	done
 }
 
-src_install() {
+multilib_src_install() {
 	gnome2_src_install
+}
+
+multilib_src_install_all() {
+	einstalldocs
 
 	if ! use doc && ! use examples; then
 		rm -fr "${ED}usr/share/doc/glibmm*"
