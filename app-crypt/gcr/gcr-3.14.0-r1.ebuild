@@ -71,6 +71,10 @@ src_configure() {
 		--disable-update-mime
 }
 
+src_compile() {
+	gnome2_src_compile -j1;
+}
+
 src_test() {
 	unset DBUS_SESSION_BUS_ADDRESS
 	Xemake check
