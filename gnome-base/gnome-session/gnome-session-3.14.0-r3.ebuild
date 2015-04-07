@@ -112,6 +112,11 @@ src_install() {
 
 	# This should be done here as discussed in bug #270852
 	newexe "${FILESDIR}/10-user-dirs-update-gnome-r1" 10-user-dirs-update-gnome
+
+	# Set XCURSOR_THEME from current dconf setting instead of installing
+	# default cursor symlink globally and affecting other DEs (bug #543488)
+	# https://bugzilla.gnome.org/show_bug.cgi?id=711703
+	newexe "${FILESDIR}/90-xcursor-theme-gnome" 90-xcursor-theme-gnome
 }
 
 pkg_postinst() {
