@@ -3,7 +3,7 @@
 EAPI="5"
 GCONF_DEBUG="no"
 
-inherit gnome2
+inherit gnome2 versionator
 
 DESCRIPTION="GNOME default icon theme"
 HOMEPAGE="http://www.gnome.org/ http://people.freedesktop.org/~jimmac/icons/#git"
@@ -21,8 +21,8 @@ COMMON_DEPEND="
 	>=x11-themes/hicolor-icon-theme-0.10
 "
 RDEPEND="${COMMON_DEPEND}
+	gnome-base/librsvg:2
 	!<x11-themes/gnome-themes-standard-3.14
-	gnome-base/librsvg
 "
 DEPEND="${COMMON_DEPEND}
 	>=x11-misc/icon-naming-utils-0.8.7
@@ -54,9 +54,13 @@ src_configure() {
 	gnome2_src_configure GTK_UPDATE_ICON_CACHE=$(type -P true)
 }
 
-src_install() {
-	gnome2_src_install
-
-	# Make it the default cursor theme
-	dosym Adwaita /usr/share/cursors/xorg-x11/default
+pkg_postinst() {
+	gnome2_pkg_postinst
+	elog "$PF no longer installs the"
+	elog "/usr/share/cursors/xorg-x11/default symlink. Instead, desktop"
+	elog "environments are expected to set the cursor theme using the"
+	elog "XCURSOR_THEME environment variable or other means."
+	elog "If you are seeing old-style X11 cursors in GNOME or Cinnamon,"
+	elog "make sure you have >=gnome-base/gnome-session-3.14.0-r2"
+	elog "and then log out and log in again."
 }
