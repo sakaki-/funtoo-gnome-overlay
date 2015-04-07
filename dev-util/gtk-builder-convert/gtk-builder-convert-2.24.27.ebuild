@@ -13,15 +13,14 @@ HOMEPAGE="http://www.gtk.org/"
 LICENSE="LGPL-2+"
 SLOT="0"
 KEYWORDS="*"
-IUSE=""
 
+IUSE=""
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 # gtk-builder-convert was part of gtk+ until 2.24.10-r1
 COMMON_DEPEND="${PYTHON_DEPS}"
 
 RDEPEND="${COMMON_DEPEND}"
-"
 
 DEPEND="${COMMON_DEPEND}"
 

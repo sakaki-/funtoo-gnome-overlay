@@ -68,7 +68,6 @@ DEPEND="${COMMON_DEPEND}
 # in sync.
 RDEPEND="${COMMON_DEPEND}
 	!<gnome-base/gail-1000
-	!<dev-util/gtk-builder-convert-${PV}
 	!<x11-libs/vte-0.28.2-r201:0
 	abi_x86_32? (
 		!<=app-emulation/emul-linux-x86-gtklibs-20140508
