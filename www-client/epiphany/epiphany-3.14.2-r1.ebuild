@@ -19,9 +19,11 @@ COMMON_DEPEND="
 	>=app-crypt/gcr-3.14.0
 	>=app-crypt/libsecret-0.18
 	>=app-text/iso-codes-0.35
+	app-text/yelp-tools
 	>=dev-libs/glib-2.42.0:2
 	>=dev-libs/libxml2-2.6.12:2
 	>=dev-libs/libxslt-1.1.7
+	gnome-base/gnome-common
 	>=gnome-base/gsettings-desktop-schemas-3.14.0
 	>=net-dns/avahi-0.6.22[dbus]
 	>=net-libs/webkit-gtk-2.6:4[jit?]
@@ -40,7 +42,6 @@ RDEPEND="${COMMON_DEPEND}
 	!www-client/epiphany-extensions
 "
 # paxctl needed for bug #407085
-# eautoreconf requires gnome-common-3.5.5
 DEPEND="${COMMON_DEPEND}
 	>=dev-util/intltool-0.50
 	sys-apps/paxctl
