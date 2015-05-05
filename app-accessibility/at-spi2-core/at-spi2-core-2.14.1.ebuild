@@ -33,6 +33,7 @@ RDEPEND="${COMMON_DEPEND}
 	)
 "
 DEPEND="${COMMON_DEPEND}
+	sys-devel/gettext
 	>=dev-util/gtk-doc-am-1.9
 	>=dev-util/intltool-0.40
 	virtual/pkgconfig[${MULTILIB_USEDEP}]
