@@ -11,7 +11,7 @@ HOMEPAGE="http://live.gnome.org/Accessibility"
 
 LICENSE="LGPL-2+"
 SLOT="2"
-IUSE="+X +introspection"
+IUSE="+X +introspection +nls"
 KEYWORDS="*"
 
 # x11-libs/libSM is needed until upstream #719808 is solved either
@@ -33,7 +33,7 @@ RDEPEND="${COMMON_DEPEND}
 	)
 "
 DEPEND="${COMMON_DEPEND}
-	sys-devel/gettext
+	nls? ( sys-devel/gettext )
 	>=dev-util/gtk-doc-am-1.9
 	>=dev-util/intltool-0.40
 	virtual/pkgconfig[${MULTILIB_USEDEP}]
