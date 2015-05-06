@@ -52,7 +52,8 @@ multilib_src_configure() {
 	gnome2_src_configure \
 		--disable-xevie \
 		$(multilib_native_use_enable introspection) \
-		$(use_enable X x11)
+		$(use_enable X x11) \
+		$(use_enable nls)
 
 	# work-around gtk-doc out-of-source brokedness
 	if multilib_is_native_abi; then
