@@ -127,7 +127,6 @@
 >=net-libs/libsoup-gnome-2.49.0
 >=net-libs/webkit-gtk-2.8.0
 >=net-misc/gnome-online-miners-3.15.0
->=net-misc/networkmanager-0.9.11.0
 >=net-misc/rygel-0.25.0
 >=net-misc/uhttpmock-0.4.0
 >=net-misc/vinagre-3.15.1
