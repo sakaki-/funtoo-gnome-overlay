@@ -113,7 +113,10 @@ src_configure() {
 		ITSTOOL=$(type -P true)
 }
 
-src_compile() {	gnome2_src_compile -j1; }
+src_prepare() {
+	epatch "${FILESDIR}"/${PN}-3.12.7-Fix-parallel-build-in-extensions.patch
+	gnome2_src_prepare
+}
 
 src_test() {
 
