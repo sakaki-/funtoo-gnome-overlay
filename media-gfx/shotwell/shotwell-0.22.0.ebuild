@@ -3,15 +3,19 @@
 EAPI=5
 
 GCONF_DEBUG="no"
-VALA_MIN_API_VERSION="0.20"
-VALA_MAX_API_VERSION="0.22"
+VALA_MIN_API_VERSION="0.26"
+VALA_MAX_API_VERSION="0.26"
 
 inherit eutils gnome2 multilib toolchain-funcs vala versionator
 
 MY_PV=$(get_version_component_range 1-2)
 DESCRIPTION="Open source photo manager for GNOME"
-HOMEPAGE="http://yorba.org/shotwell/"
-SRC_URI="mirror://gnome/sources/${PN}/$(get_version_component_range 1-2)/${P}.tar.xz"
+HOMEPAGE="https://wiki.gnome.org/Apps/Shotwell"
+SRC_URI="
+	mirror://gnome/sources/${PN}/$(get_version_component_range 1-2)/${P}.tar.xz
+	http://pkgs.fedoraproject.org/cgit/shotwell.git/plain/shotwell.1
+	http://pkgs.fedoraproject.org/cgit/shotwell.git/plain/shotwell-icons.tar.bz2
+	"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
@@ -42,14 +46,14 @@ RDEPEND="
 	media-libs/gst-plugins-good:1.0
 	media-libs/gstreamer:1.0
 	media-libs/lcms:2
-	>=media-libs/libexif-0.6.16:=
-	>=media-libs/libgphoto2-2.4.2:=
-	>=media-libs/libraw-0.13.2:=
+	>=media-libs/libexif-0.6.16
+	>=media-libs/libgphoto2-2.4.2
+	>=media-libs/libraw-0.13.2
 	>=net-libs/libsoup-2.26.0:2.4
 	>=net-libs/rest-0.7:0.7
 	>=net-libs/webkit-gtk-1.4:3
 	virtual/libgudev:=[introspection]
-	>=x11-libs/gtk+-3.6.0:3"
+	>=x11-libs/gtk+-3.14:3[X]"
 DEPEND="${RDEPEND}
 	$(vala_depend)
 	>=sys-devel/m4-1.4.13"
@@ -92,10 +96,15 @@ src_compile() {
 }
 
 src_install() {
+	local res
 	gnome2_src_install
 	for x in ${LANGS}; do
 		if ! has ${x} ${LINGUAS}; then
-			find "${D}"/usr/share/locale/${x} -type f -exec rm {} \;
+			find "${D}"/usr/share/locale/${x} -type f -exec rm {} + || die
 		fi
+	done
+	doman "${DISTDIR}"/${PN}.1
+	for res in 16 22 24 32 48 256; do
+		doicon -s ${res} "${WORKDIR}"/${res}x${res}/*
 	done
 }

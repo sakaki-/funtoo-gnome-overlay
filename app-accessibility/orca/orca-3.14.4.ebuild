@@ -21,7 +21,7 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 # liblouis is not in portage yet
 # it is used to provide contracted braille support
 # XXX: Check deps for correctness
-COMMON_DEPEND="
+COMMON_DEPEND="${PYTHON_DEPS}
 	>=app-accessibility/at-spi2-atk-2.14:2
 	>=app-accessibility/at-spi2-core-2.14:2[introspection]
 	>=dev-libs/atk-2.14
@@ -31,7 +31,7 @@ COMMON_DEPEND="
 	braille? (
 		>=app-accessibility/brltty-5.0-r3[python,${PYTHON_USEDEP}]
 		dev-libs/liblouis[python,${PYTHON_USEDEP}] )
-	${PYTHON_DEPS}
+
 "
 RDEPEND="${COMMON_DEPEND}
 	>=app-accessibility/speech-dispatcher-0.8[python,${PYTHON_USEDEP}]
