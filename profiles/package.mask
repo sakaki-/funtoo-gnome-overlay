@@ -26,7 +26,8 @@
 >=dev-libs/gobject-introspection-common-1.43.0
 >=dev-libs/libgdata-0.17.0
 >=dev-libs/libgee-0.18.0
->=dev-libs/libgit2-glib-0.0.24
+>dev-libs/libgit2-glib-0.0.22
+>dev-libs/libgit2-0.21.3
 >=dev-libs/libgweather-3.15.1
 >=dev-libs/libical-1.1.0
 >=dev-libs/libpeas-1.13.0
