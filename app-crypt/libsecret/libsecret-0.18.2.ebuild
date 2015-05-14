@@ -8,7 +8,7 @@ VALA_USE_DEPEND=vapigen
 inherit gnome2 python-any-r1 vala virtualx
 
 DESCRIPTION="GObject library for accessing the freedesktop.org Secret Service API"
-HOMEPAGE="https://live.gnome.org/Libsecret"
+HOMEPAGE="https://wiki.gnome.org/Projects/Libsecret"
 
 LICENSE="LGPL-2.1+ Apache-2.0" # Apache-2.0 license is used for tests only
 SLOT="0"
@@ -21,9 +21,9 @@ COMMON_DEPEND="
 	crypt? ( >=dev-libs/libgcrypt-1.2.2:0= )
 	introspection? ( >=dev-libs/gobject-introspection-1.29 )
 "
-RDEPEND="${COMMON_DEPEND}
-	>=gnome-base/gnome-keyring-3
-"
+RDEPEND="${COMMON_DEPEND}"
+PDEPEND=">=gnome-base/gnome-keyring-3"
+
 # Add ksecrets to RDEPEND when it's added to portage
 DEPEND="${COMMON_DEPEND}
 	app-text/docbook-xsl-stylesheets
