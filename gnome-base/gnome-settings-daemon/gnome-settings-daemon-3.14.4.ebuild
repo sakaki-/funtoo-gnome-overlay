@@ -87,6 +87,7 @@ DEPEND="${COMMON_DEPEND}
 	x11-proto/inputproto
 	x11-proto/xf86miscproto
 	>=x11-proto/xproto-7.0.15
+	dev-util/gdbus-codegen
 "
 
 src_prepare() {
