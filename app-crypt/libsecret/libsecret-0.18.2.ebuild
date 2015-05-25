@@ -60,6 +60,10 @@ src_configure() {
 		$(use_enable vala)
 }
 
+src_compile() {
+	MAKEOPTS="${MAKEOPTS} -j1" gnome2_src_compile
+}
+
 src_test() {
 	Xemake check
 }
