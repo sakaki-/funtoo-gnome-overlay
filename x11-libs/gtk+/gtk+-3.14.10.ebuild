@@ -84,14 +84,13 @@ DEPEND="${COMMON_DEPEND}
 RDEPEND="${COMMON_DEPEND}
 	!<gnome-base/gail-1000
 	!<x11-libs/vte-0.31.0:2.90
-	>=x11-themes/adwaita-icon-theme-3.14
 	X? ( !<x11-base/xorg-server-1.11.4 )
 	abi_x86_32? (
 		!<=app-emulation/emul-linux-x86-gtklibs-20140508-r3
 		!app-emulation/emul-linux-x86-gtklibs[-abi_x86_32(-)]
 	)
 "
-PDEPEND="vim-syntax? ( app-vim/gtk-syntax )"
+PDEPEND=">=x11-themes/adwaita-icon-theme-3.14 vim-syntax? ( app-vim/gtk-syntax )"
 
 MULTILIB_CHOST_TOOLS=(
 	/usr/bin/gtk-query-immodules-3.0
