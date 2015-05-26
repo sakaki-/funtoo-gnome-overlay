@@ -20,9 +20,7 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 # gtk-builder-convert was part of gtk+ until 2.24.10-r1
 COMMON_DEPEND="${PYTHON_DEPS}"
 
-RDEPEND="${COMMON_DEPEND}
-	!<=x11-libs/gtk+-2.24.10:2
-"
+RDEPEND="${COMMON_DEPEND}"
 
 DEPEND="${COMMON_DEPEND}"
 

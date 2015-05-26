@@ -27,7 +27,7 @@ RDEPEND="
 	x11-themes/adwaita-icon-theme
 
 	avahi? ( >=net-dns/avahi-0.6.26[dbus,gtk3] )
-	rdp? ( net-misc/freerdp )
+	rdp? ( <net-misc/freerdp-1.2 )
 	ssh? ( x11-libs/vte:2.91 )
 	spice? (
 		app-emulation/spice-protocol

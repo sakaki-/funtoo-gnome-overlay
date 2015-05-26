@@ -16,7 +16,7 @@ KEYWORDS="*"
 COMMON_DEPEND="
 	>=dev-libs/glib-2.42.0:2
 	>=gnome-base/libgtop-2.30.0[introspection]
-	>=app-admin/eselect-gnome-shell-extensions-20120911
+	>=app-eselect/eselect-gnome-shell-extensions-20120911
 "
 RDEPEND="${COMMON_DEPEND}
 	>=dev-libs/gjs-1.42.0

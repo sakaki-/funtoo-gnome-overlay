@@ -35,6 +35,7 @@ DEPEND="${COMMON_DEPEND}
 	${PYTHON_DEPS}
 	dev-libs/gobject-introspection-common
 	dev-libs/libxslt
+	dev-libs/vala-common
 	dev-util/gdbus-codegen
 	>=dev-util/gtk-doc-am-1.9
 	>=dev-util/intltool-0.35
@@ -44,6 +45,7 @@ DEPEND="${COMMON_DEPEND}
 "
 # eautoreconf needs:
 #	dev-libs/gobject-introspection-common
+#   dev-libs/vala-common
 
 pkg_setup() {
 	python-any-r1_pkg_setup
@@ -69,6 +71,10 @@ src_configure() {
 		$(usex debug --enable-debug=yes --enable-debug=default) \
 		--disable-update-icon-cache \
 		--disable-update-mime
+}
+
+src_compile() {
+	gnome2_src_compile -j1;
 }
 
 src_test() {

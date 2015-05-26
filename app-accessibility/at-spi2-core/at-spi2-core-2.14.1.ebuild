@@ -11,7 +11,7 @@ HOMEPAGE="http://live.gnome.org/Accessibility"
 
 LICENSE="LGPL-2+"
 SLOT="2"
-IUSE="+X +introspection"
+IUSE="+X +introspection +nls"
 KEYWORDS="*"
 
 # x11-libs/libSM is needed until upstream #719808 is solved either
@@ -33,6 +33,7 @@ RDEPEND="${COMMON_DEPEND}
 	)
 "
 DEPEND="${COMMON_DEPEND}
+	nls? ( sys-devel/gettext )
 	>=dev-util/gtk-doc-am-1.9
 	>=dev-util/intltool-0.40
 	virtual/pkgconfig[${MULTILIB_USEDEP}]
@@ -51,7 +52,8 @@ multilib_src_configure() {
 	gnome2_src_configure \
 		--disable-xevie \
 		$(multilib_native_use_enable introspection) \
-		$(use_enable X x11)
+		$(use_enable X x11) \
+		$(use_enable nls)
 
 	# work-around gtk-doc out-of-source brokedness
 	if multilib_is_native_abi; then
