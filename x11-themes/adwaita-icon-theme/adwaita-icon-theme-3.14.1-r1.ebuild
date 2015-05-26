@@ -28,6 +28,7 @@ DEPEND="${COMMON_DEPEND}
 	>=dev-util/intltool-0.40
 	sys-devel/gettext
 	virtual/pkgconfig
+	gnome-base/librsvg:2
 "
 # This ebuild does not install any binaries
 RESTRICT="binchecks strip"
